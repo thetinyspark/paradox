@@ -1,6 +1,6 @@
 {
-  "name": "paradox",
-  "version": "1.0.0",
+  "name": "@thetinyspark/paradox",
+  "version": "1.0.1",
   "description": "Your project description",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,8 +8,9 @@
     "/dist"
   ],
   "scripts": {
+    "bump:version": "node scripts/version.js",
     "pub": "npm login && npm publish --access public",
-    "build": "tsc && npx webpack --config webpack.config.js",
+    "build": "npm run bump:version && tsc && npx webpack --config webpack.config.js",
     "build:serve": "npm run build && http-server ./",
     "test": "karma start",
     "test:ci": "karma start --single-run",
