@@ -1,0 +1,105 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.configFacade = exports.configIOC = void 0;
+var coffe_maker_1 = require("@thetinyspark/coffe-maker");
+var app_const_1 = require("./app.const");
+var AddBuildingToCityCommand_1 = require("../command/AddBuildingToCityCommand");
+var AddCityCommand_1 = require("../command/AddCityCommand");
+var CreateResourcesCommand_1 = require("../command/CreateResourcesCommand");
+var CreateTemplateBuildingsCommand_1 = require("../command/CreateTemplateBuildingsCommand");
+var DoCycleCommand_1 = require("../command/DoCycleCommand");
+var GetCitiesQuery_1 = require("../command/GetCitiesQuery");
+var GetResourcesQuery_1 = require("../command/GetResourcesQuery");
+var GetTemplateBuildingsQuery_1 = require("../command/GetTemplateBuildingsQuery");
+var CityRepository_1 = require("../model/repository/CityRepository");
+var ResourceRepository_1 = require("../model/repository/ResourceRepository");
+var TemplateBuildingRepository_1 = require("../model/repository/TemplateBuildingRepository");
+var Repository_1 = require("../model/repository/Repository");
+var BuyBuildingCommand_1 = require("../command/BuyBuildingCommand");
+var UpgradeBuildingCommand_1 = require("../command/UpgradeBuildingCommand");
+var BuildingFactory_1 = require("../service/factory/BuildingFactory");
+var CityFactory_1 = require("../service/factory/CityFactory");
+var ResourceFactory_1 = require("../service/factory/ResourceFactory");
+var QuantityFactory_1 = require("../service/factory/QuantityFactory");
+var QuantityListFactory_1 = require("../service/factory/QuantityListFactory");
+var BuildingLevelFactory_1 = require("../service/factory/BuildingLevelFactory");
+var TemplateBuildingFactory_1 = require("../service/factory/TemplateBuildingFactory");
+var PaymentService_1 = require("../service/PaymentService");
+var SerializerService_1 = require("../service/SerializerService");
+var SaveGameDataQuery_1 = require("../command/SaveGameDataQuery");
+var CreateCitiesCommand_1 = require("../command/CreateCitiesCommand");
+var RestoreSavedDataCommand_1 = require("../command/RestoreSavedDataCommand");
+function configIOC(container) {
+    container.reset();
+    container.register(app_const_1.default.GAME_STORE_MODEL, function () { return new coffe_maker_1.StoreModel(); }, true);
+    container.register(app_const_1.default.APP_FACADE, function () { return new coffe_maker_1.Facade(); }, true);
+    container.register(app_const_1.default.BUY_BUILDING, function () { return new BuyBuildingCommand_1.default(); });
+    container.register(app_const_1.default.ADD_BUILDING_TO_CITY, function () { return new AddBuildingToCityCommand_1.default(); });
+    container.register(app_const_1.default.UPGRADE_BUILDING, function () { return new UpgradeBuildingCommand_1.default(); });
+    container.register(app_const_1.default.ADD_CITY, function () { return new AddCityCommand_1.default(); });
+    container.register(app_const_1.default.CREATE_CITIES, function () { return new CreateCitiesCommand_1.default(); });
+    container.register(app_const_1.default.CREATE_RESOURCES, function () { return new CreateResourcesCommand_1.default(); });
+    container.register(app_const_1.default.RESTORE_SAVED_DATA, function () { return new RestoreSavedDataCommand_1.default(); });
+    container.register(app_const_1.default.CREATE_TEMPLATE_BUILDINGS, function () { return new CreateTemplateBuildingsCommand_1.default(); });
+    container.register(app_const_1.default.DO_CYCLE, function () { return new DoCycleCommand_1.default(); });
+    container.register(app_const_1.default.GET_CITIES_QUERY, function () { return new GetCitiesQuery_1.default(); });
+    container.register(app_const_1.default.GET_RESOURCES_QUERY, function () { return new GetResourcesQuery_1.default(); });
+    container.register(app_const_1.default.SAVE_GAME_DATA_QUERY, function () { return new SaveGameDataQuery_1.default(); });
+    container.register(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY, function () { return new GetTemplateBuildingsQuery_1.default(); });
+    container.register(app_const_1.default.CITY_REPOSITORY, function () { return new CityRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "cities"); }, true);
+    container.register(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY, function () { return new TemplateBuildingRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "templateBuildings"); }, true);
+    container.register(app_const_1.default.RESOURCE_REPOSITORY, function () { return new ResourceRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "resources"); }, true);
+    container.register(app_const_1.default.BASE_REPOSITORY, function () { return new Repository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "data"); }, true);
+    container.register(app_const_1.default.BUILDING_FACTORY, function () { return new BuildingFactory_1.default(container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY)); }, true);
+    container.register(app_const_1.default.CITY_FACTORY, function () {
+        return new CityFactory_1.default(container.resolve(app_const_1.default.BUILDING_FACTORY), container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY));
+    }, true);
+    container.register(app_const_1.default.QUANTITY_LIST_FACTORY, function () {
+        return new QuantityListFactory_1.default(container.resolve(app_const_1.default.QUANTITY_FACTORY));
+    }, true);
+    container.register(app_const_1.default.BUILDING_LEVEL_FACTORY, function () {
+        return new BuildingLevelFactory_1.default(container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY));
+    }, true);
+    container.register(app_const_1.default.TEMPLATE_BUILDING_FACTORY, function () {
+        return new TemplateBuildingFactory_1.default(container.resolve(app_const_1.default.BUILDING_LEVEL_FACTORY));
+    }, true);
+    container.register(app_const_1.default.QUANTITY_FACTORY, function () {
+        return new QuantityFactory_1.default(container.resolve(app_const_1.default.RESOURCE_REPOSITORY));
+    }, true);
+    container.register(app_const_1.default.RESOURCE_FACTORY, function () { return new ResourceFactory_1.default(); }, true);
+    container.register(app_const_1.default.PAYMENT_SERVICE, function () { return new PaymentService_1.default(); }, true);
+    container.register(app_const_1.default.SERIALIZER_SERVICE, function () { return new SerializerService_1.default(); }, true);
+    return container;
+}
+exports.configIOC = configIOC;
+function configFacade(container) {
+    var facade = container.resolve(app_const_1.default.APP_FACADE);
+    facade.registerCommand(app_const_1.default.UPGRADE_BUILDING, container.get(app_const_1.default.UPGRADE_BUILDING));
+    facade.registerCommand(app_const_1.default.ADD_BUILDING_TO_CITY, container.get(app_const_1.default.ADD_BUILDING_TO_CITY));
+    facade.registerCommand(app_const_1.default.BUY_BUILDING, container.get(app_const_1.default.BUY_BUILDING));
+    facade.registerCommand(app_const_1.default.ADD_CITY, container.get(app_const_1.default.ADD_CITY));
+    facade.registerCommand(app_const_1.default.CREATE_CITIES, container.get(app_const_1.default.CREATE_CITIES));
+    facade.registerCommand(app_const_1.default.CREATE_RESOURCES, container.get(app_const_1.default.CREATE_RESOURCES));
+    facade.registerCommand(app_const_1.default.RESTORE_SAVED_DATA, container.get(app_const_1.default.RESTORE_SAVED_DATA));
+    facade.registerCommand(app_const_1.default.CREATE_TEMPLATE_BUILDINGS, container.get(app_const_1.default.CREATE_TEMPLATE_BUILDINGS));
+    facade.registerCommand(app_const_1.default.DO_CYCLE, container.get(app_const_1.default.DO_CYCLE));
+    facade.registerCommand(app_const_1.default.GET_CITIES_QUERY, container.get(app_const_1.default.GET_CITIES_QUERY));
+    facade.registerCommand(app_const_1.default.GET_RESOURCES_QUERY, container.get(app_const_1.default.GET_RESOURCES_QUERY));
+    facade.registerCommand(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY, container.get(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY));
+    facade.registerCommand(app_const_1.default.SAVE_GAME_DATA_QUERY, container.get(app_const_1.default.SAVE_GAME_DATA_QUERY));
+    facade.registerProxy(app_const_1.default.CITY_REPOSITORY, container.resolve(app_const_1.default.CITY_REPOSITORY));
+    facade.registerProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY, container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY));
+    facade.registerProxy(app_const_1.default.CITY_REPOSITORY, container.resolve(app_const_1.default.CITY_REPOSITORY));
+    facade.registerProxy(app_const_1.default.RESOURCE_REPOSITORY, container.resolve(app_const_1.default.RESOURCE_REPOSITORY));
+    facade.registerService(app_const_1.default.BUILDING_FACTORY, container.resolve(app_const_1.default.BUILDING_FACTORY));
+    facade.registerService(app_const_1.default.CITY_FACTORY, container.resolve(app_const_1.default.CITY_FACTORY));
+    facade.registerService(app_const_1.default.RESOURCE_FACTORY, container.resolve(app_const_1.default.RESOURCE_FACTORY));
+    facade.registerService(app_const_1.default.QUANTITY_FACTORY, container.resolve(app_const_1.default.QUANTITY_FACTORY));
+    facade.registerService(app_const_1.default.QUANTITY_LIST_FACTORY, container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY));
+    facade.registerService(app_const_1.default.BUILDING_LEVEL_FACTORY, container.resolve(app_const_1.default.BUILDING_LEVEL_FACTORY));
+    facade.registerService(app_const_1.default.TEMPLATE_BUILDING_FACTORY, container.resolve(app_const_1.default.TEMPLATE_BUILDING_FACTORY));
+    facade.registerService(app_const_1.default.PAYMENT_SERVICE, container.resolve(app_const_1.default.PAYMENT_SERVICE));
+    facade.registerService(app_const_1.default.SERIALIZER_SERVICE, container.resolve(app_const_1.default.SERIALIZER_SERVICE));
+    return facade;
+}
+exports.configFacade = configFacade;

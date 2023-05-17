@@ -5,7 +5,7 @@ node_modules/
 coverage/
 
 # output
-dist/
+# dist/
 
 #docs
 docs/

@@ -11,7 +11,7 @@ export default class BuildingFactory implements IFactory{
     fromData(obj:any):Building{
         const template = this._repo.getOneBy('id', obj.tplID) || null; 
         if( template === null ){
-            console.log("non existing template id", obj.tplID);
+            // console.log("non existing template id", obj.tplID);
             return null;
         }
         

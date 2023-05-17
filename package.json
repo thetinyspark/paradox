@@ -1,7 +1,7 @@
 {
   "name": "@thetinyspark/paradox",
   "version": "1.0.1",
-  "description": "Your project description",
+  "description": "A game management engine",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

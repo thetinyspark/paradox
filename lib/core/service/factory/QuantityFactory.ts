@@ -12,7 +12,7 @@ export default class QuantityFactory implements IFactory{
         const resource = this._resourceRepository.getOneBy('id', obj.resourceID); 
 
         if( resource === null ){
-            console.log("non existing resource for resource id: "+obj.resourceID);
+            // console.log("non existing resource for resource id: "+obj.resourceID);
             return null;
         }
             

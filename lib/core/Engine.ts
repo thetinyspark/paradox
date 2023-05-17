@@ -2,6 +2,7 @@ import { Container, Facade} from "@thetinyspark/coffe-maker";
 import { Emitter } from "@thetinyspark/tiny-observer";
 import AppConst from "./ioc/app.const";
 import { configFacade } from "./ioc/config";
+import { version } from "../version";
 
 export default class Engine extends Emitter{
     private _facade:Facade = null; 
@@ -16,6 +17,10 @@ export default class Engine extends Emitter{
 
         // init resources and buildings
         this._facade.sendNotification(AppConst.RESTORE_SAVED_DATA, configuration);
+    }
+
+    getVersion(){
+        return version;
     }
 
     getFacade(){
