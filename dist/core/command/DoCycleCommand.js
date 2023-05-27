@@ -18,6 +18,8 @@ var DoCycleCommand = /** @class */ (function () {
         var proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         proxy.getAll().forEach(function (city) {
             city.buildings.forEach(function (building) {
+                if (building.level === null)
+                    return;
                 building.level.prod.get().forEach(function (prod) {
                     var cityQuantity = city.wallet.get().find(function (q) { return q.resourceID === prod.resourceID; }) || null;
                     if (cityQuantity === null) {

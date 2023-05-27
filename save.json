@@ -1,0 +1,45 @@
+{
+    "cities":[
+        {
+            "id": 1, 
+            "name": "Atlantis", 
+            "buildings":[{"tplID":1}, {"tplID":2, "level":2}],
+            "wallet": [{"resourceID": 1, "amount": 1000},{"resourceID": 2, "amount": 1000}]
+        }
+    ],
+    "resources":[
+        {"id":1, "name": "gold"},
+        {"id":2, "name": "wood"},
+        {"id":3, "name": "food"}
+    ], 
+    "templateBuildings":[
+        {
+            "id": 1, 
+            "name": "Castle", 
+            "levels": [
+                {"level": 1, "cost": [{"resourceID": 1, "amount": 100}], "prod": [{"resourceID": 2, "amount": 100}]},
+                {"level": 2, "cost": [{"resourceID": 1, "amount": 200}], "prod": [{"resourceID": 2, "amount": 200}, {"resourceID": 3, "amount": 2}]}
+            ]
+        },
+        {
+            "id": 2, 
+            "name": "Cabin", 
+            "levels": [
+                {"level": 1, "cost": [{"resourceID": 2, "amount": 300}], "prod": [{"resourceID": 1, "amount": 300}]},
+                {"level": 2, "cost": [{"resourceID": 2, "amount": 400}], "prod": [{"resourceID": 1, "amount": 400}]}
+            ]
+        },
+        {
+            "id": 3, 
+            "name": "Academy", 
+            "levels": [
+                {"level": 1, "cost": [{"resourceID": 3, "amount": 100}], "prod": []}
+            ]
+        },
+        {
+            "id": 4, 
+            "name": "Home", 
+            "levels": []
+        }
+    ]
+}

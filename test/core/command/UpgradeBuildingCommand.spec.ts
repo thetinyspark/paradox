@@ -17,16 +17,18 @@ describe('UpgradeBuildingCommand test suite',
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ATLANTIS());
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ATLANTIS().id, tplID: 1});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ATLANTIS().id, tplID: 1});
 
         const atlantis = cityRepo.getOneBy('id', ATLANTIS().id);
         atlantis.wallet.get()[0].amount = 200;
         atlantis.wallet.get()[1].amount = 200;
 
-        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, tplID: TEMPLATE_BUILDINGS_MOCK[0].id});
+        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, index:0});
 
         // then 
 
         expect(atlantis.buildings[0].level.level).toEqual(2);
+        expect(atlantis.buildings[1].level.level).toEqual(1);
 
     });
 
@@ -39,12 +41,14 @@ describe('UpgradeBuildingCommand test suite',
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ATLANTIS());
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ATLANTIS().id, tplID: 1});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ATLANTIS().id, tplID: 1});
 
         const atlantis = cityRepo.getOneBy('id', ATLANTIS().id);
-        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, tplID: TEMPLATE_BUILDINGS_MOCK[0].id, freely:true});
+        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, index: 1, freely:true});
 
         // then 
 
-        expect(atlantis.buildings[0].level.level).toEqual(2);
+        expect(atlantis.buildings[0].level.level).toEqual(1);
+        expect(atlantis.buildings[1].level.level).toEqual(2);
     });
 })

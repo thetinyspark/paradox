@@ -14,9 +14,10 @@ export default class UpgradeBuildingCommand implements ICommand{
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<City>;
 
-        const tpl = tplRepo.getOneBy('id',data.tplID);
         const city = cityRepo.getOneBy('id',data.cityID);
-        const target = city.buildings.find( b=>b.tplBuildingID === data.tplID);
+        const target = city.buildings[data.index] || null; 
+        const tplID = target === null ? -1 : target.tplBuildingID;
+        const tpl = tplRepo.getOneBy('id',tplID);
 
         if( tpl === null || city === null || target === null)
             return;

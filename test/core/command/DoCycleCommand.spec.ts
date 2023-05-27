@@ -17,7 +17,10 @@ describe('DoCycleCommand test suite',
         const buildings     = data.buildings as any[];
         const numCycles     = 2;
 
-        buildings.push({tplID: TEMPLATE_BUILDINGS_MOCK[0].id});
+        buildings.push(
+            {tplID: TEMPLATE_BUILDINGS_MOCK[0].id}, 
+            {tplID: TEMPLATE_BUILDINGS_MOCK[3].id}
+        );
 
         // when 
         facade.sendNotification(AppConst.ADD_CITY, data);

@@ -16,6 +16,9 @@ export default class DoCycleCommand implements ICommand{
             (city:City)=>{
                 city.buildings.forEach( 
                     (building:Building)=>{
+                        if( building.level === null )
+                            return; 
+                            
                         building.level.prod.get().forEach( 
                             (prod:Quantity)=>{
                                 const cityQuantity = city.wallet.get().find(q=>q.resourceID === prod.resourceID ) || null;
