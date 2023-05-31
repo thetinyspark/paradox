@@ -5,9 +5,10 @@ export default class Building{
         public name:string = "",
         public level:BuildingLevel = null, 
         public tplBuildingID:number = -1,
+        public id:number = -1,
     ){}
 
     public clone():Building{
-        return new Building(this.name, this.level.clone(), this.tplBuildingID);
+        return new Building(this.name, this.level.clone(), this.tplBuildingID, this.id);
     }
 }

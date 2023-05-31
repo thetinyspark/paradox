@@ -8,14 +8,12 @@ var BuildingFactory = /** @class */ (function () {
     }
     BuildingFactory.prototype.fromData = function (obj) {
         var template = this._repo.getOneBy('id', obj.tplID) || null;
-        if (template === null) {
-            // console.log("non existing template id", obj.tplID);
+        if (template === null)
             return null;
-        }
         if (template.levels.length === 0)
-            return new Building_1.default(template.name, null, template.id);
+            return new Building_1.default(template.name, null, template.id, obj.id);
         var level = template.levels.find(function (l) { return l.level === obj.level; }) || template.levels[0];
-        return new Building_1.default(template.name, level.clone(), template.id);
+        return new Building_1.default(template.name, level.clone(), template.id, obj.id);
     };
     return BuildingFactory;
 }());

@@ -8,10 +8,8 @@ var QuantityFactory = /** @class */ (function () {
     }
     QuantityFactory.prototype.fromData = function (obj) {
         var resource = this._resourceRepository.getOneBy('id', obj.resourceID);
-        if (resource === null) {
-            // console.log("non existing resource for resource id: "+obj.resourceID);
+        if (resource === null)
             return null;
-        }
         return new Quantity_1.default(obj.resourceID, obj.amount);
     };
     return QuantityFactory;

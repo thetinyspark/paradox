@@ -8,6 +8,7 @@ var AppConst = /** @class */ (function () {
     // model
     AppConst.GAME_STORE_MODEL = "GameStoreModel";
     // commands
+    AppConst.REMOVE_BUILDING_TO_CITY = "RemoveBuildingToCityCommand";
     AppConst.ADD_BUILDING_TO_CITY = "AddBuildingToCityCommand";
     AppConst.UPGRADE_BUILDING = "UpgradeBuildingCommand";
     AppConst.ADD_CITY = "AddCityCommand";

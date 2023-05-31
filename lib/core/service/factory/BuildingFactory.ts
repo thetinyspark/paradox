@@ -10,20 +10,19 @@ export default class BuildingFactory implements IFactory{
 
     fromData(obj:any):Building{
         const template = this._repo.getOneBy('id', obj.tplID) || null; 
-        if( template === null ){
-            // console.log("non existing template id", obj.tplID);
+        if( template === null )
             return null;
-        }
         
         if( template.levels.length === 0) 
-            return  new Building(template.name, null,template.id);
+            return  new Building(template.name, null,template.id, obj.id);
 
 
         const level = template.levels.find( l=>l.level === obj.level) || template.levels[0];
         return  new Building(
             template.name, 
             level.clone(), 
-            template.id
+            template.id, 
+            obj.id
         );
     }
 }

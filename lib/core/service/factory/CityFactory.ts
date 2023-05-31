@@ -10,10 +10,16 @@ export default class CityFactory implements IFactory{
     }
 
     fromData(obj:any):City{
-        const buildings = []; 
+        let buildings = []; 
         const wallet = this._quantityListFactory.fromData(obj.wallet);
         if( Array.isArray(obj.buildings)){
-            buildings.push( ...obj.buildings.map( (b)=>this._buildingFactory.fromData(b)) );
+            buildings = obj.buildings.map( 
+                (b,id)=>{
+                    const data = {...b};
+                    data.id = b.id || id;
+                    return this._buildingFactory.fromData(data);
+                }
+            );
         }
         return new City(obj.id, obj.name, buildings, wallet);
     }

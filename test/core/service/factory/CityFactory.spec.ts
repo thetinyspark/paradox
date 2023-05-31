@@ -7,7 +7,7 @@ import { setup } from "../../../setup.spec";
 
 describe('CityFactory test suite', 
 ()=>{
-    it('should be able to create a building from data according to its template', 
+    it('should be able to create a building from data according to its template (and add ids on buildings according to their position)', 
     ()=>{
         // given 
         const facade = setup() as Facade;
@@ -16,7 +16,7 @@ describe('CityFactory test suite',
         const buildings:any[] = data.buildings as any[];
         buildings.push( 
             ...mock.TEMPLATE_BUILDINGS_MOCK.map(
-                data => {
+                (data,index) => {
                     return {tplID: data.id};
                 }
             )
@@ -47,6 +47,7 @@ describe('CityFactory test suite',
                     expect(building.level.prod.get().length).toEqual(first.prod.length);
                     expect(building.level.cost.get().length).toEqual(first.cost.length);
                     expect(building.level.level).toEqual(first.level);
+                    expect(building.id).toEqual(index);
                 }
                 expect(building.name).toEqual(currentData.name);
                 expect(building.tplBuildingID).toEqual(currentData.id);

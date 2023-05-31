@@ -17,7 +17,7 @@ describe('BuildingFactory test suite',
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[0];
-        const building = factory.fromData({tplID: tpl.id});
+        const building = factory.fromData({tplID: tpl.id, id:10});
 
         // then 
         expect(building).not.toBeNull();
@@ -26,6 +26,7 @@ describe('BuildingFactory test suite',
         expect(building.level.level).toEqual(tpl.levels[0].level);
         expect(building.level.cost.get().length).toEqual(tpl.levels[0].cost.length);
         expect(building.level.prod.get().length).toEqual(tpl.levels[0].prod.length);
+        expect(building.id).toEqual(10);
     }); 
 
     it('should be able to create a building from data according to its template even when template has empty levels', 
@@ -37,12 +38,13 @@ describe('BuildingFactory test suite',
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[3];
-        const building = factory.fromData({tplID: tpl.id});
+        const building = factory.fromData({tplID: tpl.id, id:11});
 
         // then 
         expect(building).not.toBeNull();
         expect(building.name).toEqual(tpl.name);
         expect(building.tplBuildingID).toEqual(tpl.id);
         expect(building.level).toBeNull();
+        expect(building.id).toEqual(11);
     }); 
 })

@@ -27,6 +27,7 @@ import SaveGameDataQuery from "../command/SaveGameDataQuery";
 import CreateCitiesCommand from "../command/CreateCitiesCommand";
 import RestoreSavedDataCommand from "../command/RestoreSavedDataCommand";
 import GetCityQuery from "../command/GetCityQuery";
+import RemoveBuildingCommand from "../command/RemoveBuildingCommand";
 
 
 export function configIOC(container:Container){
@@ -35,6 +36,7 @@ export function configIOC(container:Container){
     container.register(AppConst.APP_FACADE                      , ()=>  new Facade()                            , true  );
     container.register(AppConst.BUY_BUILDING                    , ()=>  new BuyBuildingCommand()                );
     container.register(AppConst.ADD_BUILDING_TO_CITY            , ()=>  new AddBuildingToCityCommand()          );
+    container.register(AppConst.REMOVE_BUILDING_TO_CITY         , ()=>  new RemoveBuildingCommand()             );
     container.register(AppConst.UPGRADE_BUILDING                , ()=>  new UpgradeBuildingCommand()            );
     container.register(AppConst.ADD_CITY                        , ()=>  new AddCityCommand()                    );
     container.register(AppConst.CREATE_CITIES                   , ()=>  new CreateCitiesCommand()               );
@@ -119,6 +121,7 @@ export function configIOC(container:Container){
 
 export function configFacade(container:Container){
     const facade = container.resolve(AppConst.APP_FACADE);
+    facade.registerCommand( AppConst.REMOVE_BUILDING_TO_CITY        , container.get(AppConst.REMOVE_BUILDING_TO_CITY));
     facade.registerCommand( AppConst.UPGRADE_BUILDING               , container.get(AppConst.UPGRADE_BUILDING));
     facade.registerCommand( AppConst.ADD_BUILDING_TO_CITY           , container.get(AppConst.ADD_BUILDING_TO_CITY));
     facade.registerCommand( AppConst.BUY_BUILDING                   , container.get(AppConst.BUY_BUILDING));

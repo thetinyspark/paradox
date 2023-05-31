@@ -21,6 +21,7 @@ export default class AddBuildingToCityCommand implements ICommand{
             return;
 
         const factory:IFactory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
-        city.buildings.push( factory.fromData({tplID: tpl.id}));
+        const id = city.buildings.length;
+        city.buildings.push( factory.fromData({tplID: tpl.id, id}));
     }
 }

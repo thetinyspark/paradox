@@ -10,7 +10,7 @@ var UpgradeBuildingCommand = /** @class */ (function () {
         var tplRepo = facade.getProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
         var cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         var city = cityRepo.getOneBy('id', data.cityID);
-        var target = city.buildings[data.index] || null;
+        var target = city.buildings.find(function (b) { return b.id === data.id; }) || null;
         var tplID = target === null ? -1 : target.tplBuildingID;
         var tpl = tplRepo.getOneBy('id', tplID);
         if (tpl === null || city === null || target === null)

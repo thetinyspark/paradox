@@ -1,6 +1,7 @@
 export default class AppConst {
     static APP_FACADE: string;
     static GAME_STORE_MODEL: string;
+    static REMOVE_BUILDING_TO_CITY: string;
     static ADD_BUILDING_TO_CITY: string;
     static UPGRADE_BUILDING: string;
     static ADD_CITY: string;

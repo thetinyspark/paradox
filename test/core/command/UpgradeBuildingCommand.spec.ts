@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import Repository from "../../../lib/core/model/repository/Repository";
-import { ATLANTIS, TEMPLATE_BUILDINGS_MOCK } from "../../../lib/mock";
+import { ATLANTIS } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
 
 describe('UpgradeBuildingCommand test suite', 
@@ -23,10 +23,9 @@ describe('UpgradeBuildingCommand test suite',
         atlantis.wallet.get()[0].amount = 200;
         atlantis.wallet.get()[1].amount = 200;
 
-        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, index:0});
+        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, id:0});
 
         // then 
-
         expect(atlantis.buildings[0].level.level).toEqual(2);
         expect(atlantis.buildings[1].level.level).toEqual(1);
 
@@ -44,7 +43,7 @@ describe('UpgradeBuildingCommand test suite',
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ATLANTIS().id, tplID: 1});
 
         const atlantis = cityRepo.getOneBy('id', ATLANTIS().id);
-        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, index: 1, freely:true});
+        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, id: 1, freely:true});
 
         // then 
 

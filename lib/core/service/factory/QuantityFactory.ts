@@ -11,10 +11,8 @@ export default class QuantityFactory implements IFactory{
     fromData(obj:any):Quantity{
         const resource = this._resourceRepository.getOneBy('id', obj.resourceID); 
 
-        if( resource === null ){
-            // console.log("non existing resource for resource id: "+obj.resourceID);
+        if( resource === null )
             return null;
-        }
             
         return new Quantity(obj.resourceID, obj.amount);
     }
