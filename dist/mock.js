@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TEMPLATE_BUILDINGS_MOCK = exports.QUANTITIES_MOCK = exports.RESOURCES_MOCK = exports.SHANGRILA = exports.ATLANTIS = exports.YS = void 0;
+exports.SAVED_DATA = exports.TEMPLATE_BUILDINGS_MOCK = exports.QUANTITIES_MOCK = exports.RESOURCES_MOCK = exports.SHANGRILA = exports.ATLANTIS = exports.YS = void 0;
 function YS() {
     return {
         id: 1,
@@ -78,3 +78,8 @@ exports.TEMPLATE_BUILDINGS_MOCK = [
         ]
     },
 ];
+exports.SAVED_DATA = {
+    cities: [SHANGRILA()],
+    resources: exports.RESOURCES_MOCK,
+    templateBuildings: exports.TEMPLATE_BUILDINGS_MOCK
+};
