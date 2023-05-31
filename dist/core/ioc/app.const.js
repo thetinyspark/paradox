@@ -18,6 +18,7 @@ var AppConst = /** @class */ (function () {
     AppConst.RESTORE_SAVED_DATA = "RestoreSavedDataCommand";
     AppConst.DO_CYCLE = "DoCycleCommand";
     // queries
+    AppConst.GET_CITY_QUERY = "GetCityQuery";
     AppConst.GET_CITIES_QUERY = "GetCitiesQuery";
     AppConst.GET_RESOURCES_QUERY = "GetResourcesQuery";
     AppConst.GET_TEMPLATES_BUILDINGS_QUERY = "GetTemplateBuildingsQuery";

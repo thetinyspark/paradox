@@ -46,5 +46,9 @@ export declare const TEMPLATE_BUILDINGS_MOCK: {
             resourceID: number;
             amount: number;
         }[];
+        cons: {
+            resourceID: number;
+            amount: number;
+        }[];
     }[];
 }[];

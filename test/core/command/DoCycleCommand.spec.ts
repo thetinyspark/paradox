@@ -1,8 +1,9 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import Repository from "../../../lib/core/model/repository/Repository";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { TEMPLATE_BUILDINGS_MOCK, YS } from "../../../lib/mock";
+import { YS } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
+import QuantityList from "../../../lib/core/model/schema/resources/QuantityList";
 
 describe('DoCycleCommand test suite', 
 ()=>{
@@ -14,29 +15,35 @@ describe('DoCycleCommand test suite',
         const facade        = setup() as Facade;
         const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<any>;
         const data          = YS();
-        const buildings     = data.buildings as any[];
         const numCycles     = 2;
-
-        buildings.push(
-            {tplID: TEMPLATE_BUILDINGS_MOCK[0].id}, 
-            {tplID: TEMPLATE_BUILDINGS_MOCK[3].id}
-        );
 
         // when 
         facade.sendNotification(AppConst.ADD_CITY, data);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:1});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:5});
+        const ys = cityRepo.getOneBy('id',data.id);
+
+
         for( let i = 0; i < numCycles; i++ ){
             facade.sendNotification(AppConst.DO_CYCLE);
         }
 
-        const ys = cityRepo.getOneBy('id',data.id);
+        // then 
         ys.wallet.get().forEach(
             (quantity, index) => {
-                const tpl = TEMPLATE_BUILDINGS_MOCK[0];
-                expect(quantity.resourceID).toEqual( tpl.levels[0].prod[index].resourceID);
-                expect(quantity.amount).toEqual( tpl.levels[0].prod[index].amount * numCycles);
+                const building1 = ys.buildings[0];
+                const building2 = ys.buildings[1];
+                const prod1 = ( building1.level.prod as QuantityList).get().find( q=>q.resourceID === quantity.resourceID)?.amount || 0;
+                const prod2 = ( building2.level.prod as QuantityList).get().find( q=>q.resourceID === quantity.resourceID)?.amount || 0;
+                const cons1 = ( building1.level.cons as QuantityList).get().find( q=>q.resourceID === quantity.resourceID)?.amount || 0;
+                const cons2 = ( building2.level.cons as QuantityList).get().find( q=>q.resourceID === quantity.resourceID)?.amount || 0;
+
+                const prod = (prod1 + prod2) * numCycles;
+                const cons = (cons1 + cons2) * numCycles;
+                const total = prod - cons;
+
+                expect(quantity.amount).toEqual(total);
             }
         );
-        // then 
-
     });
 })

@@ -10,6 +10,7 @@ export default class AppConst {
     static CREATE_TEMPLATE_BUILDINGS: string;
     static RESTORE_SAVED_DATA: string;
     static DO_CYCLE: string;
+    static GET_CITY_QUERY: string;
     static GET_CITIES_QUERY: string;
     static GET_RESOURCES_QUERY: string;
     static GET_TEMPLATES_BUILDINGS_QUERY: string;

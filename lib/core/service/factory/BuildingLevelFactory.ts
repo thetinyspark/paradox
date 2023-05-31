@@ -9,8 +9,9 @@ export default class BuildingLevelFactory implements IFactory{
     fromData(obj:any):BuildingLevel{
         return new BuildingLevel(
             obj.level, 
-            this._quantityListFactory.fromData( obj.cost ),
-            this._quantityListFactory.fromData( obj.prod )
+            this._quantityListFactory.fromData( obj.cost || [] ),
+            this._quantityListFactory.fromData( obj.prod || [] ),
+            this._quantityListFactory.fromData( obj.cons || [] ),
         );
     }
 }

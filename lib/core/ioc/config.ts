@@ -26,6 +26,7 @@ import SerializerService from "../service/SerializerService";
 import SaveGameDataQuery from "../command/SaveGameDataQuery";
 import CreateCitiesCommand from "../command/CreateCitiesCommand";
 import RestoreSavedDataCommand from "../command/RestoreSavedDataCommand";
+import GetCityQuery from "../command/GetCityQuery";
 
 
 export function configIOC(container:Container){
@@ -42,6 +43,7 @@ export function configIOC(container:Container){
     container.register(AppConst.CREATE_TEMPLATE_BUILDINGS       , ()=>  new CreateTemplateBuildingsCommand()    );
     container.register(AppConst.DO_CYCLE                        , ()=>  new DoCycleCommand()                    );
     container.register(AppConst.GET_CITIES_QUERY                , ()=>  new GetCitiesQuery()                    );
+    container.register(AppConst.GET_CITY_QUERY                  , ()=>  new GetCityQuery()                      );
     container.register(AppConst.GET_RESOURCES_QUERY             , ()=>  new GetResourcesQuery()                 );
     container.register(AppConst.SAVE_GAME_DATA_QUERY            , ()=>  new SaveGameDataQuery()                 );
     container.register(AppConst.GET_TEMPLATES_BUILDINGS_QUERY   , ()=>  new GetTemplateBuildingsQuery()         );
@@ -127,6 +129,7 @@ export function configFacade(container:Container){
     facade.registerCommand( AppConst.CREATE_TEMPLATE_BUILDINGS      , container.get(AppConst.CREATE_TEMPLATE_BUILDINGS));
     facade.registerCommand( AppConst.DO_CYCLE                       , container.get(AppConst.DO_CYCLE));
     facade.registerCommand( AppConst.GET_CITIES_QUERY               , container.get(AppConst.GET_CITIES_QUERY));
+    facade.registerCommand( AppConst.GET_CITY_QUERY                 , container.get(AppConst.GET_CITY_QUERY));
     facade.registerCommand( AppConst.GET_RESOURCES_QUERY            , container.get(AppConst.GET_RESOURCES_QUERY));
     facade.registerCommand( AppConst.GET_TEMPLATES_BUILDINGS_QUERY  , container.get(AppConst.GET_TEMPLATES_BUILDINGS_QUERY));
     facade.registerCommand( AppConst.SAVE_GAME_DATA_QUERY           , container.get(AppConst.SAVE_GAME_DATA_QUERY));

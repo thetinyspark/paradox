@@ -29,6 +29,7 @@ var SerializerService_1 = require("../service/SerializerService");
 var SaveGameDataQuery_1 = require("../command/SaveGameDataQuery");
 var CreateCitiesCommand_1 = require("../command/CreateCitiesCommand");
 var RestoreSavedDataCommand_1 = require("../command/RestoreSavedDataCommand");
+var GetCityQuery_1 = require("../command/GetCityQuery");
 function configIOC(container) {
     container.reset();
     container.register(app_const_1.default.GAME_STORE_MODEL, function () { return new coffe_maker_1.StoreModel(); }, true);
@@ -43,6 +44,7 @@ function configIOC(container) {
     container.register(app_const_1.default.CREATE_TEMPLATE_BUILDINGS, function () { return new CreateTemplateBuildingsCommand_1.default(); });
     container.register(app_const_1.default.DO_CYCLE, function () { return new DoCycleCommand_1.default(); });
     container.register(app_const_1.default.GET_CITIES_QUERY, function () { return new GetCitiesQuery_1.default(); });
+    container.register(app_const_1.default.GET_CITY_QUERY, function () { return new GetCityQuery_1.default(); });
     container.register(app_const_1.default.GET_RESOURCES_QUERY, function () { return new GetResourcesQuery_1.default(); });
     container.register(app_const_1.default.SAVE_GAME_DATA_QUERY, function () { return new SaveGameDataQuery_1.default(); });
     container.register(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY, function () { return new GetTemplateBuildingsQuery_1.default(); });
@@ -84,6 +86,7 @@ function configFacade(container) {
     facade.registerCommand(app_const_1.default.CREATE_TEMPLATE_BUILDINGS, container.get(app_const_1.default.CREATE_TEMPLATE_BUILDINGS));
     facade.registerCommand(app_const_1.default.DO_CYCLE, container.get(app_const_1.default.DO_CYCLE));
     facade.registerCommand(app_const_1.default.GET_CITIES_QUERY, container.get(app_const_1.default.GET_CITIES_QUERY));
+    facade.registerCommand(app_const_1.default.GET_CITY_QUERY, container.get(app_const_1.default.GET_CITY_QUERY));
     facade.registerCommand(app_const_1.default.GET_RESOURCES_QUERY, container.get(app_const_1.default.GET_RESOURCES_QUERY));
     facade.registerCommand(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY, container.get(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY));
     facade.registerCommand(app_const_1.default.SAVE_GAME_DATA_QUERY, container.get(app_const_1.default.SAVE_GAME_DATA_QUERY));

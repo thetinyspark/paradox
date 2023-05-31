@@ -17,6 +17,7 @@ export default class AppConst{
     static DO_CYCLE:string                      = "DoCycleCommand";
 
     // queries
+    static GET_CITY_QUERY:string                = "GetCityQuery";
     static GET_CITIES_QUERY:string              = "GetCitiesQuery";
     static GET_RESOURCES_QUERY:string           = "GetResourcesQuery";
     static GET_TEMPLATES_BUILDINGS_QUERY:string = "GetTemplateBuildingsQuery";

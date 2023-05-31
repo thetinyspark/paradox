@@ -17,6 +17,7 @@ var DoCycleCommand = /** @class */ (function () {
         var facade = notification.getEmitter();
         var proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         proxy.getAll().forEach(function (city) {
+            // production
             city.buildings.forEach(function (building) {
                 if (building.level === null)
                     return;
@@ -30,6 +31,20 @@ var DoCycleCommand = /** @class */ (function () {
                     else {
                         cityQuantity.amount += prod.amount;
                     }
+                });
+            });
+            // maintenance
+            city.buildings.forEach(function (building) {
+                if (building.level === null)
+                    return;
+                building.level.cons.get().forEach(function (cons) {
+                    var cityQuantity = city.wallet.get().find(function (q) { return q.resourceID === cons.resourceID; }) || null;
+                    if (cityQuantity === null) {
+                        var empty = cons.clone();
+                        empty.amount = 0;
+                        city.wallet.set(__spreadArray(__spreadArray([], city.wallet.get(), true), [empty], false));
+                    }
+                    cityQuantity.amount -= cons.amount;
                 });
             });
         });

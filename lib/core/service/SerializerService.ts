@@ -49,6 +49,7 @@ export default class SerializerService{
             level: buildingLevel.level, 
             cost: this.quantityListToObject(buildingLevel.cost),
             prod: this.quantityListToObject(buildingLevel.prod),
+            cons: this.quantityListToObject(buildingLevel.cons),
         };
     }
 

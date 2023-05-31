@@ -14,6 +14,8 @@ export default class DoCycleCommand implements ICommand{
 
         proxy.getAll().forEach( 
             (city:City)=>{
+
+                // production
                 city.buildings.forEach( 
                     (building:Building)=>{
                         if( building.level === null )
@@ -31,12 +33,33 @@ export default class DoCycleCommand implements ICommand{
                                     )
                                 }
                                 else{
-                                    cityQuantity.amount += prod.amount
+                                    cityQuantity.amount += prod.amount;
                                 }
                             }
-                        )
+                        );
                     }
-                )
+                );
+
+                // maintenance
+                city.buildings.forEach( 
+                    (building:Building)=>{
+                        if( building.level === null )
+                            return; 
+                            
+                        building.level.cons.get().forEach( 
+                            (cons:Quantity)=>{
+                                const cityQuantity = city.wallet.get().find(q=>q.resourceID === cons.resourceID ) || null;
+                                if( cityQuantity === null ){
+                                    const empty = cons.clone();
+                                    empty.amount = 0;
+                                    city.wallet.set([...city.wallet.get(), empty]);
+                                }
+                                
+                                cityQuantity.amount -= cons.amount;
+                            }
+                        );
+                    }
+                );
             }
         )
     }

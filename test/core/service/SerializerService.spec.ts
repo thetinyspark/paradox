@@ -5,7 +5,7 @@ import AppConst from "../../../lib/core/ioc/app.const";
 import * as mock from "../../../lib/mock";
 import IFactory from "../../../lib/core/service/factory/IFactory";
 
-describe("PaymentService test suite", () => {
+describe("SerializerService test suite", () => {
   it("should be able to create a building from data according to its template", () => {
     // given
     const container = new Container();
