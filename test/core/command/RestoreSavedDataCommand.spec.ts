@@ -1,6 +1,6 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { RESOURCES_MOCK, SHANGRILA, TEMPLATE_BUILDINGS_MOCK } from "../../../lib/mock";
+import { SAVED_DATA } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
 
 describe('RestoreSavedDataCommand test suite', 
@@ -9,11 +9,7 @@ describe('RestoreSavedDataCommand test suite',
     async ()=>{
         // given 
         const facade:Facade = setup( new Container(), false, false) as Facade;
-        const savedData = {
-            cities: [SHANGRILA()], 
-            resources: RESOURCES_MOCK, 
-            templateBuildings: TEMPLATE_BUILDINGS_MOCK
-        }
+        const savedData = SAVED_DATA;
         
         // when 
         facade.sendNotification(AppConst.RESTORE_SAVED_DATA, savedData);

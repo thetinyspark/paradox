@@ -75,3 +75,9 @@ export const TEMPLATE_BUILDINGS_MOCK = [
     },
 ];
 
+export const SAVED_DATA = {
+    cities: [SHANGRILA()], 
+    resources: RESOURCES_MOCK, 
+    templateBuildings: TEMPLATE_BUILDINGS_MOCK
+}
+
