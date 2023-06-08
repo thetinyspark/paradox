@@ -33,6 +33,7 @@ var SerializerService = /** @class */ (function () {
             cost: this.quantityListToObject(buildingLevel.cost),
             prod: this.quantityListToObject(buildingLevel.prod),
             cons: this.quantityListToObject(buildingLevel.cons),
+            sold: this.quantityListToObject(buildingLevel.sold),
         };
     };
     SerializerService.prototype.templateBuildingToObject = function (tplBuilding) {

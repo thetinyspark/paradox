@@ -31,13 +31,15 @@ var CreateCitiesCommand_1 = require("../command/CreateCitiesCommand");
 var RestoreSavedDataCommand_1 = require("../command/RestoreSavedDataCommand");
 var GetCityQuery_1 = require("../command/GetCityQuery");
 var RemoveBuildingCommand_1 = require("../command/RemoveBuildingCommand");
+var SellBuildingCommand_1 = require("../command/SellBuildingCommand");
 function configIOC(container) {
     container.reset();
     container.register(app_const_1.default.GAME_STORE_MODEL, function () { return new coffe_maker_1.StoreModel(); }, true);
     container.register(app_const_1.default.APP_FACADE, function () { return new coffe_maker_1.Facade(); }, true);
     container.register(app_const_1.default.BUY_BUILDING, function () { return new BuyBuildingCommand_1.default(); });
     container.register(app_const_1.default.ADD_BUILDING_TO_CITY, function () { return new AddBuildingToCityCommand_1.default(); });
-    container.register(app_const_1.default.REMOVE_BUILDING_TO_CITY, function () { return new RemoveBuildingCommand_1.default(); });
+    container.register(app_const_1.default.SELL_BUILDING, function () { return new SellBuildingCommand_1.default(); });
+    container.register(app_const_1.default.REMOVE_BUILDING_FROM_CITY, function () { return new RemoveBuildingCommand_1.default(); });
     container.register(app_const_1.default.UPGRADE_BUILDING, function () { return new UpgradeBuildingCommand_1.default(); });
     container.register(app_const_1.default.ADD_CITY, function () { return new AddCityCommand_1.default(); });
     container.register(app_const_1.default.CREATE_CITIES, function () { return new CreateCitiesCommand_1.default(); });
@@ -78,7 +80,8 @@ function configIOC(container) {
 exports.configIOC = configIOC;
 function configFacade(container) {
     var facade = container.resolve(app_const_1.default.APP_FACADE);
-    facade.registerCommand(app_const_1.default.REMOVE_BUILDING_TO_CITY, container.get(app_const_1.default.REMOVE_BUILDING_TO_CITY));
+    facade.registerCommand(app_const_1.default.SELL_BUILDING, container.get(app_const_1.default.SELL_BUILDING));
+    facade.registerCommand(app_const_1.default.REMOVE_BUILDING_FROM_CITY, container.get(app_const_1.default.REMOVE_BUILDING_FROM_CITY));
     facade.registerCommand(app_const_1.default.UPGRADE_BUILDING, container.get(app_const_1.default.UPGRADE_BUILDING));
     facade.registerCommand(app_const_1.default.ADD_BUILDING_TO_CITY, container.get(app_const_1.default.ADD_BUILDING_TO_CITY));
     facade.registerCommand(app_const_1.default.BUY_BUILDING, container.get(app_const_1.default.BUY_BUILDING));

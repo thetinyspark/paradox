@@ -7,7 +7,7 @@ var BuildingLevelFactory = /** @class */ (function () {
         this.fromData = this.fromData.bind(this);
     }
     BuildingLevelFactory.prototype.fromData = function (obj) {
-        return new BuildingLevel_1.default(obj.level, this._quantityListFactory.fromData(obj.cost || []), this._quantityListFactory.fromData(obj.prod || []), this._quantityListFactory.fromData(obj.cons || []));
+        return new BuildingLevel_1.default(obj.level, this._quantityListFactory.fromData(obj.cost || []), this._quantityListFactory.fromData(obj.prod || []), this._quantityListFactory.fromData(obj.cons || []), this._quantityListFactory.fromData(obj.sold || []));
     };
     return BuildingLevelFactory;
 }());

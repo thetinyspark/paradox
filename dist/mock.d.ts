@@ -50,6 +50,10 @@ export declare const TEMPLATE_BUILDINGS_MOCK: {
             resourceID: number;
             amount: number;
         }[];
+        sold: {
+            resourceID: number;
+            amount: number;
+        }[];
     }[];
 }[];
 export declare const SAVED_DATA: {
@@ -83,6 +87,10 @@ export declare const SAVED_DATA: {
                 amount: number;
             }[];
             cons: {
+                resourceID: number;
+                amount: number;
+            }[];
+            sold: {
                 resourceID: number;
                 amount: number;
             }[];
