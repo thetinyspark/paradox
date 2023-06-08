@@ -32,6 +32,7 @@ describe('CityFactory test suite',
         expect(city.buildings.length).toEqual(data.buildings.length);
         expect(city.wallet.get().length).toEqual(data.wallet.length);
 
+        
         city.wallet.get().forEach( 
             (quantity,index)=>{
                 expect(data.wallet[index].resourceID).toEqual(quantity.resourceID);
@@ -47,11 +48,12 @@ describe('CityFactory test suite',
                     expect(building.level.prod.get().length).toEqual(first.prod.length);
                     expect(building.level.cost.get().length).toEqual(first.cost.length);
                     expect(building.level.level).toEqual(first.level);
-                    expect(building.id).toEqual(index);
+                    expect(building.id).toEqual(index+1);
                 }
                 expect(building.name).toEqual(currentData.name);
                 expect(building.tplBuildingID).toEqual(currentData.id);
             }
         )
+        
     }); 
 })

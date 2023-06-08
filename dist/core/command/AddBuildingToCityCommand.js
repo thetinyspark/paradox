@@ -23,8 +23,7 @@ var AddBuildingToCityCommand = /** @class */ (function () {
         if (tpl === null || city === null)
             return;
         var factory = facade.getService(app_const_1.default.BUILDING_FACTORY);
-        var id = city.buildings.length;
-        city.buildings.push(factory.fromData({ tplID: tpl.id, id: id }));
+        city.buildings.push(factory.fromData({ tplID: tpl.id }));
     };
     return AddBuildingToCityCommand;
 }());

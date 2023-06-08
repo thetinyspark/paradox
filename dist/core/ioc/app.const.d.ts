@@ -28,6 +28,7 @@ export default class AppConst {
     static QUANTITY_LIST_FACTORY: string;
     static BUILDING_LEVEL_FACTORY: string;
     static TEMPLATE_BUILDING_FACTORY: string;
+    static UID_SERVICE: string;
     static PAYMENT_SERVICE: string;
     static SERIALIZER_SERVICE: string;
 }

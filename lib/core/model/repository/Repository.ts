@@ -9,7 +9,10 @@ export default class Repository<T> extends Proxy{
         super();
         this._key   = key;
         this._state = storeModel;
+        this.reset();
+    }
 
+    reset(){
         const save = {};
         save[this._key] = new Array<T>();
         this._state.setState(save);

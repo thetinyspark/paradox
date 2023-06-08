@@ -26,11 +26,14 @@ var Repository = /** @class */ (function (_super) {
         _this._key = "data";
         _this._key = key;
         _this._state = storeModel;
-        var save = {};
-        save[_this._key] = new Array();
-        _this._state.setState(save);
+        _this.reset();
         return _this;
     }
+    Repository.prototype.reset = function () {
+        var save = {};
+        save[this._key] = new Array();
+        this._state.setState(save);
+    };
     Repository.prototype.add = function (obj) {
         var data = this.getAll();
         data.push(obj);

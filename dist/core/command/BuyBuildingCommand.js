@@ -25,16 +25,14 @@ var BuyBuildingCommand = /** @class */ (function () {
         var factory = facade.getService(app_const_1.default.BUILDING_FACTORY);
         // building is free
         if (tpl.levels.length === 0 || data.freely) {
-            var id = city.buildings.length;
-            city.buildings.push(factory.fromData({ tplID: tpl.id, id: id }));
+            city.buildings.push(factory.fromData({ tplID: tpl.id }));
             return;
         }
         var cost = tpl.levels[0].cost;
         var wallet = city.wallet;
         var paymentService = facade.getService(app_const_1.default.PAYMENT_SERVICE);
         if (paymentService.pay(wallet, cost)) {
-            var id = city.buildings.length;
-            city.buildings.push(factory.fromData({ tplID: tpl.id, id: id }));
+            city.buildings.push(factory.fromData({ tplID: tpl.id }));
         }
     };
     return BuyBuildingCommand;

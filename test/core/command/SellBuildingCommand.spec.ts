@@ -29,8 +29,8 @@ describe('SellBuildingCommand test suite',
         // then 
         expect(atlantis).toBeTruthy();
         expect(atlantis.buildings.length).toEqual(2);
-        expect(atlantis.buildings[0].id).toEqual(0);
-        expect(atlantis.buildings[1].id).toEqual(1);
+        expect(atlantis.buildings[0].id).toEqual(2);
+        expect(atlantis.buildings[1].id).toEqual(3);
 
         const list = targetBuilding.level.sold.get();
         list.forEach( 

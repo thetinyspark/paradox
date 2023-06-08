@@ -33,8 +33,7 @@ export default class BuyBuildingCommand implements ICommand{
         
         // building is free
         if( tpl.levels.length === 0 || data.freely ){
-            const id = city.buildings.length;
-            city.buildings.push( factory.fromData({tplID: tpl.id, id}));
+            city.buildings.push( factory.fromData({tplID: tpl.id}));
             return;
         }
         
@@ -43,8 +42,7 @@ export default class BuyBuildingCommand implements ICommand{
         const paymentService = facade.getService(AppConst.PAYMENT_SERVICE) as PaymentService; 
 
         if( paymentService.pay(wallet, cost) ){
-            const id = city.buildings.length;
-            city.buildings.push( factory.fromData({tplID: tpl.id, id}));
+            city.buildings.push( factory.fromData({tplID: tpl.id}));
         }
     }
 }

@@ -23,7 +23,7 @@ describe('UpgradeBuildingCommand test suite',
         atlantis.wallet.get()[0].amount = 200;
         atlantis.wallet.get()[1].amount = 200;
 
-        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, id:0});
+        facade.sendNotification(AppConst.UPGRADE_BUILDING, {cityID: ATLANTIS().id, id:1});
 
         // then 
         expect(atlantis.buildings[0].level.level).toEqual(2);
@@ -47,7 +47,7 @@ describe('UpgradeBuildingCommand test suite',
 
         // then 
 
-        expect(atlantis.buildings[0].level.level).toEqual(1);
-        expect(atlantis.buildings[1].level.level).toEqual(2);
+        expect(atlantis.buildings[0].level.level).toEqual(2);
+        expect(atlantis.buildings[1].level.level).toEqual(1);
     });
 })

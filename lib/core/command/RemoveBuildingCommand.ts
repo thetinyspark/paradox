@@ -27,10 +27,5 @@ export default class RemoveBuildingCommand implements ICommand{
 
         const pos = city.buildings.indexOf(target);
         city.buildings.splice(pos,1);
-        city.buildings.forEach( 
-            (building, index)=>{
-                building.id = index;
-            }
-        );
     }
 }

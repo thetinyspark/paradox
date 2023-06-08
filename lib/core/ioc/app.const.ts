@@ -41,6 +41,7 @@ export default class AppConst{
     static TEMPLATE_BUILDING_FACTORY:string     = "TemplateBuildingFactory";
     
     // services
+    static UID_SERVICE:string                   = "UIDService";
     static PAYMENT_SERVICE:string               = "PaymentService";
     static SERIALIZER_SERVICE:string            = "SerializerService";
 }

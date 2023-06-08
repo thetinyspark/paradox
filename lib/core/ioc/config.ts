@@ -29,6 +29,7 @@ import RestoreSavedDataCommand from "../command/RestoreSavedDataCommand";
 import GetCityQuery from "../command/GetCityQuery";
 import RemoveBuildingCommand from "../command/RemoveBuildingCommand";
 import SellBuildingCommand from "../command/SellBuildingCommand";
+import UIDService from "../service/UIDService";
 
 
 export function configIOC(container:Container){
@@ -78,7 +79,10 @@ export function configIOC(container:Container){
     );
 
     container.register( AppConst.BUILDING_FACTORY, 
-                        ()=>  new BuildingFactory(container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY)), 
+                        ()=>  new BuildingFactory(
+                                container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY), 
+                                container.resolve(AppConst.UID_SERVICE)
+                            ), 
                         true
     );
     container.register( AppConst.CITY_FACTORY, 
@@ -115,9 +119,10 @@ export function configIOC(container:Container){
                         true
     );
 
-    container.register( AppConst.RESOURCE_FACTORY,  ()=>  new ResourceFactory(), true);
-    container.register( AppConst.PAYMENT_SERVICE,   ()=>  new PaymentService(), true);
-    container.register( AppConst.SERIALIZER_SERVICE,()=>  new SerializerService(), true);
+    container.register( AppConst.RESOURCE_FACTORY,      ()=>  new ResourceFactory(), true);
+    container.register( AppConst.PAYMENT_SERVICE,       ()=>  new PaymentService(), true);
+    container.register( AppConst.SERIALIZER_SERVICE ,   ()=>  new SerializerService(), true);
+    container.register( AppConst.UID_SERVICE        ,   ()=>  new UIDService(), true);
     return container;
 }
 
@@ -154,5 +159,6 @@ export function configFacade(container:Container){
     facade.registerService( AppConst.TEMPLATE_BUILDING_FACTORY      , container.resolve(AppConst.TEMPLATE_BUILDING_FACTORY)     );
     facade.registerService( AppConst.PAYMENT_SERVICE                , container.resolve(AppConst.PAYMENT_SERVICE)               );
     facade.registerService( AppConst.SERIALIZER_SERVICE             , container.resolve(AppConst.SERIALIZER_SERVICE)            );
+    facade.registerService( AppConst.UID_SERVICE                    , container.resolve(AppConst.UID_SERVICE)                   );
     return facade;
 }

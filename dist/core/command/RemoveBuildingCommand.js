@@ -23,9 +23,6 @@ var RemoveBuildingCommand = /** @class */ (function () {
             return;
         var pos = city.buildings.indexOf(target);
         city.buildings.splice(pos, 1);
-        city.buildings.forEach(function (building, index) {
-            building.id = index;
-        });
     };
     return RemoveBuildingCommand;
 }());

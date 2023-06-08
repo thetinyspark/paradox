@@ -5,6 +5,7 @@ import * as mock from "../../../../lib/mock";
 import Repository from "../../../../lib/core/model/repository/Repository";
 import TemplateBuilding from "../../../../lib/core/model/schema/building/TemplateBuilding";
 import { setup } from "../../../setup.spec";
+import UIDService from "../../../../lib/core/service/UIDService";
 
 describe('BuildingFactory test suite', 
 ()=>{
@@ -13,7 +14,7 @@ describe('BuildingFactory test suite',
         // given 
         const facade = setup() as Facade;
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const factory = new BuildingFactory(tplRepo);
+        const factory = new BuildingFactory(tplRepo, new UIDService());
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[0];
@@ -34,7 +35,7 @@ describe('BuildingFactory test suite',
         // given 
         const facade = setup() as Facade;
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const factory = new BuildingFactory(tplRepo);
+        const factory = new BuildingFactory(tplRepo, new UIDService());
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[3];
@@ -47,4 +48,31 @@ describe('BuildingFactory test suite',
         expect(building.level).toBeNull();
         expect(building.id).toEqual(11);
     }); 
+
+    it('should provide a unique building id if it is not provided or it has a negative value', 
+    ()=>{
+        // given 
+        const facade = setup() as Facade;
+        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
+        const factory = new BuildingFactory(tplRepo, new UIDService());
+
+        // when 
+        const tpl = mock.TEMPLATE_BUILDINGS_MOCK[3];
+        const building1 = factory.fromData({tplID: tpl.id, id:-1});
+        const building2 = factory.fromData({tplID: tpl.id});
+        const building3 = factory.fromData({tplID: tpl.id, id:4});
+        const building4 = factory.fromData({tplID: tpl.id});
+        const building5 = factory.fromData({tplID: tpl.id, id:10});
+        const building6 = factory.fromData({tplID: tpl.id});
+        const building7 = factory.fromData({tplID: tpl.id, id: 4});
+
+        // then 
+        expect(building1.id).toEqual(1);
+        expect(building2.id).toEqual(2);
+        expect(building3.id).toEqual(4);
+        expect(building4.id).toEqual(5);
+        expect(building5.id).toEqual(10);
+        expect(building6.id).toEqual(11);
+        expect(building7.id).toEqual(12);
+    });
 })

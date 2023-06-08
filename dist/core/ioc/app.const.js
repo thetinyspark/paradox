@@ -39,6 +39,7 @@ var AppConst = /** @class */ (function () {
     AppConst.BUILDING_LEVEL_FACTORY = "BuildingLevelFactory";
     AppConst.TEMPLATE_BUILDING_FACTORY = "TemplateBuildingFactory";
     // services
+    AppConst.UID_SERVICE = "UIDService";
     AppConst.PAYMENT_SERVICE = "PaymentService";
     AppConst.SERIALIZER_SERVICE = "SerializerService";
     return AppConst;
