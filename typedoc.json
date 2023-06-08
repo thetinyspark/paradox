@@ -1,5 +1,5 @@
 {
-    "entryPoints": ["./lib/index.ts"],
+    "entryPoints": ["./lib/index.ts","./lib/core/Engine.ts"],
     "out": "docs", 
     "theme": "./node_modules/typedoc-theme-dark/dist/dark/"
-  }
+}

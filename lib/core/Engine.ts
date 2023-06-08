@@ -3,6 +3,7 @@ import { Emitter } from "@thetinyspark/tiny-observer";
 import AppConst from "./ioc/app.const";
 import { configFacade } from "./ioc/config";
 import { version } from "../version";
+import City from "./model/schema/city/City";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -25,7 +26,6 @@ export default class Engine extends Emitter{
         // init resources and buildings
         this._facade.sendNotification(AppConst.RESTORE_SAVED_DATA, configuration);
     }
-
     /**
      * Returns a version num
      * @returns string
@@ -33,12 +33,240 @@ export default class Engine extends Emitter{
     getVersion(){
         return version;
     }
-
     /**
      * Returns the Facade which is used to dispatch commands and queries.
      * @returns Facade
      */
     getFacade(){
         return this._facade;
+    }
+
+
+    /**
+     * Processes a cycle. A cycle means that productions are added 
+     * to cities's wallets and consumptions are removed from them too. 
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.doCycle()
+     * ```
+     */
+    doCycle(){
+        this.getFacade().sendNotification(AppConst.DO_CYCLE);
+    }
+
+    /**
+     * Adds a building to a city
+     * 
+     * example.ts
+     * ```typescript
+     * const data = ;
+     * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
+     * ```
+     */
+    addBuilding(data:any){
+        return this.getFacade().sendNotification(AppConst.ADD_BUILDING_TO_CITY, data);
+    }
+    /**
+     * Buys and adds a building to a city if city has enough resources
+     * 
+     * example.ts
+     * ```typescript
+     * const data = ;
+     * Paradox.engine.buyBuilding({cityID: 1, tplID: 1})
+     * ```
+     */
+    buyBuilding(data:any){
+        return this.getFacade().sendNotification(AppConst.BUY_BUILDING, data);
+    }
+    /**
+     * Upgrades a building with a specific id (it if exists)
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.upgradeBuilding({cityID: 1, id:1});
+     * ```
+     */
+    upgradeBuilding(data:any){
+        return this.getFacade().sendNotification(AppConst.UPGRADE_BUILDING, data);
+    }
+    /**
+     * Removes a building with a specific id from a city (it if exists)
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.removeBuilding({cityID: 1, id:1});
+     * ```
+     */
+    removeBuilding(data:any){
+        return this.getFacade().sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, data);
+    }
+    /**
+     * Sells a building with a specific id and remove it from a city (it if exists)
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.sellBuilding({cityID:1, id:1});
+     * ```
+     */
+    sellBuilding(data:any){
+        return this.getFacade().sendNotification(AppConst.SELL_BUILDING, data);
+    }
+
+    /**
+     * Create building's templates
+     * 
+     * example.ts
+     * ```typescript
+const templates = [
+    {
+        id: 1, 
+        name: "Castle", 
+        levels: [
+            {
+                level: 1, 
+                cost: [{resourceID: 1, amount: 100}], 
+                prod: [{resourceID: 2, amount: 100}], 
+                cons:[{resourceID: 2, amount: 2}], 
+                sold:[{resourceID: 1, amount: 50}]
+            },
+            {
+                level: 2, 
+                cost: [{resourceID: 1, amount: 200}], 
+                prod: [{resourceID: 2, amount: 200}], 
+                cons:[], 
+                sold:[]
+            },
+        ]
+    },
+    {
+        id: 2, 
+        name: "Home", 
+        levels: []
+    },
+];
+Paradox.engine.createBuildingTemplates(templates);
+    * ```
+    */
+    createBuildingTemplates(templates:any[]){
+        return this.getFacade().sendNotification(AppConst.CREATE_TEMPLATE_BUILDINGS, templates);
+    }
+    /**
+     * Returns all building's templates
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.getTemplateBuildings().then( (templates)=>{});
+     * ```
+     */
+    getTemplateBuildings():Promise<any>{
+        return this.getFacade().query(AppConst.GET_TEMPLATES_BUILDINGS_QUERY);
+    }
+
+
+    /**
+     * Create resources
+     * 
+     * example.ts
+     * ```typescript
+     * const resources = [{id:1, name: "gold"},{id:2, name: "wood"},{id:3, name: "food"}];
+     * Paradox.engine.createResources(resources)
+     * ```
+     */
+    createResources(resources:any[]){
+        return this.getFacade().sendNotification(AppConst.CREATE_RESOURCES, resources);
+    }
+    /**
+     * Returns all resources
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.getResources().then( (templates)=>{});
+     * ```
+     */
+    getResources():Promise<any>{
+        return this.getFacade().query(AppConst.GET_RESOURCES_QUERY);
+    }
+
+
+    /**
+     * Adds city
+     * 
+     * example.ts
+     * ```typescript
+    const cityData = {
+        id: 1, 
+        name: "Atlantis", 
+        buildings:[{tplID:1, level:2}],
+        wallet: [{resourceID: 1, amount: 100}]
+    };
+    * Paradox.engine.addCity(cityData);
+    * ```
+    */
+    addCity(city:any){
+        return this.getFacade().sendNotification(AppConst.ADD_CITY, city);
+    }
+    /**
+     * Create cities
+     * 
+     * example.ts
+     * ```typescript
+     * const city1 = {id: 1, name: "city1", buildings:[{tplID:1, level:1}],wallet: [{resourceID: 1, amount: 100}]};
+     * const city2 = {id: 2, name: "city2", buildings:[{tplID:2, level:1}],wallet: [{resourceID: 2, amount: 100}]};
+     * const cities = [city1,city2];
+     * Paradox.engine.createCities(cities)
+     * ```
+     */
+    createCities(cities:any[]){
+        return this.getFacade().sendNotification(AppConst.CREATE_CITIES, cities);
+    }
+    /**
+     * Returns all cities
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.getCities().then( (templates)=>{});
+     * ```
+     */
+    getCities():Promise<any>{
+        return this.getFacade().query(AppConst.GET_CITIES_QUERY);
+    }
+    /**
+     * Returns a city by its id (if exists)
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.getCityByID({id:1}).then( (city)=>{});
+     * ```
+     */
+    getCityByID(data:any):Promise<City>{
+        return this.getFacade().query(AppConst.GET_CITY_QUERY, data);
+    }
+
+    /**
+     * Restores game data
+     * 
+     * example.ts
+     * ```typescript
+     * const cities             = [... cities data];
+     * const resources          = [... resources data];
+     * const templateBuildings  = [... templates data];
+     * const data =  {cities resources, templateBuildings};
+     * Paradox.engine.restoreGameData(data);
+     * ```
+     */
+    restoreGameData(data:any){
+        return this.getFacade().sendNotification(AppConst.RESTORE_SAVED_DATA, data);
+    }
+    /**
+     * Saves and returns all game data
+     * 
+     * example.ts
+     * ```typescript
+     * Paradox.engine.saveGameData().then( (gameData)=>{});
+     * ```
+     */
+    saveGameData():Promise<any>{
+        return this.getFacade().query(AppConst.SAVE_GAME_DATA_QUERY);
     }
 }
