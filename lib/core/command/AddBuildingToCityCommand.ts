@@ -6,8 +6,16 @@ import TemplateBuilding from "../model/schema/building/TemplateBuilding";
 import City from "../model/schema/city/City";
 import IFactory from "../service/factory/IFactory";
 
+/**
+ * Adds a building to a city
+ * 
+ * example.ts
+ * ```typescript
+ * const data = {cityID: 1, tplID: 1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.ADD_BUILDING_TO_CITY, data);
+ * ```
+ */
 export default class AddBuildingToCityCommand implements ICommand{
-
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 

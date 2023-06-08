@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Sells a building with a specific id and remove it from a city (it if exists)
+ *
+ * example.ts
+ * ```typescript
+ * const data = {cityID:1, id:1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.SELL_BUILDING, data);
+ * ```
+ */
 var SellBuildingCommand = /** @class */ (function () {
     function SellBuildingCommand() {
     }

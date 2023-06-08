@@ -4,7 +4,15 @@ import Resource from "../model/schema/resources/Resource";
 import AppConst from "../ioc/app.const";
 import Repository from "../model/repository/Repository";
 import IFactory from "../service/factory/IFactory";
-
+/**
+ * Create resources
+ * 
+ * example.ts
+ * ```typescript
+ * const resources = [{id:1, name: "gold"},{id:2, name: "wood"},{id:3, name: "food"}];
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.CREATE_RESOURCES, resources);
+ * ```
+ */
 export default class CreateResourcesCommand implements ICommand{
 
     execute(notification: INotification): void {

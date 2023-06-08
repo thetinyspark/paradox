@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Create resources
+ *
+ * example.ts
+ * ```typescript
+ * const resources = [{id:1, name: "gold"},{id:2, name: "wood"},{id:3, name: "food"}];
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.CREATE_RESOURCES, resources);
+ * ```
+ */
 var CreateResourcesCommand = /** @class */ (function () {
     function CreateResourcesCommand() {
     }

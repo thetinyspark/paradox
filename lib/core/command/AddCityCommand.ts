@@ -5,6 +5,20 @@ import AppConst from "../ioc/app.const";
 import Repository from "../model/repository/Repository";
 import IFactory from "../service/factory/IFactory";
 
+/**
+ * Adds city
+ * 
+ * example.ts
+ * ```typescript
+ * const cityData = {
+        id: 1, 
+        name: "Atlantis", 
+        buildings:[{tplID:1, level:2}],
+        wallet: [{resourceID: 1, amount: 100}]
+    };
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.ADD_CITY, cityData)
+ * ```
+ */
 export default class AddCityCommand implements ICommand{
 
     execute(notification: INotification): void {

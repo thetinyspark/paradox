@@ -10,6 +10,15 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Processes a cycle. A cycle means that productions are added
+ * to cities's wallets and consumptions are removed from them too.
+ *
+ * example.ts
+ * ```typescript
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.DO_CYCLE);
+ * ```
+ */
 var DoCycleCommand = /** @class */ (function () {
     function DoCycleCommand() {
     }

@@ -5,7 +5,15 @@ import Building from "../model/schema/building/Building";
 import Quantity from "../model/schema/resources/Quantity";
 import AppConst from "../ioc/app.const";
 import Repository from "../model/repository/Repository";
-
+/**
+ * Processes a cycle. A cycle means that productions are added 
+ * to cities's wallets and consumptions are removed from them too. 
+ * 
+ * example.ts
+ * ```typescript
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.DO_CYCLE);
+ * ```
+ */
 export default class DoCycleCommand implements ICommand{
 
     execute(notification: INotification): void {

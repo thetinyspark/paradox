@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Adds a building to a city
+ *
+ * example.ts
+ * ```typescript
+ * const data = {cityID: 1, tplID: 1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.ADD_BUILDING_TO_CITY, data);
+ * ```
+ */
 var AddBuildingToCityCommand = /** @class */ (function () {
     function AddBuildingToCityCommand() {
     }

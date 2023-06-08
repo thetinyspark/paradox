@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Upgrades a building with a specific id (it if exists)
+ *
+ * example.ts
+ * ```typescript
+ * const data = {cityID: 1, id:1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.UPGRADE_BUILDING, data);
+ * ```
+ */
 var UpgradeBuildingCommand = /** @class */ (function () {
     function UpgradeBuildingCommand() {
     }

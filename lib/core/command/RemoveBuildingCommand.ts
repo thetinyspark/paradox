@@ -3,7 +3,15 @@ import { INotification } from "@thetinyspark/tiny-observer";
 import AppConst from "../ioc/app.const";
 import Repository from "../model/repository/Repository";
 import City from "../model/schema/city/City";
-
+/**
+ * Removes a building with a specific id from a city (it if exists)
+ * 
+ * example.ts
+ * ```typescript
+ * const data = {cityID: 1, id:1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.REMOVE_BUILDING_FROM_CITY, data);
+ * ```
+ */
 export default class RemoveBuildingCommand implements ICommand{
 
     execute(notification: INotification): void {

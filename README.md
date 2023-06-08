@@ -1,2 +1,2 @@
 # Description
-An management game engine
+A management game engine

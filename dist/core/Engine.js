@@ -19,6 +19,9 @@ var tiny_observer_1 = require("@thetinyspark/tiny-observer");
 var app_const_1 = require("./ioc/app.const");
 var config_1 = require("./ioc/config");
 var version_1 = require("../version");
+/**
+ * The Engine object represents the main gateway between you and the paradox engine's core.
+ */
 var Engine = /** @class */ (function (_super) {
     __extends(Engine, _super);
     function Engine() {
@@ -26,6 +29,11 @@ var Engine = /** @class */ (function (_super) {
         _this._facade = null;
         return _this;
     }
+    /**
+     * Init the engine, and restores game data
+     * @param container a Container's instance
+     * @param configuration game data to restore
+     */
     Engine.prototype.init = function (container, configuration) {
         if (configuration === void 0) { configuration = {}; }
         (0, config_1.configFacade)(container);
@@ -33,9 +41,17 @@ var Engine = /** @class */ (function (_super) {
         // init resources and buildings
         this._facade.sendNotification(app_const_1.default.RESTORE_SAVED_DATA, configuration);
     };
+    /**
+     * Returns a version num
+     * @returns string
+     */
     Engine.prototype.getVersion = function () {
         return version_1.version;
     };
+    /**
+     * Returns the Facade which is used to dispatch commands and queries.
+     * @returns Facade
+     */
     Engine.prototype.getFacade = function () {
         return this._facade;
     };

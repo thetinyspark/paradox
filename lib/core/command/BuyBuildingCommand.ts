@@ -6,7 +6,15 @@ import City from "../model/schema/city/City";
 import TemplateBuilding from "../model/schema/building/TemplateBuilding";
 import IFactory from "../service/factory/IFactory";
 import PaymentService from "../service/PaymentService";
-
+/**
+ * Buys and adds a building to a city if city has enough resources
+ * 
+ * example.ts
+ * ```typescript
+ * const data = {cityID: 1, tplID: 1};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.BUY_BUILDING, data);
+ * ```
+ */
 export default class BuyBuildingCommand implements ICommand{
 
     execute(notification: INotification): void {

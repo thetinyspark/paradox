@@ -1,6 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Restores game data
+ *
+ * example.ts
+ * ```typescript
+ * const cities             = [... cities data];
+ * const resources          = [... resources data];
+ * const templateBuildings  = [... templates data];
+ * const data =  {cities resources, templateBuildings};
+ * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.RESTORE_SAVED_DATA, data);
+ * ```
+ */
 var RestoreSavedDataCommand = /** @class */ (function () {
     function RestoreSavedDataCommand() {
     }

@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_const_1 = require("../ioc/app.const");
+/**
+ * Saves and returns all game data
+ *
+ * example.ts
+ * ```typescript
+ * Paradox.engine.getFacade().query(Paradox.appConstants.SAVE_GAME_DATA_QUERY).then( (gameData)=>{});
+ * ```
+ */
 var SaveGameDataQuery = /** @class */ (function () {
     function SaveGameDataQuery() {
     }
