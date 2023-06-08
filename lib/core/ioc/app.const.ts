@@ -6,7 +6,8 @@ export default class AppConst{
     static GAME_STORE_MODEL:string              = "GameStoreModel"
 
     // commands
-    static REMOVE_BUILDING_TO_CITY:string       = "RemoveBuildingToCityCommand";
+    static SELL_BUILDING:string                 = "SellBuildingCommand";
+    static REMOVE_BUILDING_FROM_CITY:string     = "RemoveBuildingFromCityCommand";
     static ADD_BUILDING_TO_CITY:string          = "AddBuildingToCityCommand";
     static UPGRADE_BUILDING:string              = "UpgradeBuildingCommand";
     static ADD_CITY:string                      = "AddCityCommand";

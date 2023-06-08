@@ -23,6 +23,8 @@ describe('BuildingLevelFactory test suite',
                 expect(level).not.toBeNull();
                 expect(level.cost.get().length).toEqual(data[index].cost.length);
                 expect(level.prod.get().length).toEqual(data[index].prod.length);
+                expect(level.cons.get().length).toEqual(data[index].cons.length);
+                expect(level.sold.get().length).toEqual(data[index].sold.length);
                 expect(level.level).toEqual(data[index].level);
             }
         )
