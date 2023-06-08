@@ -394,9 +394,9 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
 /*!***********************!*\
   !*** ./dist/index.js ***!
   \***********************/
-/***/ ((module, exports, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-maker */ \"./node_modules/@thetinyspark/coffe-maker/dist/index.js\");\r\nvar config_1 = __webpack_require__(/*! ./core/ioc/config */ \"./dist/core/ioc/config.js\");\r\nvar Engine_1 = __webpack_require__(/*! ./core/Engine */ \"./dist/core/Engine.js\");\r\nvar app_const_1 = __webpack_require__(/*! ./core/ioc/app.const */ \"./dist/core/ioc/app.const.js\");\r\nvar defaultContainer = (0, config_1.configIOC)(new coffe_maker_1.Container());\r\nvar engine = new Engine_1.default();\r\nmodule.exports = {\r\n    engine: engine,\r\n    defaultContainer: defaultContainer,\r\n    appConstants: app_const_1.default\r\n};\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/index.js?");
+eval("\r\nvar coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-maker */ \"./node_modules/@thetinyspark/coffe-maker/dist/index.js\");\r\nvar config_1 = __webpack_require__(/*! ./core/ioc/config */ \"./dist/core/ioc/config.js\");\r\nvar Engine_1 = __webpack_require__(/*! ./core/Engine */ \"./dist/core/Engine.js\");\r\nvar app_const_1 = __webpack_require__(/*! ./core/ioc/app.const */ \"./dist/core/ioc/app.const.js\");\r\nvar defaultContainer = (0, config_1.configIOC)(new coffe_maker_1.Container());\r\nvar engine = new Engine_1.default();\r\nmodule.exports = {\r\n    engine: engine,\r\n    defaultContainer: defaultContainer,\r\n    appConstants: app_const_1.default\r\n};\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/index.js?");
 
 /***/ }),
 
@@ -406,7 +406,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
   \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.2.0\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.2.1\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
 
 /***/ }),
 

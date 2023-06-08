@@ -6,7 +6,7 @@ import AppConst from "./core/ioc/app.const";
 const defaultContainer = configIOC(new Container());
 const engine = new Engine();
 
-module.exports = {
+export = {
     engine, 
     defaultContainer,
     appConstants:AppConst

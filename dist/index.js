@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var coffe_maker_1 = require("@thetinyspark/coffe-maker");
 var config_1 = require("./core/ioc/config");
 var Engine_1 = require("./core/Engine");
