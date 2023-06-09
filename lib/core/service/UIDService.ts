@@ -2,6 +2,10 @@ export default class UIDService{
 
     private ids:Map<string,number[]> = new Map<string,number[]>();
 
+    reset(){
+        this.ids = new Map<string,number[]>(); 
+    }
+
     createUID(category:string="no_category",defaultUID:number=-1):number{
         if( !this.ids.has(category) ){
             this.ids.set(category, []);

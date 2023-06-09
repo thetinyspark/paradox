@@ -90,6 +90,7 @@ export function configIOC(container:Container){
                             return new CityFactory(
                                 container.resolve(AppConst.BUILDING_FACTORY),
                                 container.resolve(AppConst.QUANTITY_LIST_FACTORY),
+                                container.resolve(AppConst.UID_SERVICE)
                             )
                         }, 
                         true
@@ -108,7 +109,10 @@ export function configIOC(container:Container){
     );
     container.register( AppConst.TEMPLATE_BUILDING_FACTORY, 
                         ()=>  {
-                            return new TemplateBuildingFactory(container.resolve(AppConst.BUILDING_LEVEL_FACTORY))
+                            return new TemplateBuildingFactory(
+                                container.resolve(AppConst.BUILDING_LEVEL_FACTORY), 
+                                container.resolve(AppConst.UID_SERVICE)
+                            )
                         }, 
                         true
     );
@@ -119,7 +123,7 @@ export function configIOC(container:Container){
                         true
     );
 
-    container.register( AppConst.RESOURCE_FACTORY,      ()=>  new ResourceFactory(), true);
+    container.register( AppConst.RESOURCE_FACTORY,      ()=>  new ResourceFactory(container.resolve(AppConst.UID_SERVICE)), true);
     container.register( AppConst.PAYMENT_SERVICE,       ()=>  new PaymentService(), true);
     container.register( AppConst.SERIALIZER_SERVICE ,   ()=>  new SerializerService(), true);
     container.register( AppConst.UID_SERVICE        ,   ()=>  new UIDService(), true);

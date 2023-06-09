@@ -13,9 +13,10 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var City_1 = require("../../model/schema/city/City");
 var CityFactory = /** @class */ (function () {
-    function CityFactory(_buildingFactory, _quantityListFactory) {
+    function CityFactory(_buildingFactory, _quantityListFactory, _uidService) {
         this._buildingFactory = _buildingFactory;
         this._quantityListFactory = _quantityListFactory;
+        this._uidService = _uidService;
         this.fromData = this.fromData.bind(this);
     }
     CityFactory.prototype.fromData = function (obj) {
@@ -25,7 +26,8 @@ var CityFactory = /** @class */ (function () {
         if (Array.isArray(obj.buildings)) {
             buildings = obj.buildings.map(function (b, id) {
                 var data = __assign({}, b);
-                data.id = b.id || id;
+                var uid = _this._uidService.createUID("cities", b.id);
+                data.id = uid;
                 return _this._buildingFactory.fromData(data);
             });
         }

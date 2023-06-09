@@ -13,6 +13,9 @@ var UIDService = /** @class */ (function () {
     function UIDService() {
         this.ids = new Map();
     }
+    UIDService.prototype.reset = function () {
+        this.ids = new Map();
+    };
     UIDService.prototype.createUID = function (category, defaultUID) {
         if (category === void 0) { category = "no_category"; }
         if (defaultUID === void 0) { defaultUID = -1; }

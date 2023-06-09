@@ -59,7 +59,7 @@ function configIOC(container) {
     container.register(app_const_1.default.BASE_REPOSITORY, function () { return new Repository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "data"); }, true);
     container.register(app_const_1.default.BUILDING_FACTORY, function () { return new BuildingFactory_1.default(container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY), container.resolve(app_const_1.default.UID_SERVICE)); }, true);
     container.register(app_const_1.default.CITY_FACTORY, function () {
-        return new CityFactory_1.default(container.resolve(app_const_1.default.BUILDING_FACTORY), container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY));
+        return new CityFactory_1.default(container.resolve(app_const_1.default.BUILDING_FACTORY), container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY), container.resolve(app_const_1.default.UID_SERVICE));
     }, true);
     container.register(app_const_1.default.QUANTITY_LIST_FACTORY, function () {
         return new QuantityListFactory_1.default(container.resolve(app_const_1.default.QUANTITY_FACTORY));
@@ -68,12 +68,12 @@ function configIOC(container) {
         return new BuildingLevelFactory_1.default(container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY));
     }, true);
     container.register(app_const_1.default.TEMPLATE_BUILDING_FACTORY, function () {
-        return new TemplateBuildingFactory_1.default(container.resolve(app_const_1.default.BUILDING_LEVEL_FACTORY));
+        return new TemplateBuildingFactory_1.default(container.resolve(app_const_1.default.BUILDING_LEVEL_FACTORY), container.resolve(app_const_1.default.UID_SERVICE));
     }, true);
     container.register(app_const_1.default.QUANTITY_FACTORY, function () {
         return new QuantityFactory_1.default(container.resolve(app_const_1.default.RESOURCE_REPOSITORY));
     }, true);
-    container.register(app_const_1.default.RESOURCE_FACTORY, function () { return new ResourceFactory_1.default(); }, true);
+    container.register(app_const_1.default.RESOURCE_FACTORY, function () { return new ResourceFactory_1.default(container.resolve(app_const_1.default.UID_SERVICE)); }, true);
     container.register(app_const_1.default.PAYMENT_SERVICE, function () { return new PaymentService_1.default(); }, true);
     container.register(app_const_1.default.SERIALIZER_SERVICE, function () { return new SerializerService_1.default(); }, true);
     container.register(app_const_1.default.UID_SERVICE, function () { return new UIDService_1.default(); }, true);

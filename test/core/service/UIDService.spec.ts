@@ -1,8 +1,6 @@
-import PaymentService from "../../../lib/core/service/PaymentService";
 import { setup } from "../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import IFactory from "../../../lib/core/service/factory/IFactory";
 import UIDService from "../../../lib/core/service/UIDService";
 
 describe("UIDService test suite", () => {
