@@ -1,4 +1,10 @@
-export function YS(){
+import { CityDescType } from "./core/model/types/CityDescType";
+import { GameSaveDescType } from "./core/model/types/GameSaveDescType";
+import { QuantityDescType } from "./core/model/types/QuantityDescType";
+import { ResourceDescType } from "./core/model/types/ResourceDescType";
+import { TemplateBuildingDescType } from "./core/model/types/TemplateBuildingDescType";
+
+export function YS():CityDescType{
     return {
         id: 1, 
         name: "Ys", 
@@ -7,7 +13,7 @@ export function YS(){
     }
 };
 
-export function ATLANTIS(){
+export function ATLANTIS():CityDescType{
     return{
         id: 2, 
         name: "Atlantis", 
@@ -16,7 +22,7 @@ export function ATLANTIS(){
     }
 };
 
-export function SHANGRILA(){
+export function SHANGRILA():CityDescType{
     return{
         id: 2, 
         name: "Atlantis", 
@@ -25,19 +31,19 @@ export function SHANGRILA(){
     }
 };
 
-export const RESOURCES_MOCK = [
+export const RESOURCES_MOCK:ResourceDescType[] = [
     {id:1, name: "gold"},
     {id:2, name: "wood"},
     {id:3, name: "food"},
 ];
 
-export const QUANTITIES_MOCK = [
+export const QUANTITIES_MOCK:QuantityDescType[] = [
     {resourceID: 1, amount: 100},
     {resourceID: 2, amount: 100},
     {resourceID: 3, amount: 100},
 ];
 
-export const TEMPLATE_BUILDINGS_MOCK = [
+export const TEMPLATE_BUILDINGS_MOCK:TemplateBuildingDescType[] = [
     {
         id: 1, 
         name: "Castle", 
@@ -75,7 +81,7 @@ export const TEMPLATE_BUILDINGS_MOCK = [
     },
 ];
 
-export const SAVED_DATA = {
+export const SAVED_DATA:GameSaveDescType = {
     cities: [SHANGRILA()], 
     resources: RESOURCES_MOCK, 
     templateBuildings: TEMPLATE_BUILDINGS_MOCK

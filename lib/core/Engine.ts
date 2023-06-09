@@ -4,6 +4,14 @@ import AppConst from "./ioc/app.const";
 import { configFacade } from "./ioc/config";
 import { version } from "../version";
 import City from "./model/schema/city/City";
+import { GameSaveDescType } from "./model/types/GameSaveDescType";
+import { CityDescType } from "./model/types/CityDescType";
+import { ResourceDescType } from "./model/types/ResourceDescType";
+import Resource from "./model/schema/resources/Resource";
+import TemplateBuilding from "./model/schema/building/TemplateBuilding";
+import { TemplateBuildingDescType } from "./model/types/TemplateBuildingDescType";
+import { CityBuildingPointerType } from "./model/types/CityBuildingPointerType";
+import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -19,7 +27,7 @@ export default class Engine extends Emitter{
      * @param container a Container's instance
      * @param configuration game data to restore
      */
-    init(container:Container, configuration:any = {}){
+    init(container:Container, configuration:GameSaveDescType = {}){
         configFacade(container);
         this._facade = container.resolve(AppConst.APP_FACADE) as Facade;
 
@@ -64,7 +72,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    addBuilding(data:any){
+    addBuilding(data:CreateCityBuildingType){
         return this.getFacade().sendNotification(AppConst.ADD_BUILDING_TO_CITY, data);
     }
     /**
@@ -76,7 +84,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.buyBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    buyBuilding(data:any){
+    buyBuilding(data:CreateCityBuildingType){
         return this.getFacade().sendNotification(AppConst.BUY_BUILDING, data);
     }
     /**
@@ -87,7 +95,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.upgradeBuilding({cityID: 1, id:1});
      * ```
      */
-    upgradeBuilding(data:any){
+    upgradeBuilding(data:CityBuildingPointerType){
         return this.getFacade().sendNotification(AppConst.UPGRADE_BUILDING, data);
     }
     /**
@@ -98,7 +106,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.removeBuilding({cityID: 1, id:1});
      * ```
      */
-    removeBuilding(data:any){
+    removeBuilding(data:CityBuildingPointerType){
         return this.getFacade().sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, data);
     }
     /**
@@ -109,7 +117,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.sellBuilding({cityID:1, id:1});
      * ```
      */
-    sellBuilding(data:any){
+    sellBuilding(data:CityBuildingPointerType){
         return this.getFacade().sendNotification(AppConst.SELL_BUILDING, data);
     }
 
@@ -148,7 +156,7 @@ const templates = [
 Paradox.engine.createBuildingTemplates(templates);
     * ```
     */
-    createBuildingTemplates(templates:any[]){
+    createBuildingTemplates(templates:TemplateBuildingDescType[]){
         return this.getFacade().sendNotification(AppConst.CREATE_TEMPLATE_BUILDINGS, templates);
     }
     /**
@@ -159,7 +167,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getTemplateBuildings().then( (templates)=>{});
      * ```
      */
-    getTemplateBuildings():Promise<any>{
+    getTemplateBuildings():Promise<TemplateBuilding[]>{
         return this.getFacade().query(AppConst.GET_TEMPLATES_BUILDINGS_QUERY);
     }
 
@@ -173,7 +181,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.createResources(resources)
      * ```
      */
-    createResources(resources:any[]){
+    createResources(resources:ResourceDescType[]){
         return this.getFacade().sendNotification(AppConst.CREATE_RESOURCES, resources);
     }
     /**
@@ -184,7 +192,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getResources().then( (templates)=>{});
      * ```
      */
-    getResources():Promise<any>{
+    getResources():Promise<Resource[]>{
         return this.getFacade().query(AppConst.GET_RESOURCES_QUERY);
     }
 
@@ -203,7 +211,7 @@ Paradox.engine.createBuildingTemplates(templates);
     * Paradox.engine.addCity(cityData);
     * ```
     */
-    addCity(city:any){
+    addCity(city:CityDescType){
         return this.getFacade().sendNotification(AppConst.ADD_CITY, city);
     }
     /**
@@ -217,7 +225,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.createCities(cities)
      * ```
      */
-    createCities(cities:any[]){
+    createCities(cities:CityDescType[]){
         return this.getFacade().sendNotification(AppConst.CREATE_CITIES, cities);
     }
     /**
@@ -228,7 +236,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getCities().then( (templates)=>{});
      * ```
      */
-    getCities():Promise<any>{
+    getCities():Promise<City[]>{
         return this.getFacade().query(AppConst.GET_CITIES_QUERY);
     }
     /**
@@ -243,6 +251,7 @@ Paradox.engine.createBuildingTemplates(templates);
         return this.getFacade().query(AppConst.GET_CITY_QUERY, data);
     }
 
+
     /**
      * Restores game data
      * 
@@ -255,7 +264,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.restoreGameData(data);
      * ```
      */
-    restoreGameData(data:any){
+    restoreGameData(data:GameSaveDescType){
         return this.getFacade().sendNotification(AppConst.RESTORE_SAVED_DATA, data);
     }
     /**
@@ -266,7 +275,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.saveGameData().then( (gameData)=>{});
      * ```
      */
-    saveGameData():Promise<any>{
+    saveGameData():Promise<GameSaveDescType>{
         return this.getFacade().query(AppConst.SAVE_GAME_DATA_QUERY);
     }
 }

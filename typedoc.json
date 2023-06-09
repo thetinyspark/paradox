@@ -1,5 +1,17 @@
 {
-    "entryPoints": ["./lib/index.ts","./lib/core/Engine.ts"],
+    "entryPoints": [
+        "./lib/index.ts",
+        "./lib/core/model/types/BuildingLevelDescType.ts",
+        "./lib/core/model/types/CityBuildingDescType.ts",
+        "./lib/core/model/types/CityBuildingPointerType.ts",
+        "./lib/core/model/types/CityDescType.ts",
+        "./lib/core/model/types/CreateCityBuildingType.ts",
+        "./lib/core/model/types/GameSaveDescType.ts",
+        "./lib/core/model/types/QuantityDescType.ts",
+        "./lib/core/model/types/ResourceDescType.ts",
+        "./lib/core/model/types/TemplateBuildingDescType.ts",
+        "./lib/core/Engine.ts"
+    ],
     "out": "docs", 
     "theme": "./node_modules/typedoc-theme-dark/dist/dark/"
 }

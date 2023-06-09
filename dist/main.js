@@ -426,7 +426,7 @@ eval("\r\nvar coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-maker 
   \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.4.0\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.4.1\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
 
 /***/ }),
 
