@@ -43,6 +43,8 @@ class SerializerService {
         return {
             tplID: building.tplBuildingID,
             level: building.level.level,
+            id: building.id,
+            frozen: building.frozen
         };
     }
     cityToObject(city) {

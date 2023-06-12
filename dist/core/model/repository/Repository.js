@@ -2,12 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const coffe_maker_1 = require("@thetinyspark/coffe-maker");
 class Repository extends coffe_maker_1.Proxy {
-    constructor(storeModel = new coffe_maker_1.Model(), key = "data") {
+    constructor(_state, _key) {
         super();
-        this._state = null;
-        this._key = "data";
-        this._key = key;
-        this._state = storeModel;
+        this._state = _state;
+        this._key = _key;
         this.reset();
     }
     reset() {

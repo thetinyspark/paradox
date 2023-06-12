@@ -10,12 +10,18 @@ import { TemplateBuildingDescType } from "./model/types/TemplateBuildingDescType
 import { CityBuildingPointerType } from "./model/types/CityBuildingPointerType";
 import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
 import { CityPointerType } from "./model/types/CityPointerType";
+import { SetBuildingFrozenStatusType } from "./model/types/SetBuildingFrozenStatusType";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
 export default class Engine extends Emitter {
     private _facade;
+    private _container;
     constructor();
+    /**
+     * Reset data but keeps configuration
+     */
+    reset(): void;
     /**
      * Init the engine, and restores game data
      * @param container a Container's instance
@@ -47,10 +53,19 @@ export default class Engine extends Emitter {
      *
      * example.ts
      * ```typescript
-     * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
+     * Paradox.engine.addBuilding({cityID: 1, tplID: 1, frozen:true})
      * ```
      */
     addBuilding(data: CreateCityBuildingType): void;
+    /**
+     * Set frozen status for a city building
+     * A frozen building does not produce nor consume anything on cycle
+     * example.ts
+     * ```typescript
+     * Paradox.engine.setBuildingFrozenStatus({cityID: 1, id: 1, frozen:true})
+     * ```
+     */
+    setBuildingFrozenStatus(data: SetBuildingFrozenStatusType): void;
     /**
      * Buys and adds a building to a city if city has enough resources
      *
@@ -206,7 +221,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getCityByID({id:1}).then( (city)=>{});
      * ```
      */
-    getCityByID(data: any): Promise<City>;
+    getCityByID(data: CityPointerType): Promise<City>;
     /**
      * Restores game data
      *

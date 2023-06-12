@@ -16,6 +16,8 @@ class RemoveBuildingCommand {
         const data = notification.getPayload();
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const city = cityRepo.getOneBy('id', data.cityID);
+        if (city === null)
+            return;
         const target = city.buildings.find(b => b.id === data.id) || null;
         if (!city.buildings.includes(target))
             return;

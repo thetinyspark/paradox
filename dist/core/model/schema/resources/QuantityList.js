@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class QuantityList {
-    constructor(quantities) {
+    constructor(quantities = []) {
         this._quantities = [];
         this.set(quantities);
     }
@@ -12,7 +12,7 @@ class QuantityList {
         return this._quantities;
     }
     clone() {
-        return new QuantityList(this._quantities.map(q => q.clone()));
+        return new QuantityList(this._quantities.filter(q => q !== null).map(q => q.clone()));
     }
 }
 exports.default = QuantityList;

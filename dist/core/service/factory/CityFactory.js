@@ -11,6 +11,7 @@ class CityFactory {
     fromData(obj) {
         let buildings = [];
         const wallet = this._quantityListFactory.fromData(obj.wallet);
+        /* istanbul ignore else */
         if (Array.isArray(obj.buildings)) {
             buildings = obj.buildings.map((b, id) => {
                 const data = { ...b };

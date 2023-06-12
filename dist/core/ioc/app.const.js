@@ -8,6 +8,7 @@ AppConst.APP_FACADE = "AppFacade";
 // model
 AppConst.GAME_STORE_MODEL = "GameStoreModel";
 // commands
+AppConst.SET_BUILDING_FROZEN_STATUS = "SetBuildingFrozenStatus";
 AppConst.SELL_BUILDING = "SellBuildingCommand";
 AppConst.REMOVE_BUILDING_FROM_CITY = "RemoveBuildingFromCityCommand";
 AppConst.ADD_BUILDING_TO_CITY = "AddBuildingToCityCommand";
@@ -30,7 +31,6 @@ AppConst.SAVE_GAME_DATA_QUERY = "SaveGameDataQuery";
 AppConst.CITY_REPOSITORY = "CityRepository";
 AppConst.RESOURCE_REPOSITORY = "ResourceRepository";
 AppConst.TEMPLATE_BUILDING_REPOSITORY = "TemplateBuildingRepository";
-AppConst.BASE_REPOSITORY = "BaseRepository";
 // factories
 AppConst.BUILDING_FACTORY = "BuildingFactory";
 AppConst.CITY_FACTORY = "CityFactory";
