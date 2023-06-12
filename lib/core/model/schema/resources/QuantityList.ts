@@ -8,7 +8,7 @@ export default class QuantityList{
         this.set(quantities);
     }
 
-    public set(quantities:Quantity[]):void{
+    public set(quantities:Quantity[] = []):void{
         this._quantities = quantities;
     }
 
@@ -17,6 +17,6 @@ export default class QuantityList{
     }
 
     public clone():QuantityList{
-        return new QuantityList( this._quantities.map( q => q.clone() ) );
+        return new QuantityList( this._quantities.filter(q=>q !== null ).map( q => q.clone() ) );
     }
 }

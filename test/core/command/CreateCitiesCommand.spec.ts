@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { ATLANTIS, SHANGRILA, YS } from "../../../lib/mock";
+import { ATLANTIS, SHANGRILA, YS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('CreateCitiesCommand test suite', 

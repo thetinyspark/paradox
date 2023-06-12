@@ -1,8 +1,8 @@
-import { CityDescType } from "./core/model/types/CityDescType";
-import { GameSaveDescType } from "./core/model/types/GameSaveDescType";
-import { QuantityDescType } from "./core/model/types/QuantityDescType";
-import { ResourceDescType } from "./core/model/types/ResourceDescType";
-import { TemplateBuildingDescType } from "./core/model/types/TemplateBuildingDescType";
+import { CityDescType } from "../lib/core/model/types/CityDescType";
+import { GameSaveDescType } from "../lib/core/model/types/GameSaveDescType";
+import { QuantityDescType } from "../lib/core/model/types/QuantityDescType";
+import { ResourceDescType } from "../lib/core/model/types/ResourceDescType";
+import { TemplateBuildingDescType } from "../lib/core/model/types/TemplateBuildingDescType";
 
 export function YS():CityDescType{
     return {

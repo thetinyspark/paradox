@@ -1,7 +1,7 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
 import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { TEMPLATE_BUILDINGS_MOCK } from "../../../lib/mock";
+import { TEMPLATE_BUILDINGS_MOCK } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('CreateTemplateBuildingsCommand test suite', 

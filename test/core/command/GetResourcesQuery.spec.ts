@@ -1,7 +1,7 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
 import Resource from "../../../lib/core/model/schema/resources/Resource";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { RESOURCES_MOCK } from "../../../lib/mock";
+import { RESOURCES_MOCK } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('GetResourcesQuery test suite', 

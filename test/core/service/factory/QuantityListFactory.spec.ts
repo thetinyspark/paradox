@@ -1,4 +1,4 @@
-import * as mock from "../../../../lib/mock";
+import * as mock from "../../../mock.spec";
 import Quantity from "../../../../lib/core/model/schema/resources/Quantity";
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../../lib/core/ioc/app.const";

@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import City from "../../../lib/core/model/schema/city/City";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { ATLANTIS, YS } from "../../../lib/mock";
+import { ATLANTIS, YS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('GetCityQuery test suite', 

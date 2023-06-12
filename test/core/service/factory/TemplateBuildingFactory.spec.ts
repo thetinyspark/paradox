@@ -1,4 +1,4 @@
-import * as mock from "../../../../lib/mock";
+import * as mock from "../../../mock.spec";
 import BuildingLevel from "../../../../lib/core/model/schema/building/BuildingLevel";
 import TemplateBuilding from "../../../../lib/core/model/schema/building/TemplateBuilding";
 import { setup } from "../../../setup.spec";

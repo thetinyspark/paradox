@@ -1,0 +1,12 @@
+import { CityDescType } from "../lib/core/model/types/CityDescType";
+import { GameSaveDescType } from "../lib/core/model/types/GameSaveDescType";
+import { QuantityDescType } from "../lib/core/model/types/QuantityDescType";
+import { ResourceDescType } from "../lib/core/model/types/ResourceDescType";
+import { TemplateBuildingDescType } from "../lib/core/model/types/TemplateBuildingDescType";
+export declare function YS(): CityDescType;
+export declare function ATLANTIS(): CityDescType;
+export declare function SHANGRILA(): CityDescType;
+export declare const RESOURCES_MOCK: ResourceDescType[];
+export declare const QUANTITIES_MOCK: QuantityDescType[];
+export declare const TEMPLATE_BUILDINGS_MOCK: TemplateBuildingDescType[];
+export declare const SAVED_DATA: GameSaveDescType;

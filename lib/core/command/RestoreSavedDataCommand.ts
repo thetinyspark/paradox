@@ -19,8 +19,8 @@ export default class RestoreSavedDataCommand implements ICommand{
         const facade:Facade = notification.getEmitter() as Facade;
         const configuration:any = notification.getPayload() as any; 
 
-        facade.sendNotification(AppConst.CREATE_RESOURCES, configuration.resources);
-        facade.sendNotification(AppConst.CREATE_TEMPLATE_BUILDINGS, configuration.templateBuildings);
-        facade.sendNotification(AppConst.CREATE_CITIES, configuration.cities);
+        facade.sendNotification(AppConst.CREATE_RESOURCES, configuration.resources || []);
+        facade.sendNotification(AppConst.CREATE_TEMPLATE_BUILDINGS, configuration.templateBuildings || []);
+        facade.sendNotification(AppConst.CREATE_CITIES, configuration.cities || []);
     }
 }

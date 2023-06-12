@@ -1,5 +1,5 @@
 import { Facade } from "@thetinyspark/coffe-maker";
-import * as mock from "../../../../lib/mock";
+import * as mock from "../../../mock.spec";
 import AppConst from "../../../../lib/core/ioc/app.const";
 import IFactory from "../../../../lib/core/service/factory/IFactory";
 import Building from "../../../../lib/core/model/schema/building/Building";

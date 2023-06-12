@@ -1,7 +1,7 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
 import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { RESOURCES_MOCK } from "../../../lib/mock";
+import { RESOURCES_MOCK } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('CreateResourcesCommand test suite', 

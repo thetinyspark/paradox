@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import TemplateBuilding from "../../../lib/core/model/schema/building/TemplateBuilding";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { TEMPLATE_BUILDINGS_MOCK } from "../../../lib/mock";
+import { TEMPLATE_BUILDINGS_MOCK } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('GetTemplateBuildingsQuery test suite', 

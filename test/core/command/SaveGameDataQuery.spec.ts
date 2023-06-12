@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import { setup } from "../../setup.spec";
-import  * as mock from "../../../lib/mock";
+import  * as mock from "../../mock.spec";
 
 describe('SaveGameDataQuery test suite', 
 ()=>{

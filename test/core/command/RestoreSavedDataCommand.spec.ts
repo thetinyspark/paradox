@@ -1,6 +1,6 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { SAVED_DATA } from "../../../lib/mock";
+import { SAVED_DATA } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('RestoreSavedDataCommand test suite', 

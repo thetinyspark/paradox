@@ -1,4 +1,4 @@
-import * as mock from "../../../../lib/mock";
+import * as mock from "../../../mock.spec";
 import Quantity from "../../../../lib/core/model/schema/resources/Quantity";
 import { setup } from "../../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";

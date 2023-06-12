@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
-import { ATLANTIS, TEMPLATE_BUILDINGS_MOCK, YS } from "../../../lib/mock";
+import { ATLANTIS, TEMPLATE_BUILDINGS_MOCK, YS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('BuyBuildingCommand test suite', 

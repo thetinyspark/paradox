@@ -1,4 +1,4 @@
-import * as mock from "../../../../lib/mock";
+import * as mock from "../../../mock.spec";
 import BuildingLevel from "../../../../lib/core/model/schema/building/BuildingLevel";
 import { setup } from "../../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";

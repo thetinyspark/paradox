@@ -2,7 +2,7 @@ import ISerializerService from "../../../lib/core/service/ISerializerService";
 import { setup } from "../../setup.spec";
 import { Container, Facade, IStoreModel } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import * as mock from "../../../lib/mock";
+import * as mock from "../../mock.spec";
 import IFactory from "../../../lib/core/service/factory/IFactory";
 
 describe("ISerializerService test suite", () => {

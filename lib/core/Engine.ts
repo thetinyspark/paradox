@@ -13,14 +13,33 @@ import { TemplateBuildingDescType } from "./model/types/TemplateBuildingDescType
 import { CityBuildingPointerType } from "./model/types/CityBuildingPointerType";
 import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
 import { CityPointerType } from "./model/types/CityPointerType";
+import IUIDService from "./service/IUIDService";
+import IRepository from "./model/repository/IRepository";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
 export default class Engine extends Emitter{
     private _facade:Facade = null; 
+    private _container:Container;
 
     constructor(){
         super();
+    }
+
+    /**
+     * Reset data but keeps configuration
+     */
+    reset(){
+        const container = this._container;
+        const uidService:IUIDService = container.resolve(AppConst.UID_SERVICE) as IUIDService;
+        const cities = container.resolve(AppConst.CITY_REPOSITORY) as IRepository<City>;
+        const templates = container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
+        const resources = container.resolve(AppConst.RESOURCE_REPOSITORY) as IRepository<Resource>;
+
+        uidService.reset();
+        cities.reset();
+        templates.reset();
+        resources.reset();
     }
 
     /**
@@ -31,6 +50,7 @@ export default class Engine extends Emitter{
     init(container:Container, configuration:GameSaveDescType = {}){
         configFacade(container);
         this._facade = container.resolve(AppConst.APP_FACADE) as Facade;
+        this._container = container;
 
         // init resources and buildings
         this._facade.sendNotification(AppConst.RESTORE_SAVED_DATA, configuration);
@@ -259,7 +279,7 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getCityByID({id:1}).then( (city)=>{});
      * ```
      */
-    getCityByID(data:any):Promise<City>{
+    getCityByID(data:CityPointerType):Promise<City>{
         return this.getFacade().query(AppConst.GET_CITY_QUERY, data);
     }
 

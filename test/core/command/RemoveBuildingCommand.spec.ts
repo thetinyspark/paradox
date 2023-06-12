@@ -1,7 +1,7 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import IRepository from "../../../lib/core/model/repository/IRepository";
-import { ATLANTIS } from "../../../lib/mock";
+import { ATLANTIS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
 
 describe('RemoveBuildingCommand test suite', 

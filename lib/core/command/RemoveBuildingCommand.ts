@@ -20,6 +20,9 @@ export default class RemoveBuildingCommand implements ICommand{
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
         const city = cityRepo.getOneBy('id',data.cityID);
+        if( city === null )
+            return; 
+            
         const target = city.buildings.find(b=> b.id === data.id) || null;
     
         if( !city.buildings.includes(target) )

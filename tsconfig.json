@@ -1,5 +1,5 @@
 {
-  "include": ["lib"],
+  "include": ["lib", "test/mock.spec.ts"],
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",

@@ -1,6 +1,6 @@
 {
   "include": ["lib", "test"],
-  "exclude": ["lib/index.ts"],
+  "exclude": ["lib/index.ts","lib/version.ts"],
   "compilerOptions": {
     "target": "es2021",
     "module": "commonjs",
