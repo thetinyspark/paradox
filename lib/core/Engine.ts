@@ -12,6 +12,7 @@ import TemplateBuilding from "./model/schema/building/TemplateBuilding";
 import { TemplateBuildingDescType } from "./model/types/TemplateBuildingDescType";
 import { CityBuildingPointerType } from "./model/types/CityBuildingPointerType";
 import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
+import { CityPointerType } from "./model/types/CityPointerType";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -212,6 +213,18 @@ Paradox.engine.createBuildingTemplates(templates);
     */
     addCity(city:CityDescType){
         return this.getFacade().sendNotification(AppConst.ADD_CITY, city);
+    }
+    /**
+     * Removes city
+     * 
+     * example.ts
+     * ```typescript
+     * const data = {id:1};
+     * Paradox.engine.removeCity(data);
+     * ```
+    */
+    removeCity(city:CityPointerType){
+        return this.getFacade().sendNotification(AppConst.REMOVE_CITY, city);
     }
     /**
      * Create cities

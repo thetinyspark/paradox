@@ -195,6 +195,18 @@ Paradox.engine.createBuildingTemplates(templates);
         return this.getFacade().sendNotification(app_const_1.default.ADD_CITY, city);
     }
     /**
+     * Removes city
+     *
+     * example.ts
+     * ```typescript
+     * const data = {id:1};
+     * Paradox.engine.removeCity(data);
+     * ```
+    */
+    removeCity(city) {
+        return this.getFacade().sendNotification(app_const_1.default.REMOVE_CITY, city);
+    }
+    /**
      * Create cities
      *
      * example.ts

@@ -115,6 +115,10 @@ type CityDescType = {
     wallet: QuantityDescType[]
 }
 
+type CityPointerType = {
+    id: number
+}
+
 type CreateCityBuildingType = {
     cityID: number, 
     tplID:number
@@ -154,6 +158,12 @@ const cityData:CityDescType = {
     wallet: [{resourceID: 1, amount: 100}]
 };
 Paradox.engine.addCity(cityData);
+```
+
+### Remove a city
+```typescript
+const data:CityPointerType = {id:1};
+Paradox.engine.removeCity(data);
 ```
 
 ### Get all cities

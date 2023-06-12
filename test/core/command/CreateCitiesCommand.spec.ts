@@ -4,7 +4,7 @@ import AppConst from "../../../lib/core/ioc/app.const";
 import { ATLANTIS, SHANGRILA, YS } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
 
-describe('CreateResourcesCommand test suite', 
+describe('CreateCitiesCommand test suite', 
 ()=>{
     it('should be able to create a set of cities and retrieve them', 
     ()=>{

@@ -30,6 +30,7 @@ import GetCityQuery from "../command/GetCityQuery";
 import RemoveBuildingCommand from "../command/RemoveBuildingCommand";
 import SellBuildingCommand from "../command/SellBuildingCommand";
 import UIDService from "../service/UIDService";
+import RemoveCityCommand from "../command/RemoveCityCommand";
 
 
 export function configIOC(container:Container){
@@ -42,6 +43,7 @@ export function configIOC(container:Container){
     container.register(AppConst.REMOVE_BUILDING_FROM_CITY       , ()=>  new RemoveBuildingCommand()             );
     container.register(AppConst.UPGRADE_BUILDING                , ()=>  new UpgradeBuildingCommand()            );
     container.register(AppConst.ADD_CITY                        , ()=>  new AddCityCommand()                    );
+    container.register(AppConst.REMOVE_CITY                     , ()=>  new RemoveCityCommand()                    );
     container.register(AppConst.CREATE_CITIES                   , ()=>  new CreateCitiesCommand()               );
     container.register(AppConst.CREATE_RESOURCES                , ()=>  new CreateResourcesCommand()            );
     container.register(AppConst.RESTORE_SAVED_DATA              , ()=>  new RestoreSavedDataCommand()            );
@@ -138,6 +140,7 @@ export function configFacade(container:Container){
     facade.registerCommand( AppConst.ADD_BUILDING_TO_CITY           , container.get(AppConst.ADD_BUILDING_TO_CITY));
     facade.registerCommand( AppConst.BUY_BUILDING                   , container.get(AppConst.BUY_BUILDING));
     facade.registerCommand( AppConst.ADD_CITY                       , container.get(AppConst.ADD_CITY));
+    facade.registerCommand( AppConst.REMOVE_CITY                    , container.get(AppConst.REMOVE_CITY));
     facade.registerCommand( AppConst.CREATE_CITIES                  , container.get(AppConst.CREATE_CITIES));
     facade.registerCommand( AppConst.CREATE_RESOURCES               , container.get(AppConst.CREATE_RESOURCES));
     facade.registerCommand( AppConst.RESTORE_SAVED_DATA             , container.get(AppConst.RESTORE_SAVED_DATA));

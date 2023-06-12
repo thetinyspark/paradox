@@ -11,6 +11,7 @@ export default class AppConst{
     static ADD_BUILDING_TO_CITY:string          = "AddBuildingToCityCommand";
     static UPGRADE_BUILDING:string              = "UpgradeBuildingCommand";
     static ADD_CITY:string                      = "AddCityCommand";
+    static REMOVE_CITY:string                   = "RemoveCityCommand";
     static BUY_BUILDING:string                  = "BuyBuildingCommand";
     static CREATE_RESOURCES:string              = "CreateResourcesCommand";
     static CREATE_CITIES:string                 = "CreateCitiesCommand";

@@ -6,6 +6,7 @@ export default class AppConst {
     static ADD_BUILDING_TO_CITY: string;
     static UPGRADE_BUILDING: string;
     static ADD_CITY: string;
+    static REMOVE_CITY: string;
     static BUY_BUILDING: string;
     static CREATE_RESOURCES: string;
     static CREATE_CITIES: string;
