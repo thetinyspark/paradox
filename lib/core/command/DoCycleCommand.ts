@@ -26,7 +26,7 @@ export default class DoCycleCommand implements ICommand{
                 // production
                 city.buildings.forEach( 
                     (building:Building)=>{
-                        if( building.level === null )
+                        if( building.level === null || building.frozen )
                             return; 
                             
                         building.level.prod.get().forEach( 
@@ -50,7 +50,7 @@ export default class DoCycleCommand implements ICommand{
                 // maintenance
                 city.buildings.forEach( 
                     (building:Building)=>{
-                        if( building.level === null )
+                        if( building.level === null || building.frozen )
                             return; 
                             
                         building.level.cons.get().forEach( 

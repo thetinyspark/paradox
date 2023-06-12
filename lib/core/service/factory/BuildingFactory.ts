@@ -18,7 +18,7 @@ export default class BuildingFactory implements IFactory{
         const id = this._uidService.createUID("buildings",obj.id);
         
         if( template.levels.length === 0) 
-            return  new Building(template.name, null,template.id, id);
+            return  new Building(template.name, null,template.id, id, obj.frozen);
 
 
         const level = template.levels.find( l=>l.level === obj.level) || template.levels[0];
@@ -26,7 +26,8 @@ export default class BuildingFactory implements IFactory{
             template.name, 
             level.clone(), 
             template.id, 
-            id
+            id,
+            obj.frozen
         );
     }
 }

@@ -115,4 +115,29 @@ describe('DoCycleCommand test suite',
         // then 
         expect( city.wallet.get().length ).toEqual(0);
     });
+
+    it('should not add resources to the wallet if building is frozen', 
+    ()=>{
+        // given 
+        const facade        = setup() as Facade;
+        const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const data          = YS();
+        const template      = TEMPLATE_BUILDINGS_MOCK[0];
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, data);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template.id});
+
+        const city = cityRepo.getOneBy('id', data.id);
+        city.buildings[0].frozen = true;
+
+        facade.sendNotification(AppConst.DO_CYCLE);
+
+        // then 
+        city.wallet.get().forEach( 
+            (quantity:Quantity)=>{
+                expect(quantity.amount).toEqual(0);
+            }
+        )
+    });
 })

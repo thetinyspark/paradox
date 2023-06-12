@@ -34,6 +34,7 @@ export default class UpgradeBuildingCommand implements ICommand{
             return;
 
         const nextLevel = tpl.levels.find( l=>l.level === target.level.level+1) || null;
+        
         if( nextLevel === null )
             return 
 

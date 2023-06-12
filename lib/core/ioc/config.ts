@@ -31,6 +31,7 @@ import RemoveBuildingCommand from "../command/RemoveBuildingCommand";
 import SellBuildingCommand from "../command/SellBuildingCommand";
 import UIDService from "../service/UIDService";
 import RemoveCityCommand from "../command/RemoveCityCommand";
+import SetBuildingFrozenStatusCommand from "../command/SetBuildingFrozenStatusCommand";
 
 
 export function configIOC(container:Container){
@@ -38,15 +39,16 @@ export function configIOC(container:Container){
     container.register(AppConst.GAME_STORE_MODEL                , ()=>  new StoreModel()                        , true  )
     container.register(AppConst.APP_FACADE                      , ()=>  new Facade()                            , true  );
     container.register(AppConst.BUY_BUILDING                    , ()=>  new BuyBuildingCommand()                );
+    container.register(AppConst.SET_BUILDING_FROZEN_STATUS      , ()=>  new SetBuildingFrozenStatusCommand()    );
     container.register(AppConst.ADD_BUILDING_TO_CITY            , ()=>  new AddBuildingToCityCommand()          );
-    container.register(AppConst.SELL_BUILDING                   , ()=>  new SellBuildingCommand()             );
+    container.register(AppConst.SELL_BUILDING                   , ()=>  new SellBuildingCommand()               );
     container.register(AppConst.REMOVE_BUILDING_FROM_CITY       , ()=>  new RemoveBuildingCommand()             );
     container.register(AppConst.UPGRADE_BUILDING                , ()=>  new UpgradeBuildingCommand()            );
     container.register(AppConst.ADD_CITY                        , ()=>  new AddCityCommand()                    );
-    container.register(AppConst.REMOVE_CITY                     , ()=>  new RemoveCityCommand()                    );
+    container.register(AppConst.REMOVE_CITY                     , ()=>  new RemoveCityCommand()                 );
     container.register(AppConst.CREATE_CITIES                   , ()=>  new CreateCitiesCommand()               );
     container.register(AppConst.CREATE_RESOURCES                , ()=>  new CreateResourcesCommand()            );
-    container.register(AppConst.RESTORE_SAVED_DATA              , ()=>  new RestoreSavedDataCommand()            );
+    container.register(AppConst.RESTORE_SAVED_DATA              , ()=>  new RestoreSavedDataCommand()           );
     container.register(AppConst.CREATE_TEMPLATE_BUILDINGS       , ()=>  new CreateTemplateBuildingsCommand()    );
     container.register(AppConst.DO_CYCLE                        , ()=>  new DoCycleCommand()                    );
     container.register(AppConst.GET_CITIES_QUERY                , ()=>  new GetCitiesQuery()                    );
@@ -113,6 +115,7 @@ export function configIOC(container:Container){
 
 export function configFacade(container:Container){
     const facade = container.resolve(AppConst.APP_FACADE);
+    facade.registerCommand( AppConst.SET_BUILDING_FROZEN_STATUS     , container.get(AppConst.SET_BUILDING_FROZEN_STATUS));
     facade.registerCommand( AppConst.SELL_BUILDING                  , container.get(AppConst.SELL_BUILDING));
     facade.registerCommand( AppConst.REMOVE_BUILDING_FROM_CITY      , container.get(AppConst.REMOVE_BUILDING_FROM_CITY));
     facade.registerCommand( AppConst.UPGRADE_BUILDING               , container.get(AppConst.UPGRADE_BUILDING));

@@ -67,6 +67,8 @@ export default class SerializerService implements ISerializerService{
         return {
             tplID: building.tplBuildingID,
             level: building.level.level,
+            id: building.id, 
+            frozen: building.frozen
         }
     }
 

@@ -15,6 +15,7 @@ import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
 import { CityPointerType } from "./model/types/CityPointerType";
 import IUIDService from "./service/IUIDService";
 import IRepository from "./model/repository/IRepository";
+import { SetBuildingFrozenStatusType } from "./model/types/SetBuildingFrozenStatusType";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -88,11 +89,22 @@ export default class Engine extends Emitter{
      * 
      * example.ts
      * ```typescript
-     * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
+     * Paradox.engine.addBuilding({cityID: 1, tplID: 1, frozen:true})
      * ```
      */
     addBuilding(data:CreateCityBuildingType){
         return this.getFacade().sendNotification(AppConst.ADD_BUILDING_TO_CITY, data);
+    }
+    /**
+     * Set frozen status for a city building
+     * A frozen building does not produce nor consume anything on cycle
+     * example.ts
+     * ```typescript
+     * Paradox.engine.setBuildingFrozenStatus({cityID: 1, id: 1, frozen:true})
+     * ```
+     */
+    setBuildingFrozenStatus(data:SetBuildingFrozenStatusType){
+        return this.getFacade().sendNotification(AppConst.SET_BUILDING_FROZEN_STATUS, data);
     }
     /**
      * Buys and adds a building to a city if city has enough resources

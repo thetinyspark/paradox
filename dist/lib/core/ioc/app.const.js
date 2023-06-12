@@ -8,6 +8,7 @@ AppConst.APP_FACADE = "AppFacade";
 // model
 AppConst.GAME_STORE_MODEL = "GameStoreModel";
 // commands
+AppConst.SET_BUILDING_FROZEN_STATUS = "SetBuildingFrozenStatus";
 AppConst.SELL_BUILDING = "SellBuildingCommand";
 AppConst.REMOVE_BUILDING_FROM_CITY = "RemoveBuildingFromCityCommand";
 AppConst.ADD_BUILDING_TO_CITY = "AddBuildingToCityCommand";
