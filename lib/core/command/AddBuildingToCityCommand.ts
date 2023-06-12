@@ -19,9 +19,9 @@ export default class AddBuildingToCityCommand implements ICommand{
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
+        
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
-
         const tpl = tplRepo.getOneBy('id',data.tplID);
         const city = cityRepo.getOneBy('id',data.cityID);
 

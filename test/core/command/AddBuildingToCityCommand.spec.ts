@@ -34,4 +34,30 @@ describe('AddBuildingToCityCommand test suite',
         expect(atlantis.buildings[1].name).toEqual(buildings[1].name);
         expect(ys.buildings[0].name).toEqual(buildings[2].name);
     });
+
+    it('should not be able to add a building to an existing city if city does not exists or tplid does not exists', 
+    ()=>{
+        // given 
+        const facade            = setup() as Facade;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const buildings:any[]   = TEMPLATE_BUILDINGS_MOCK;
+        const atData:any        = ATLANTIS();
+        const ysData:any        = YS();
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, atData);
+        facade.sendNotification(AppConst.ADD_CITY, YS());
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 10});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id+10, tplID: 2});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ysData.id+10, tplID: 30});
+
+        const atlantis = cityRepo.getAllBy('id', atData.id)[0];
+        const ys = cityRepo.getAllBy('id', ysData.id)[0];
+        // then 
+
+        expect(atlantis).toBeTruthy();
+        expect(ys).toBeTruthy();
+        expect(atlantis.buildings.length).toEqual(0);
+        expect(ys.buildings.length).toEqual(0);
+    });
 })

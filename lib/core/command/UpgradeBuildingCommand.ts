@@ -22,16 +22,16 @@ export default class UpgradeBuildingCommand implements ICommand{
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
-        const city = cityRepo.getOneBy('id',data.cityID);
+        const city = cityRepo.getOneBy('id',data.cityID) || null;
+        if( city === null )
+            return; 
+
         const target = city.buildings.find(b=> b.id === data.id) || null; 
         const tplID = target === null ? -1 : target.tplBuildingID;
         const tpl = tplRepo.getOneBy('id',tplID);
 
-        if( tpl === null || city === null || target === null)
+        if( tpl === null || target === null)
             return;
-            
-        if( !city.buildings.includes(target) )
-            return; 
 
         const nextLevel = tpl.levels.find( l=>l.level === target.level.level+1) || null;
         if( nextLevel === null )

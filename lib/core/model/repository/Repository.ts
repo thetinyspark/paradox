@@ -2,14 +2,9 @@ import { Model, Proxy } from "@thetinyspark/coffe-maker";
 import IRepository from "./IRepository";
 
 export default class Repository<T> extends Proxy implements IRepository<T>{
-    
-    private _state:Model = null;
-    private _key:string  = "data";
 
-    constructor(storeModel:Model = new Model(), key:string ="data"){
+    constructor(private _state:Model, private _key:string){
         super();
-        this._key   = key;
-        this._state = storeModel;
         this.reset();
     }
 

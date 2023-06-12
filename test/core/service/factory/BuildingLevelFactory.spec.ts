@@ -4,6 +4,8 @@ import { setup } from "../../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../../lib/core/ioc/app.const";
 import IFactory from "../../../../lib/core/service/factory/IFactory";
+import { BuildingLevelDescType } from "../../../../lib/core/model/types/BuildingLevelDescType";
+import QuantityList from "../../../../lib/core/model/schema/resources/QuantityList";
 
 describe('BuildingLevelFactory test suite', 
 ()=>{
@@ -28,5 +30,23 @@ describe('BuildingLevelFactory test suite',
                 expect(level.level).toEqual(data[index].level);
             }
         )
+    }); 
+
+    it('should be able to create a building from data with default values if not provided', 
+    ()=>{
+        // given 
+        const facade = setup() as Facade;
+        const factory = facade.getService(AppConst.BUILDING_LEVEL_FACTORY) as IFactory;
+        const data = {level:1};
+        // when 
+
+        const level = factory.fromData(data);
+
+        // then 
+        expect(level.level).toEqual(1);
+        expect(level.prod).toEqual(new QuantityList());
+        expect(level.cons).toEqual(new QuantityList());
+        expect(level.sold).toEqual(new QuantityList());
+        expect(level.cost).toEqual(new QuantityList());
     }); 
 })

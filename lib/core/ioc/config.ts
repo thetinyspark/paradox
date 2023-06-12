@@ -55,30 +55,9 @@ export function configIOC(container:Container){
     container.register(AppConst.SAVE_GAME_DATA_QUERY            , ()=>  new SaveGameDataQuery()                 );
     container.register(AppConst.GET_TEMPLATES_BUILDINGS_QUERY   , ()=>  new GetTemplateBuildingsQuery()         );
 
-    container.register(AppConst.CITY_REPOSITORY                 , ()=>  new CityRepository(
-                                                                            container.resolve(AppConst.GAME_STORE_MODEL), 
-                                                                            "cities"
-                                                                        )            
-                                                                        , true  
-    );
-    container.register(AppConst.TEMPLATE_BUILDING_REPOSITORY    , ()=>  new TemplateBuildingRepository(
-                                                                            container.resolve(AppConst.GAME_STORE_MODEL), 
-                                                                            "templateBuildings"
-                                                                        )            
-                                                                        , true  
-    );
-    container.register(AppConst.RESOURCE_REPOSITORY             , ()=>  new ResourceRepository(
-                                                                            container.resolve(AppConst.GAME_STORE_MODEL), 
-                                                                            "resources"
-                                                                        )            
-                                                                        , true  
-    );
-    container.register(AppConst.BASE_REPOSITORY                 , ()=>  new Repository<any>(
-                                                                            container.resolve(AppConst.GAME_STORE_MODEL), 
-                                                                            "data"
-                                                                        )            
-                                                                        , true  
-    );
+    container.register(AppConst.CITY_REPOSITORY                 , ()=>  new CityRepository(container.resolve(AppConst.GAME_STORE_MODEL), "cities"),true);
+    container.register(AppConst.TEMPLATE_BUILDING_REPOSITORY    , ()=>  new TemplateBuildingRepository(container.resolve(AppConst.GAME_STORE_MODEL), "templateBuildings"), true);
+    container.register(AppConst.RESOURCE_REPOSITORY             , ()=>  new ResourceRepository(container.resolve(AppConst.GAME_STORE_MODEL), "resources"), true  );
 
     container.register( AppConst.BUILDING_FACTORY, 
                         ()=>  new BuildingFactory(
@@ -154,7 +133,6 @@ export function configFacade(container:Container){
 
     facade.registerProxy( AppConst.CITY_REPOSITORY                  , container.resolve(AppConst.CITY_REPOSITORY)               );
     facade.registerProxy( AppConst.TEMPLATE_BUILDING_REPOSITORY     , container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY)  );
-    facade.registerProxy( AppConst.CITY_REPOSITORY                  , container.resolve(AppConst.CITY_REPOSITORY)               );
     facade.registerProxy( AppConst.RESOURCE_REPOSITORY              , container.resolve(AppConst.RESOURCE_REPOSITORY)           );
 
     facade.registerService( AppConst.BUILDING_FACTORY               , container.resolve(AppConst.BUILDING_FACTORY)              );

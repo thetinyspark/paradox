@@ -30,7 +30,6 @@ export default class AppConst{
     static CITY_REPOSITORY:string               = "CityRepository";
     static RESOURCE_REPOSITORY:string           = "ResourceRepository";
     static TEMPLATE_BUILDING_REPOSITORY:string  = "TemplateBuildingRepository";
-    static BASE_REPOSITORY:string               = "BaseRepository";
 
     // factories
     static BUILDING_FACTORY:string              = "BuildingFactory";

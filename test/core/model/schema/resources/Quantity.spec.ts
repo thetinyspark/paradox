@@ -23,6 +23,18 @@ describe('Quantity test suite',
         expect(results2).toEqual(list2);
     }); 
 
+    it('should have default values', 
+    ()=>{
+        // given 
+        const q = new Quantity();
+
+        // when 
+
+        // then
+        expect(q.amount).toEqual(0);
+        expect(q.resourceID).toEqual(-1);
+    }); 
+
     it('should be able to create a Quantity', 
     ()=>{
         // given 

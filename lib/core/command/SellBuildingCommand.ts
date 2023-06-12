@@ -3,6 +3,7 @@ import { INotification } from "@thetinyspark/tiny-observer";
 import AppConst from "../ioc/app.const";
 import IRepository from "../model/repository/IRepository";
 import City from "../model/schema/city/City";
+import Quantity from "../model/schema/resources/Quantity";
 /**
  * Sells a building with a specific id and remove it from a city (it if exists)
  * 
@@ -25,19 +26,16 @@ export default class SellBuildingCommand implements ICommand{
             
         const target = city.buildings.find(b=> b.id === data.id) || null;
     
-        if( !city.buildings.includes(target) )
-            return; 
-
+        if( target === null )
+            return;
             
         target.level.sold.get().forEach(
             (quantity)=>{
                 const wallet = city.wallet.get();
-                const eq = wallet.find( q=>q.resourceID === quantity.resourceID );
-                if( !eq)
-                    wallet.push(quantity.clone());
-                else
-                    eq.amount += quantity.amount;
-
+                const eq = wallet.find( q=>q.resourceID === quantity.resourceID ) || new Quantity(quantity.resourceID, 0);
+                wallet.splice( wallet.findIndex(q=>q.resourceID === quantity.resourceID, 1))
+                eq.amount += quantity.amount;
+                wallet.push(eq);
                 city.wallet.set(wallet);
             }
         );

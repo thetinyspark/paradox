@@ -11,7 +11,6 @@ describe('BuyBuildingCommand test suite',
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
-        const buildings:any[]   = TEMPLATE_BUILDINGS_MOCK;
         const atData:any        = ATLANTIS();
         const ysData:any        = YS();
 
@@ -48,5 +47,25 @@ describe('BuyBuildingCommand test suite',
 
         // then 
         expect(ys.buildings.length).toEqual(1);
+    });
+
+    it('should not be able to buyd a building if city or template does not exists', 
+    ()=>{
+        // given 
+        const facade            = setup() as Facade;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const buildings:any[]   = TEMPLATE_BUILDINGS_MOCK;
+        const ysData:any        = YS();
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, ysData);
+        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: ysData.id, tplID: -1, freely:true});
+        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: -1, tplID: 1, freely:true});
+        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: -1, tplID: -1, freely:true});
+
+        const ys = cityRepo.getOneBy('id', ysData.id);
+
+        // then 
+        expect(ys.buildings.length).toEqual(0);
     });
 })

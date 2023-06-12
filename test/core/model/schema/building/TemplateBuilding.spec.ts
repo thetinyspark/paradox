@@ -3,8 +3,19 @@ import BuildingLevel from "../../../../../lib/core/model/schema/building/Buildin
 import Quantity from "../../../../../lib/core/model/schema/resources/Quantity";
 import QuantityList from "../../../../../lib/core/model/schema/resources/QuantityList";
 
-describe('Building test suite', 
+describe('Template Building test suite', 
 ()=>{
+    it('should have default values', 
+    ()=>{
+        // given 
+        const building = new TemplateBuilding();
+
+        // when then
+        expect(building.id).toEqual(-1);
+        expect(building.levels).toEqual([]);
+        expect(building.name).toEqual("");
+    }); 
+
     it('should be able to create a building and add some levels', 
     ()=>{
         // given 

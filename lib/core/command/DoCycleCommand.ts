@@ -31,18 +31,17 @@ export default class DoCycleCommand implements ICommand{
                             
                         building.level.prod.get().forEach( 
                             (prod:Quantity)=>{
-                                const cityQuantity = city.wallet.get().find(q=>q.resourceID === prod.resourceID ) || null;
-                                if( cityQuantity === null ){
-                                    city.wallet.set(
-                                        [
-                                            ...city.wallet.get(), 
-                                            prod.clone()
-                                        ]
-                                    )
+
+                                const wallet = city.wallet.get();
+                                let pos = wallet.findIndex(q=>q.resourceID === prod.resourceID );
+
+                                if( pos < 0 ){
+                                    wallet.push( new Quantity(prod.resourceID, 0));
+                                    pos = wallet.length -1;
                                 }
-                                else{
-                                    cityQuantity.amount += prod.amount;
-                                }
+                                    
+                                const cityQuantity = wallet[pos];
+                                cityQuantity.amount += prod.amount;
                             }
                         );
                     }
@@ -56,13 +55,15 @@ export default class DoCycleCommand implements ICommand{
                             
                         building.level.cons.get().forEach( 
                             (cons:Quantity)=>{
-                                const cityQuantity = city.wallet.get().find(q=>q.resourceID === cons.resourceID ) || null;
-                                if( cityQuantity === null ){
-                                    const empty = cons.clone();
-                                    empty.amount = 0;
-                                    city.wallet.set([...city.wallet.get(), empty]);
+                                const wallet = city.wallet.get();
+                                let pos = wallet.findIndex(q=>q.resourceID === cons.resourceID );
+
+                                if( pos < 0 ){
+                                    wallet.push( new Quantity(cons.resourceID, 0));
+                                    pos = wallet.length -1;
                                 }
-                                
+                                    
+                                const cityQuantity = wallet[pos];
                                 cityQuantity.amount -= cons.amount;
                             }
                         );

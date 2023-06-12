@@ -44,4 +44,48 @@ describe('SellBuildingCommand test suite',
             }
         )
     });
+
+    it('should not be able to sell a building to a non existing city', 
+    ()=>{
+        // given 
+        const facade            = setup() as Facade;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const atData:any        = ATLANTIS();
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, atData);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 3});
+        facade.sendNotification(AppConst.SELL_BUILDING, {cityID: atData.id+30, id:1});
+
+        const atlantis = cityRepo.getOneBy('id', atData.id);
+
+        // then 
+        expect(atlantis).toBeTruthy();
+        expect(atlantis.buildings.length).toEqual(3);
+    
+    });
+
+    it('should not be able to sell a non existing building froml a city', 
+    ()=>{
+        // given 
+        const facade            = setup() as Facade;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const atData:any        = ATLANTIS();
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, atData);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 3});
+        facade.sendNotification(AppConst.SELL_BUILDING, {cityID: atData.id, id:100});
+
+        const atlantis = cityRepo.getOneBy('id', atData.id);
+
+        // then 
+        expect(atlantis).toBeTruthy();
+        expect(atlantis.buildings.length).toEqual(3);
+    
+    });
 })

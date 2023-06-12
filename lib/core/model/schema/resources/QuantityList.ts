@@ -4,11 +4,11 @@ export default class QuantityList{
 
     private _quantities:Quantity[] = [];
 
-    constructor( quantities:Quantity[] ){
+    constructor( quantities:Quantity[] = [] ){
         this.set(quantities);
     }
 
-    public set(quantities:Quantity[] = []):void{
+    public set(quantities:Quantity[]):void{
         this._quantities = quantities;
     }
 
