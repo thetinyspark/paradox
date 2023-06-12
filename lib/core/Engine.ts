@@ -19,7 +19,7 @@ import IRepository from "./model/repository/IRepository";
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
 export default class Engine extends Emitter{
-    private _facade:Facade = null; 
+    private _facade:Facade; 
     private _container:Container;
 
     constructor(){
@@ -30,11 +30,10 @@ export default class Engine extends Emitter{
      * Reset data but keeps configuration
      */
     reset(){
-        const container = this._container;
-        const uidService:IUIDService = container.resolve(AppConst.UID_SERVICE) as IUIDService;
-        const cities = container.resolve(AppConst.CITY_REPOSITORY) as IRepository<City>;
-        const templates = container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
-        const resources = container.resolve(AppConst.RESOURCE_REPOSITORY) as IRepository<Resource>;
+        const uidService    = this._container.resolve(AppConst.UID_SERVICE) as IUIDService;
+        const cities        = this._container.resolve(AppConst.CITY_REPOSITORY) as IRepository<City>;
+        const templates     = this._container.resolve(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
+        const resources     = this._container.resolve(AppConst.RESOURCE_REPOSITORY) as IRepository<Resource>;
 
         uidService.reset();
         cities.reset();

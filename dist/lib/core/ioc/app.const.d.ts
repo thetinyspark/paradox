@@ -21,7 +21,6 @@ export default class AppConst {
     static CITY_REPOSITORY: string;
     static RESOURCE_REPOSITORY: string;
     static TEMPLATE_BUILDING_REPOSITORY: string;
-    static BASE_REPOSITORY: string;
     static BUILDING_FACTORY: string;
     static CITY_FACTORY: string;
     static RESOURCE_FACTORY: string;

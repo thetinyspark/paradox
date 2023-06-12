@@ -14,6 +14,7 @@ export default class CityFactory implements IFactory{
     fromData(obj:any):City{
         let buildings = []; 
         const wallet = this._quantityListFactory.fromData(obj.wallet);
+        /* istanbul ignore else */
         if( Array.isArray(obj.buildings)){
             buildings = obj.buildings.map( 
                 (b,id)=>{

@@ -16,13 +16,13 @@ class UpgradeBuildingCommand {
         const data = notification.getPayload();
         const tplRepo = facade.getProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
-        const city = cityRepo.getOneBy('id', data.cityID);
+        const city = cityRepo.getOneBy('id', data.cityID) || null;
+        if (city === null)
+            return;
         const target = city.buildings.find(b => b.id === data.id) || null;
         const tplID = target === null ? -1 : target.tplBuildingID;
         const tpl = tplRepo.getOneBy('id', tplID);
-        if (tpl === null || city === null || target === null)
-            return;
-        if (!city.buildings.includes(target))
+        if (tpl === null || target === null)
             return;
         const nextLevel = tpl.levels.find(l => l.level === target.level.level + 1) || null;
         if (nextLevel === null)

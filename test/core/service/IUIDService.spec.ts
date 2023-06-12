@@ -8,6 +8,7 @@ describe("IUIDService test suite", () => {
     // given
     const facade = setup() as Facade;
     const service = facade.getService(AppConst.UID_SERVICE) as IUIDService;
+    service.reset();
   
     // when 
     const results:number[] = [

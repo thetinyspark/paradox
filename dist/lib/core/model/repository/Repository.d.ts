@@ -3,7 +3,7 @@ import IRepository from "./IRepository";
 export default class Repository<T> extends Proxy implements IRepository<T> {
     private _state;
     private _key;
-    constructor(storeModel?: Model, key?: string);
+    constructor(_state: Model, _key: string);
     reset(): void;
     add(obj: T): void;
     remove(obj: T): void;

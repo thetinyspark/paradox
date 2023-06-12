@@ -14,7 +14,6 @@ const GetTemplateBuildingsQuery_1 = require("../command/GetTemplateBuildingsQuer
 const CityRepository_1 = require("../model/repository/CityRepository");
 const ResourceRepository_1 = require("../model/repository/ResourceRepository");
 const TemplateBuildingRepository_1 = require("../model/repository/TemplateBuildingRepository");
-const Repository_1 = require("../model/repository/Repository");
 const BuyBuildingCommand_1 = require("../command/BuyBuildingCommand");
 const UpgradeBuildingCommand_1 = require("../command/UpgradeBuildingCommand");
 const BuildingFactory_1 = require("../service/factory/BuildingFactory");
@@ -58,7 +57,6 @@ function configIOC(container) {
     container.register(app_const_1.default.CITY_REPOSITORY, () => new CityRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "cities"), true);
     container.register(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY, () => new TemplateBuildingRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "templateBuildings"), true);
     container.register(app_const_1.default.RESOURCE_REPOSITORY, () => new ResourceRepository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "resources"), true);
-    container.register(app_const_1.default.BASE_REPOSITORY, () => new Repository_1.default(container.resolve(app_const_1.default.GAME_STORE_MODEL), "data"), true);
     container.register(app_const_1.default.BUILDING_FACTORY, () => new BuildingFactory_1.default(container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY), container.resolve(app_const_1.default.UID_SERVICE)), true);
     container.register(app_const_1.default.CITY_FACTORY, () => {
         return new CityFactory_1.default(container.resolve(app_const_1.default.BUILDING_FACTORY), container.resolve(app_const_1.default.QUANTITY_LIST_FACTORY), container.resolve(app_const_1.default.UID_SERVICE));
@@ -103,7 +101,6 @@ function configFacade(container) {
     facade.registerCommand(app_const_1.default.SAVE_GAME_DATA_QUERY, container.get(app_const_1.default.SAVE_GAME_DATA_QUERY));
     facade.registerProxy(app_const_1.default.CITY_REPOSITORY, container.resolve(app_const_1.default.CITY_REPOSITORY));
     facade.registerProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY, container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY));
-    facade.registerProxy(app_const_1.default.CITY_REPOSITORY, container.resolve(app_const_1.default.CITY_REPOSITORY));
     facade.registerProxy(app_const_1.default.RESOURCE_REPOSITORY, container.resolve(app_const_1.default.RESOURCE_REPOSITORY));
     facade.registerService(app_const_1.default.BUILDING_FACTORY, container.resolve(app_const_1.default.BUILDING_FACTORY));
     facade.registerService(app_const_1.default.CITY_FACTORY, container.resolve(app_const_1.default.CITY_FACTORY));
