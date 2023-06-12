@@ -33,6 +33,7 @@ const GetCityQuery_1 = require("../command/GetCityQuery");
 const RemoveBuildingCommand_1 = require("../command/RemoveBuildingCommand");
 const SellBuildingCommand_1 = require("../command/SellBuildingCommand");
 const UIDService_1 = require("../service/UIDService");
+const RemoveCityCommand_1 = require("../command/RemoveCityCommand");
 function configIOC(container) {
     container.reset();
     container.register(app_const_1.default.GAME_STORE_MODEL, () => new coffe_maker_1.StoreModel(), true);
@@ -43,6 +44,7 @@ function configIOC(container) {
     container.register(app_const_1.default.REMOVE_BUILDING_FROM_CITY, () => new RemoveBuildingCommand_1.default());
     container.register(app_const_1.default.UPGRADE_BUILDING, () => new UpgradeBuildingCommand_1.default());
     container.register(app_const_1.default.ADD_CITY, () => new AddCityCommand_1.default());
+    container.register(app_const_1.default.REMOVE_CITY, () => new RemoveCityCommand_1.default());
     container.register(app_const_1.default.CREATE_CITIES, () => new CreateCitiesCommand_1.default());
     container.register(app_const_1.default.CREATE_RESOURCES, () => new CreateResourcesCommand_1.default());
     container.register(app_const_1.default.RESTORE_SAVED_DATA, () => new RestoreSavedDataCommand_1.default());
@@ -88,6 +90,7 @@ function configFacade(container) {
     facade.registerCommand(app_const_1.default.ADD_BUILDING_TO_CITY, container.get(app_const_1.default.ADD_BUILDING_TO_CITY));
     facade.registerCommand(app_const_1.default.BUY_BUILDING, container.get(app_const_1.default.BUY_BUILDING));
     facade.registerCommand(app_const_1.default.ADD_CITY, container.get(app_const_1.default.ADD_CITY));
+    facade.registerCommand(app_const_1.default.REMOVE_CITY, container.get(app_const_1.default.REMOVE_CITY));
     facade.registerCommand(app_const_1.default.CREATE_CITIES, container.get(app_const_1.default.CREATE_CITIES));
     facade.registerCommand(app_const_1.default.CREATE_RESOURCES, container.get(app_const_1.default.CREATE_RESOURCES));
     facade.registerCommand(app_const_1.default.RESTORE_SAVED_DATA, container.get(app_const_1.default.RESTORE_SAVED_DATA));

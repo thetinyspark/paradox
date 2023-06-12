@@ -13,6 +13,7 @@ AppConst.REMOVE_BUILDING_FROM_CITY = "RemoveBuildingFromCityCommand";
 AppConst.ADD_BUILDING_TO_CITY = "AddBuildingToCityCommand";
 AppConst.UPGRADE_BUILDING = "UpgradeBuildingCommand";
 AppConst.ADD_CITY = "AddCityCommand";
+AppConst.REMOVE_CITY = "RemoveCityCommand";
 AppConst.BUY_BUILDING = "BuyBuildingCommand";
 AppConst.CREATE_RESOURCES = "CreateResourcesCommand";
 AppConst.CREATE_CITIES = "CreateCitiesCommand";
