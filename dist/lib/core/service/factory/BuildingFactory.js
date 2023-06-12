@@ -13,9 +13,9 @@ class BuildingFactory {
             return null;
         const id = this._uidService.createUID("buildings", obj.id);
         if (template.levels.length === 0)
-            return new Building_1.default(template.name, null, template.id, id);
+            return new Building_1.default(template.name, null, template.id, id, obj.frozen);
         const level = template.levels.find(l => l.level === obj.level) || template.levels[0];
-        return new Building_1.default(template.name, level.clone(), template.id, id);
+        return new Building_1.default(template.name, level.clone(), template.id, id, obj.frozen);
     }
 }
 exports.default = BuildingFactory;

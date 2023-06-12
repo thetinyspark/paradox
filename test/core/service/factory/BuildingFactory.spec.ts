@@ -69,4 +69,19 @@ describe('BuildingFactory test suite',
         expect(building6.id).toEqual(11);
         expect(building7.id).toEqual(12);
     });
+
+    it('should be able to create a building from data according to its template and its "frozen status', 
+    ()=>{
+        // given 
+        const facade = setup() as Facade;
+        const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
+
+        // when 
+        const tpl = mock.TEMPLATE_BUILDINGS_MOCK[0];
+        const building = factory.fromData({tplID: tpl.id, id:10, frozen: true});
+
+        // then 
+        expect(building).not.toBeNull();
+        expect(building.frozen).toEqual(true);
+    }); 
 })

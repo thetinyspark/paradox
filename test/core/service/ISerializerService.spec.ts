@@ -29,7 +29,7 @@ describe("ISerializerService test suite", () => {
     expect(results2).toBeInstanceOf(Object);  
   });
 
-  it("should be able to create a building from data according to its template", () => {
+  it("should be able to convert data into obj", () => {
     // given
     const container = new Container();
     const facade = setup(container) as Facade;
@@ -66,6 +66,22 @@ describe("ISerializerService test suite", () => {
     );
     // then
     expect(results).toEqual(expected);;  
+  });
+
+  it("should be able to convert a building to an object", () => {
+    // given
+    const facade = setup() as Facade;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
+    const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
+    // when
+    
+    const expected1 = mock.SHANGRILA().buildings[0];
+    const expected2 = {...expected1, id:10, frozen:true};
+    const results1 = serializer.buildingToObject( factory.fromData(expected1));
+    const results2 = serializer.buildingToObject( factory.fromData(expected2));
+    // then
+    expect(results1).toEqual(expected1); 
+    expect(results2).toEqual(expected2);
   });
 
   it("should be able to convert a quantity to an object", () => {

@@ -166,6 +166,25 @@ describe("Engine test suite", () => {
         }   
     );
 
+    it("should be able to freeze a building", 
+    async () => {
+            // given
+            engine.reset();
+            const data = ATLANTIS();
+
+            // when 
+            engine.createResources(RESOURCES_MOCK);
+            engine.createBuildingTemplates(TEMPLATE_BUILDINGS_MOCK);
+            engine.addCity(data);
+            engine.addBuilding({cityID: data.id, tplID: 1})
+            engine.setBuildingFrozenStatus({cityID: data.id, id: 1, frozen: true})
+            const cities = await engine.getCities();
+
+            // then
+            expect(cities[0].buildings[0].frozen).toBeTrue();
+        }   
+    );
+
     it("should be able to buy a building and add it to a city if wallet has enough resources", 
         async () => {
             // given

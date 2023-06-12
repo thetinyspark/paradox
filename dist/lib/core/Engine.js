@@ -10,17 +10,15 @@ const version_1 = require("../version");
 class Engine extends tiny_observer_1.Emitter {
     constructor() {
         super();
-        this._facade = null;
     }
     /**
      * Reset data but keeps configuration
      */
     reset() {
-        const container = this._container;
-        const uidService = container.resolve(app_const_1.default.UID_SERVICE);
-        const cities = container.resolve(app_const_1.default.CITY_REPOSITORY);
-        const templates = container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
-        const resources = container.resolve(app_const_1.default.RESOURCE_REPOSITORY);
+        const uidService = this._container.resolve(app_const_1.default.UID_SERVICE);
+        const cities = this._container.resolve(app_const_1.default.CITY_REPOSITORY);
+        const templates = this._container.resolve(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
+        const resources = this._container.resolve(app_const_1.default.RESOURCE_REPOSITORY);
         uidService.reset();
         cities.reset();
         templates.reset();
@@ -69,11 +67,22 @@ class Engine extends tiny_observer_1.Emitter {
      *
      * example.ts
      * ```typescript
-     * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
+     * Paradox.engine.addBuilding({cityID: 1, tplID: 1, frozen:true})
      * ```
      */
     addBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.ADD_BUILDING_TO_CITY, data);
+    }
+    /**
+     * Set frozen status for a city building
+     * A frozen building does not produce nor consume anything on cycle
+     * example.ts
+     * ```typescript
+     * Paradox.engine.setBuildingFrozenStatus({cityID: 1, id: 1, frozen:true})
+     * ```
+     */
+    setBuildingFrozenStatus(data) {
+        return this.getFacade().sendNotification(app_const_1.default.SET_BUILDING_FROZEN_STATUS, data);
     }
     /**
      * Buys and adds a building to a city if city has enough resources

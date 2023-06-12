@@ -6,6 +6,7 @@ export default class AppConst{
     static GAME_STORE_MODEL:string              = "GameStoreModel"
 
     // commands
+    static SET_BUILDING_FROZEN_STATUS:string    = "SetBuildingFrozenStatus";
     static SELL_BUILDING:string                 = "SellBuildingCommand";
     static REMOVE_BUILDING_FROM_CITY:string     = "RemoveBuildingFromCityCommand";
     static ADD_BUILDING_TO_CITY:string          = "AddBuildingToCityCommand";

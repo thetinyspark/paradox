@@ -18,7 +18,7 @@ class DoCycleCommand {
         proxy.getAll().forEach((city) => {
             // production
             city.buildings.forEach((building) => {
-                if (building.level === null)
+                if (building.level === null || building.frozen)
                     return;
                 building.level.prod.get().forEach((prod) => {
                     const wallet = city.wallet.get();
@@ -33,7 +33,7 @@ class DoCycleCommand {
             });
             // maintenance
             city.buildings.forEach((building) => {
-                if (building.level === null)
+                if (building.level === null || building.frozen)
                     return;
                 building.level.cons.get().forEach((cons) => {
                     const wallet = city.wallet.get();

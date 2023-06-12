@@ -129,6 +129,12 @@ type CityBuildingPointerType = {
     id:number
 };
 
+type SetBuildingFrozenStatusType = {
+    cityID: number, 
+    id:number, 
+    frozen:boolean
+};
+
 ```
 
 
@@ -227,6 +233,14 @@ Paradox.engine.getResources().then( (resources:Resource:[])=>{});
 ```typescript
 const data:CreateCityBuildingType = {cityID: 1, tplID: 1};
 Paradox.engine.addBuilding(data);
+```
+
+### Freezes a city's building
+A frozen building cannot consume nor produce anything on cycle
+
+```typescript
+const data:SetBuildingFrozenStatusType = {cityID: 1, id: 1, frozen:true};
+Paradox.engine.setBuildingFrozenStatus(data);
 ```
 
 ### Buys a building and add it to a city (if city has enough resources)
