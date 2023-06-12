@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class QuantityList {
-    constructor(quantities) {
+    constructor(quantities = []) {
         this._quantities = [];
         this.set(quantities);
     }
-    set(quantities = []) {
+    set(quantities) {
         this._quantities = quantities;
     }
     get() {
