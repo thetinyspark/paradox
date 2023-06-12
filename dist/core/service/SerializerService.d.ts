@@ -5,7 +5,8 @@ import QuantityList from "../model/schema/resources/QuantityList";
 import BuildingLevel from "../model/schema/building/BuildingLevel";
 import TemplateBuilding from "../model/schema/building/TemplateBuilding";
 import Building from "../model/schema/building/Building";
-export default class SerializerService {
+import ISerializerService from "./ISerializerService";
+export default class SerializerService implements ISerializerService {
     serialize(cities: City[], templates: TemplateBuilding[], resources: Resource[], format?: string): any;
     convertToObj(cities: City[], templates: TemplateBuilding[], resources: Resource[]): any;
     resourceToObject(resource: Resource): any;

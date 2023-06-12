@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Create resources
  *
@@ -10,18 +10,15 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.CREATE_RESOURCES, resources);
  * ```
  */
-var CreateResourcesCommand = /** @class */ (function () {
-    function CreateResourcesCommand() {
-    }
-    CreateResourcesCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var list = notification.getPayload();
-        var proxy = facade.getProxy(app_const_1.default.RESOURCE_REPOSITORY);
-        var factory = facade.getService(app_const_1.default.RESOURCE_FACTORY);
-        list.forEach(function (current) {
+class CreateResourcesCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const list = notification.getPayload();
+        const proxy = facade.getProxy(app_const_1.default.RESOURCE_REPOSITORY);
+        const factory = facade.getService(app_const_1.default.RESOURCE_FACTORY);
+        list.forEach((current) => {
             proxy.add(factory.fromData(current));
         });
-    };
-    return CreateResourcesCommand;
-}());
+    }
+}
 exports.default = CreateResourcesCommand;

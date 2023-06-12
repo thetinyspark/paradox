@@ -1,6 +1,6 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import Repository from "../../../lib/core/model/repository/Repository";
+import IRepository from "../../../lib/core/model/repository/IRepository";
 import { ATLANTIS } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
 
@@ -12,7 +12,7 @@ describe('UpgradeBuildingCommand test suite',
     ()=>{
         // given 
         const facade            = setup() as Facade;
-        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<any>;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
 
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ATLANTIS());
@@ -35,7 +35,7 @@ describe('UpgradeBuildingCommand test suite',
     ()=>{
         // given 
         const facade            = setup() as Facade;
-        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<any>;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
 
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ATLANTIS());

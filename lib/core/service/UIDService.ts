@@ -1,4 +1,6 @@
-export default class UIDService{
+import IUIDService from "./IUIDService";
+
+export default class UIDService implements IUIDService{
 
     private ids:Map<string,number[]> = new Map<string,number[]>();
 

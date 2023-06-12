@@ -1,13 +1,13 @@
 import { setup } from "../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
-import UIDService from "../../../lib/core/service/UIDService";
+import IUIDService from "../../../lib/core/service/IUIDService";
 
-describe("UIDService test suite", () => {
+describe("IUIDService test suite", () => {
   it("should be able to create an auto increment unique id for a specific category", () => {
     // given
     const facade = setup() as Facade;
-    const service = facade.getService(AppConst.UID_SERVICE) as UIDService;
+    const service = facade.getService(AppConst.UID_SERVICE) as IUIDService;
   
     // when 
     const results:number[] = [

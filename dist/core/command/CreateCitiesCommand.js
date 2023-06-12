@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Create cities
  *
@@ -11,18 +11,15 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.CREATE_CITIES, [city1, city2]);
  * ```
  */
-var CreateCitiesCommand = /** @class */ (function () {
-    function CreateCitiesCommand() {
-    }
-    CreateCitiesCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var list = notification.getPayload();
-        var proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
-        var factory = facade.getService(app_const_1.default.CITY_FACTORY);
-        list.forEach(function (current) {
+class CreateCitiesCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const list = notification.getPayload();
+        const proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
+        const factory = facade.getService(app_const_1.default.CITY_FACTORY);
+        list.forEach((current) => {
             proxy.add(factory.fromData(current));
         });
-    };
-    return CreateCitiesCommand;
-}());
+    }
+}
 exports.default = CreateCitiesCommand;

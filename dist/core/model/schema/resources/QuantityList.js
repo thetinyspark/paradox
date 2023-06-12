@@ -1,19 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var QuantityList = /** @class */ (function () {
-    function QuantityList(quantities) {
+class QuantityList {
+    constructor(quantities) {
         this._quantities = [];
         this.set(quantities);
     }
-    QuantityList.prototype.set = function (quantities) {
+    set(quantities) {
         this._quantities = quantities;
-    };
-    QuantityList.prototype.get = function () {
+    }
+    get() {
         return this._quantities;
-    };
-    QuantityList.prototype.clone = function () {
-        return new QuantityList(this._quantities.map(function (q) { return q.clone(); }));
-    };
-    return QuantityList;
-}());
+    }
+    clone() {
+        return new QuantityList(this._quantities.map(q => q.clone()));
+    }
+}
 exports.default = QuantityList;

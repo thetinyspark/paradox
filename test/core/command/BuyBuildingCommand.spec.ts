@@ -1,5 +1,5 @@
 import { Facade } from "@thetinyspark/coffe-maker";
-import Repository from "../../../lib/core/model/repository/Repository";
+import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
 import { ATLANTIS, TEMPLATE_BUILDINGS_MOCK, YS } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
@@ -10,7 +10,7 @@ describe('BuyBuildingCommand test suite',
     ()=>{
         // given 
         const facade            = setup() as Facade;
-        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<any>;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
         const buildings:any[]   = TEMPLATE_BUILDINGS_MOCK;
         const atData:any        = ATLANTIS();
         const ysData:any        = YS();
@@ -36,7 +36,7 @@ describe('BuyBuildingCommand test suite',
     ()=>{
         // given 
         const facade            = setup() as Facade;
-        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<any>;
+        const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
         const buildings:any[]   = TEMPLATE_BUILDINGS_MOCK;
         const ysData:any        = YS();
 

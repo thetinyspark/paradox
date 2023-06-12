@@ -46,7 +46,6 @@ export default class Engine extends Emitter {
      *
      * example.ts
      * ```typescript
-     * const data = ;
      * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
      * ```
      */

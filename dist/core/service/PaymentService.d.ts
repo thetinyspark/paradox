@@ -1,4 +1,5 @@
 import QuantityList from "../model/schema/resources/QuantityList";
-export default class PaymentService {
+import IPaymentService from "./IPaymentService";
+export default class PaymentService implements IPaymentService {
     pay(payment: QuantityList, cost: QuantityList): boolean;
 }

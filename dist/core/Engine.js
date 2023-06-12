@@ -1,60 +1,42 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var tiny_observer_1 = require("@thetinyspark/tiny-observer");
-var app_const_1 = require("./ioc/app.const");
-var config_1 = require("./ioc/config");
-var version_1 = require("../version");
+const tiny_observer_1 = require("@thetinyspark/tiny-observer");
+const app_const_1 = require("./ioc/app.const");
+const config_1 = require("./ioc/config");
+const version_1 = require("../version");
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
-var Engine = /** @class */ (function (_super) {
-    __extends(Engine, _super);
-    function Engine() {
-        var _this = _super.call(this) || this;
-        _this._facade = null;
-        return _this;
+class Engine extends tiny_observer_1.Emitter {
+    constructor() {
+        super();
+        this._facade = null;
     }
     /**
      * Init the engine, and restores game data
      * @param container a Container's instance
      * @param configuration game data to restore
      */
-    Engine.prototype.init = function (container, configuration) {
-        if (configuration === void 0) { configuration = {}; }
+    init(container, configuration = {}) {
         (0, config_1.configFacade)(container);
         this._facade = container.resolve(app_const_1.default.APP_FACADE);
         // init resources and buildings
         this._facade.sendNotification(app_const_1.default.RESTORE_SAVED_DATA, configuration);
-    };
+    }
     /**
      * Returns a version num
      * @returns string
      */
-    Engine.prototype.getVersion = function () {
+    getVersion() {
         return version_1.version;
-    };
+    }
     /**
      * Returns the Facade which is used to dispatch commands and queries.
      * @returns Facade
      */
-    Engine.prototype.getFacade = function () {
+    getFacade() {
         return this._facade;
-    };
+    }
     /**
      * Processes a cycle. A cycle means that productions are added
      * to cities's wallets and consumptions are removed from them too.
@@ -64,21 +46,20 @@ var Engine = /** @class */ (function (_super) {
      * Paradox.engine.doCycle()
      * ```
      */
-    Engine.prototype.doCycle = function () {
+    doCycle() {
         this.getFacade().sendNotification(app_const_1.default.DO_CYCLE);
-    };
+    }
     /**
      * Adds a building to a city
      *
      * example.ts
      * ```typescript
-     * const data = ;
      * Paradox.engine.addBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    Engine.prototype.addBuilding = function (data) {
+    addBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.ADD_BUILDING_TO_CITY, data);
-    };
+    }
     /**
      * Buys and adds a building to a city if city has enough resources
      *
@@ -88,9 +69,9 @@ var Engine = /** @class */ (function (_super) {
      * Paradox.engine.buyBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    Engine.prototype.buyBuilding = function (data) {
+    buyBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.BUY_BUILDING, data);
-    };
+    }
     /**
      * Upgrades a building with a specific id (it if exists)
      *
@@ -99,9 +80,9 @@ var Engine = /** @class */ (function (_super) {
      * Paradox.engine.upgradeBuilding({cityID: 1, id:1});
      * ```
      */
-    Engine.prototype.upgradeBuilding = function (data) {
+    upgradeBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.UPGRADE_BUILDING, data);
-    };
+    }
     /**
      * Removes a building with a specific id from a city (it if exists)
      *
@@ -110,9 +91,9 @@ var Engine = /** @class */ (function (_super) {
      * Paradox.engine.removeBuilding({cityID: 1, id:1});
      * ```
      */
-    Engine.prototype.removeBuilding = function (data) {
+    removeBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
-    };
+    }
     /**
      * Sells a building with a specific id and remove it from a city (it if exists)
      *
@@ -121,9 +102,9 @@ var Engine = /** @class */ (function (_super) {
      * Paradox.engine.sellBuilding({cityID:1, id:1});
      * ```
      */
-    Engine.prototype.sellBuilding = function (data) {
+    sellBuilding(data) {
         return this.getFacade().sendNotification(app_const_1.default.SELL_BUILDING, data);
-    };
+    }
     /**
      * Create building's templates
      *
@@ -159,9 +140,9 @@ const templates = [
 Paradox.engine.createBuildingTemplates(templates);
     * ```
     */
-    Engine.prototype.createBuildingTemplates = function (templates) {
+    createBuildingTemplates(templates) {
         return this.getFacade().sendNotification(app_const_1.default.CREATE_TEMPLATE_BUILDINGS, templates);
-    };
+    }
     /**
      * Returns all building's templates
      *
@@ -170,9 +151,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getTemplateBuildings().then( (templates)=>{});
      * ```
      */
-    Engine.prototype.getTemplateBuildings = function () {
+    getTemplateBuildings() {
         return this.getFacade().query(app_const_1.default.GET_TEMPLATES_BUILDINGS_QUERY);
-    };
+    }
     /**
      * Create resources
      *
@@ -182,9 +163,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.createResources(resources)
      * ```
      */
-    Engine.prototype.createResources = function (resources) {
+    createResources(resources) {
         return this.getFacade().sendNotification(app_const_1.default.CREATE_RESOURCES, resources);
-    };
+    }
     /**
      * Returns all resources
      *
@@ -193,9 +174,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getResources().then( (templates)=>{});
      * ```
      */
-    Engine.prototype.getResources = function () {
+    getResources() {
         return this.getFacade().query(app_const_1.default.GET_RESOURCES_QUERY);
-    };
+    }
     /**
      * Adds city
      *
@@ -210,9 +191,9 @@ Paradox.engine.createBuildingTemplates(templates);
     * Paradox.engine.addCity(cityData);
     * ```
     */
-    Engine.prototype.addCity = function (city) {
+    addCity(city) {
         return this.getFacade().sendNotification(app_const_1.default.ADD_CITY, city);
-    };
+    }
     /**
      * Create cities
      *
@@ -224,9 +205,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.createCities(cities)
      * ```
      */
-    Engine.prototype.createCities = function (cities) {
+    createCities(cities) {
         return this.getFacade().sendNotification(app_const_1.default.CREATE_CITIES, cities);
-    };
+    }
     /**
      * Returns all cities
      *
@@ -235,9 +216,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getCities().then( (templates)=>{});
      * ```
      */
-    Engine.prototype.getCities = function () {
+    getCities() {
         return this.getFacade().query(app_const_1.default.GET_CITIES_QUERY);
-    };
+    }
     /**
      * Returns a city by its id (if exists)
      *
@@ -246,9 +227,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.getCityByID({id:1}).then( (city)=>{});
      * ```
      */
-    Engine.prototype.getCityByID = function (data) {
+    getCityByID(data) {
         return this.getFacade().query(app_const_1.default.GET_CITY_QUERY, data);
-    };
+    }
     /**
      * Restores game data
      *
@@ -261,9 +242,9 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.restoreGameData(data);
      * ```
      */
-    Engine.prototype.restoreGameData = function (data) {
+    restoreGameData(data) {
         return this.getFacade().sendNotification(app_const_1.default.RESTORE_SAVED_DATA, data);
-    };
+    }
     /**
      * Saves and returns all game data
      *
@@ -272,9 +253,8 @@ Paradox.engine.createBuildingTemplates(templates);
      * Paradox.engine.saveGameData().then( (gameData)=>{});
      * ```
      */
-    Engine.prototype.saveGameData = function () {
+    saveGameData() {
         return this.getFacade().query(app_const_1.default.SAVE_GAME_DATA_QUERY);
-    };
-    return Engine;
-}(tiny_observer_1.Emitter));
+    }
+}
 exports.default = Engine;

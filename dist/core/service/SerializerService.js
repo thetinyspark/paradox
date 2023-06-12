@@ -1,33 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SerializerService = /** @class */ (function () {
-    function SerializerService() {
-    }
-    SerializerService.prototype.serialize = function (cities, templates, resources, format) {
-        if (format === void 0) { format = "raw"; }
+class SerializerService {
+    serialize(cities, templates, resources, format = "raw") {
         if (format === "json")
             return JSON.stringify(this.convertToObj(cities, templates, resources));
         else
             return this.convertToObj(cities, templates, resources);
-    };
-    SerializerService.prototype.convertToObj = function (cities, templates, resources) {
-        var _this = this;
+    }
+    convertToObj(cities, templates, resources) {
         return {
-            cities: cities.map(function (c) { return _this.cityToObject(c); }),
-            templateBuildings: templates.map(function (t) { return _this.templateBuildingToObject(t); }),
-            resources: resources.map(function (r) { return _this.resourceToObject(r); })
+            cities: cities.map((c) => this.cityToObject(c)),
+            templateBuildings: templates.map(t => this.templateBuildingToObject(t)),
+            resources: resources.map(r => this.resourceToObject(r))
         };
-    };
-    SerializerService.prototype.resourceToObject = function (resource) {
+    }
+    resourceToObject(resource) {
         return { id: resource.id, name: resource.name };
-    };
-    SerializerService.prototype.quantityToObject = function (quantity) {
+    }
+    quantityToObject(quantity) {
         return { resourceID: quantity.resourceID, amount: quantity.amount };
-    };
-    SerializerService.prototype.quantityListToObject = function (quantityList) {
+    }
+    quantityListToObject(quantityList) {
         return quantityList.get().map(this.quantityToObject);
-    };
-    SerializerService.prototype.buildingLevelToObject = function (buildingLevel) {
+    }
+    buildingLevelToObject(buildingLevel) {
         return {
             level: buildingLevel.level,
             cost: this.quantityListToObject(buildingLevel.cost),
@@ -35,30 +31,27 @@ var SerializerService = /** @class */ (function () {
             cons: this.quantityListToObject(buildingLevel.cons),
             sold: this.quantityListToObject(buildingLevel.sold),
         };
-    };
-    SerializerService.prototype.templateBuildingToObject = function (tplBuilding) {
-        var _this = this;
+    }
+    templateBuildingToObject(tplBuilding) {
         return {
             id: tplBuilding.id,
             name: tplBuilding.name,
-            levels: tplBuilding.levels.map(function (l) { return _this.buildingLevelToObject(l); })
+            levels: tplBuilding.levels.map((l) => this.buildingLevelToObject(l))
         };
-    };
-    SerializerService.prototype.buildingToObject = function (building) {
+    }
+    buildingToObject(building) {
         return {
             tplID: building.tplBuildingID,
             level: building.level.level,
         };
-    };
-    SerializerService.prototype.cityToObject = function (city) {
-        var _this = this;
+    }
+    cityToObject(city) {
         return {
             id: city.id,
             name: city.name,
             wallet: this.quantityListToObject(city.wallet),
-            buildings: city.buildings.map(function (b) { return _this.buildingToObject(b); })
+            buildings: city.buildings.map(b => this.buildingToObject(b))
         };
-    };
-    return SerializerService;
-}());
+    }
+}
 exports.default = SerializerService;

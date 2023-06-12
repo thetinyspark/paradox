@@ -4,7 +4,7 @@ import City from "../model/schema/city/City";
 import Building from "../model/schema/building/Building";
 import Quantity from "../model/schema/resources/Quantity";
 import AppConst from "../ioc/app.const";
-import Repository from "../model/repository/Repository";
+import IRepository from "../model/repository/IRepository";
 /**
  * Processes a cycle. A cycle means that productions are added 
  * to cities's wallets and consumptions are removed from them too. 
@@ -18,7 +18,7 @@ export default class DoCycleCommand implements ICommand{
 
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
-        const proxy = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<City>;
+        const proxy = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
         proxy.getAll().forEach( 
             (city:City)=>{

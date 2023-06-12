@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Sells a building with a specific id and remove it from a city (it if exists)
  *
@@ -10,20 +10,18 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.SELL_BUILDING, data);
  * ```
  */
-var SellBuildingCommand = /** @class */ (function () {
-    function SellBuildingCommand() {
-    }
-    SellBuildingCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var data = notification.getPayload();
-        var cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
-        var city = cityRepo.getOneBy('id', data.cityID);
-        var target = city.buildings.find(function (b) { return b.id === data.id; }) || null;
+class SellBuildingCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const data = notification.getPayload();
+        const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
+        const city = cityRepo.getOneBy('id', data.cityID);
+        const target = city.buildings.find(b => b.id === data.id) || null;
         if (!city.buildings.includes(target))
             return;
-        target.level.sold.get().forEach(function (quantity) {
-            var wallet = city.wallet.get();
-            var eq = wallet.find(function (q) { return q.resourceID === quantity.resourceID; });
+        target.level.sold.get().forEach((quantity) => {
+            const wallet = city.wallet.get();
+            const eq = wallet.find(q => q.resourceID === quantity.resourceID);
             if (!eq)
                 wallet.push(quantity.clone());
             else
@@ -31,7 +29,6 @@ var SellBuildingCommand = /** @class */ (function () {
             city.wallet.set(wallet);
         });
         facade.sendNotification(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
-    };
-    return SellBuildingCommand;
-}());
+    }
+}
 exports.default = SellBuildingCommand;

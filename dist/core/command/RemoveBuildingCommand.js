@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Removes a building with a specific id from a city (it if exists)
  *
@@ -10,20 +10,17 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.REMOVE_BUILDING_FROM_CITY, data);
  * ```
  */
-var RemoveBuildingCommand = /** @class */ (function () {
-    function RemoveBuildingCommand() {
-    }
-    RemoveBuildingCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var data = notification.getPayload();
-        var cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
-        var city = cityRepo.getOneBy('id', data.cityID);
-        var target = city.buildings.find(function (b) { return b.id === data.id; }) || null;
+class RemoveBuildingCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const data = notification.getPayload();
+        const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
+        const city = cityRepo.getOneBy('id', data.cityID);
+        const target = city.buildings.find(b => b.id === data.id) || null;
         if (!city.buildings.includes(target))
             return;
-        var pos = city.buildings.indexOf(target);
+        const pos = city.buildings.indexOf(target);
         city.buildings.splice(pos, 1);
-    };
-    return RemoveBuildingCommand;
-}());
+    }
+}
 exports.default = RemoveBuildingCommand;

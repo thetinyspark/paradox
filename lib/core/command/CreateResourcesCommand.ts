@@ -2,7 +2,7 @@ import { Facade, ICommand } from "@thetinyspark/coffe-maker";
 import { INotification } from "@thetinyspark/tiny-observer";
 import Resource from "../model/schema/resources/Resource";
 import AppConst from "../ioc/app.const";
-import Repository from "../model/repository/Repository";
+import IRepository from "../model/repository/IRepository";
 import IFactory from "../service/factory/IFactory";
 /**
  * Create resources
@@ -18,7 +18,7 @@ export default class CreateResourcesCommand implements ICommand{
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
         const list:any[] = notification.getPayload() as any[]; 
-        const proxy = facade.getProxy(AppConst.RESOURCE_REPOSITORY) as Repository<Resource>;
+        const proxy = facade.getProxy(AppConst.RESOURCE_REPOSITORY) as IRepository<Resource>;
         const factory:IFactory = facade.getService(AppConst.RESOURCE_FACTORY) as IFactory;
         list.forEach( 
             (current)=>{

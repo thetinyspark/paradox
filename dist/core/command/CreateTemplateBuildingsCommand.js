@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Create building's templates
  *
@@ -24,18 +24,15 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.CREATE_TEMPLATE_BUILDINGS, templates);
  * ```
  */
-var CreateTemplateBuildingsCommand = /** @class */ (function () {
-    function CreateTemplateBuildingsCommand() {
-    }
-    CreateTemplateBuildingsCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var list = notification.getPayload();
-        var templateProxy = facade.getProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
-        var factory = facade.getService(app_const_1.default.TEMPLATE_BUILDING_FACTORY);
-        list.forEach(function (current) {
+class CreateTemplateBuildingsCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const list = notification.getPayload();
+        const templateProxy = facade.getProxy(app_const_1.default.TEMPLATE_BUILDING_REPOSITORY);
+        const factory = facade.getService(app_const_1.default.TEMPLATE_BUILDING_FACTORY);
+        list.forEach((current) => {
             templateProxy.add(factory.fromData(current));
         });
-    };
-    return CreateTemplateBuildingsCommand;
-}());
+    }
+}
 exports.default = CreateTemplateBuildingsCommand;

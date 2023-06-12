@@ -1,6 +1,7 @@
 import { Model, Proxy } from "@thetinyspark/coffe-maker";
+import IRepository from "./IRepository";
 
-export default class Repository<T> extends Proxy{
+export default class Repository<T> extends Proxy implements IRepository<T>{
     
     private _state:Model = null;
     private _key:string  = "data";

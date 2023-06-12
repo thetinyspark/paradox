@@ -1,5 +1,5 @@
 import { Container, Facade } from "@thetinyspark/coffe-maker";
-import Repository from "../../../lib/core/model/repository/Repository";
+import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
 import { TEMPLATE_BUILDINGS_MOCK } from "../../../lib/mock";
 import { setup } from "../../setup.spec";
@@ -10,7 +10,7 @@ describe('CreateTemplateBuildingsCommand test suite',
     ()=>{
         // given 
         const facade:Facade = setup( new Container(), true, false) as Facade;
-        const proxy = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<any>;
+        const proxy = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<any>;
         const buildings:any[] = TEMPLATE_BUILDINGS_MOCK;
         
         // when 

@@ -1,15 +1,6 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_const_1 = require("../ioc/app.const");
+const app_const_1 = require("../ioc/app.const");
 /**
  * Processes a cycle. A cycle means that productions are added
  * to cities's wallets and consumptions are removed from them too.
@@ -19,23 +10,22 @@ var app_const_1 = require("../ioc/app.const");
  * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.DO_CYCLE);
  * ```
  */
-var DoCycleCommand = /** @class */ (function () {
-    function DoCycleCommand() {
-    }
-    DoCycleCommand.prototype.execute = function (notification) {
-        var facade = notification.getEmitter();
-        var proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
-        proxy.getAll().forEach(function (city) {
+class DoCycleCommand {
+    execute(notification) {
+        const facade = notification.getEmitter();
+        const proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
+        proxy.getAll().forEach((city) => {
             // production
-            city.buildings.forEach(function (building) {
+            city.buildings.forEach((building) => {
                 if (building.level === null)
                     return;
-                building.level.prod.get().forEach(function (prod) {
-                    var cityQuantity = city.wallet.get().find(function (q) { return q.resourceID === prod.resourceID; }) || null;
+                building.level.prod.get().forEach((prod) => {
+                    const cityQuantity = city.wallet.get().find(q => q.resourceID === prod.resourceID) || null;
                     if (cityQuantity === null) {
-                        city.wallet.set(__spreadArray(__spreadArray([], city.wallet.get(), true), [
+                        city.wallet.set([
+                            ...city.wallet.get(),
                             prod.clone()
-                        ], false));
+                        ]);
                     }
                     else {
                         cityQuantity.amount += prod.amount;
@@ -43,21 +33,20 @@ var DoCycleCommand = /** @class */ (function () {
                 });
             });
             // maintenance
-            city.buildings.forEach(function (building) {
+            city.buildings.forEach((building) => {
                 if (building.level === null)
                     return;
-                building.level.cons.get().forEach(function (cons) {
-                    var cityQuantity = city.wallet.get().find(function (q) { return q.resourceID === cons.resourceID; }) || null;
+                building.level.cons.get().forEach((cons) => {
+                    const cityQuantity = city.wallet.get().find(q => q.resourceID === cons.resourceID) || null;
                     if (cityQuantity === null) {
-                        var empty = cons.clone();
+                        const empty = cons.clone();
                         empty.amount = 0;
-                        city.wallet.set(__spreadArray(__spreadArray([], city.wallet.get(), true), [empty], false));
+                        city.wallet.set([...city.wallet.get(), empty]);
                     }
                     cityQuantity.amount -= cons.amount;
                 });
             });
         });
-    };
-    return DoCycleCommand;
-}());
+    }
+}
 exports.default = DoCycleCommand;

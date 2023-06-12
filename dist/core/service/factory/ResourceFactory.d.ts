@@ -1,8 +1,8 @@
 import Resource from "../../model/schema/resources/Resource";
-import UIDService from "../UIDService";
+import IUIDService from "../IUIDService";
 import IFactory from "./IFactory";
 export default class ResourceFactory implements IFactory {
     private _uidService;
-    constructor(_uidService: UIDService);
+    constructor(_uidService: IUIDService);
     fromData(obj: any): Resource;
 }

@@ -1,10 +1,10 @@
 import { Facade, ICommand } from "@thetinyspark/coffe-maker";
 import { INotification } from "@thetinyspark/tiny-observer";
 import AppConst from "../ioc/app.const";
-import Repository from "../model/repository/Repository";
+import IRepository from "../model/repository/IRepository";
 import TemplateBuilding from "../model/schema/building/TemplateBuilding";
 import City from "../model/schema/city/City";
-import PaymentService from "../service/PaymentService";
+import IPaymentService from "../service/IPaymentService";
 /**
  * Upgrades a building with a specific id (it if exists)
  * 
@@ -19,8 +19,8 @@ export default class UpgradeBuildingCommand implements ICommand{
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
-        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<City>;
+        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
+        const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
         const city = cityRepo.getOneBy('id',data.cityID);
         const target = city.buildings.find(b=> b.id === data.id) || null; 
@@ -44,8 +44,8 @@ export default class UpgradeBuildingCommand implements ICommand{
 
         const cost = nextLevel.cost;
         const wallet = city.wallet;
-        const paymentService = facade.getService(AppConst.PAYMENT_SERVICE) as PaymentService; 
-        if( paymentService.pay(wallet, cost) ){
+        const IPaymentService = facade.getService(AppConst.PAYMENT_SERVICE) as IPaymentService; 
+        if( IPaymentService.pay(wallet, cost) ){
             target.level = nextLevel.clone();
         }
     }

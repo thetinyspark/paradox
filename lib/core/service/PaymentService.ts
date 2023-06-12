@@ -1,8 +1,8 @@
 import QuantityList from "../model/schema/resources/QuantityList";
+import IPaymentService from "./IPaymentService";
 
-export default class PaymentService{
+export default class PaymentService implements IPaymentService{
     pay( payment:QuantityList, cost:QuantityList ):boolean{
-
         // checks if there is not enough ressources
         const pairs = [];
         for( let i = 0; i < cost.get().length; i++ ){

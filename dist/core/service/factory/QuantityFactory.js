@@ -1,17 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Quantity_1 = require("../../model/schema/resources/Quantity");
-var QuantityFactory = /** @class */ (function () {
-    function QuantityFactory(_resourceRepository) {
-        this._resourceRepository = _resourceRepository;
+const Quantity_1 = require("../../model/schema/resources/Quantity");
+class QuantityFactory {
+    constructor(_resourceIRepository) {
+        this._resourceIRepository = _resourceIRepository;
         this.fromData = this.fromData.bind(this);
     }
-    QuantityFactory.prototype.fromData = function (obj) {
-        var resource = this._resourceRepository.getOneBy('id', obj.resourceID);
+    fromData(obj) {
+        const resource = this._resourceIRepository.getOneBy('id', obj.resourceID);
         if (resource === null)
             return null;
         return new Quantity_1.default(obj.resourceID, obj.amount);
-    };
-    return QuantityFactory;
-}());
+    }
+}
 exports.default = QuantityFactory;

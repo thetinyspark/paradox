@@ -1,12 +1,12 @@
 import City from "../../model/schema/city/City";
-import UIDService from "../UIDService";
+import IUIDService from "../IUIDService";
 import IFactory from "./IFactory";
 
 export default class CityFactory implements IFactory{
     constructor( 
         private _buildingFactory:IFactory, 
         private _quantityListFactory:IFactory, 
-        private _uidService:UIDService
+        private _uidService:IUIDService
     ){
         this.fromData = this.fromData.bind(this);
     }

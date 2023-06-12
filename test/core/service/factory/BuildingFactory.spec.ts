@@ -1,11 +1,8 @@
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../../lib/core/ioc/app.const";
-import BuildingFactory from "../../../../lib/core/service/factory/BuildingFactory";
 import * as mock from "../../../../lib/mock";
-import Repository from "../../../../lib/core/model/repository/Repository";
-import TemplateBuilding from "../../../../lib/core/model/schema/building/TemplateBuilding";
 import { setup } from "../../../setup.spec";
-import UIDService from "../../../../lib/core/service/UIDService";
+import IFactory from "../../../../lib/core/service/factory/IFactory";
 
 describe('BuildingFactory test suite', 
 ()=>{
@@ -13,8 +10,7 @@ describe('BuildingFactory test suite',
     ()=>{
         // given 
         const facade = setup() as Facade;
-        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const factory = new BuildingFactory(tplRepo, new UIDService());
+        const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[0];
@@ -34,8 +30,7 @@ describe('BuildingFactory test suite',
     ()=>{
         // given 
         const facade = setup() as Facade;
-        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const factory = new BuildingFactory(tplRepo, new UIDService());
+        const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[3];
@@ -53,8 +48,7 @@ describe('BuildingFactory test suite',
     ()=>{
         // given 
         const facade = setup() as Facade;
-        const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as Repository<TemplateBuilding>;
-        const factory = new BuildingFactory(tplRepo, new UIDService());
+        const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
 
         // when 
         const tpl = mock.TEMPLATE_BUILDINGS_MOCK[3];

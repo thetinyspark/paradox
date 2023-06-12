@@ -1,7 +1,7 @@
 import { Facade, ICommand } from "@thetinyspark/coffe-maker";
 import { INotification } from "@thetinyspark/tiny-observer";
 import AppConst from "../ioc/app.const";
-import Repository from "../model/repository/Repository";
+import IRepository from "../model/repository/IRepository";
 import City from "../model/schema/city/City";
 /**
  * Removes a building with a specific id from a city (it if exists)
@@ -17,7 +17,7 @@ export default class RemoveBuildingCommand implements ICommand{
     execute(notification: INotification): void {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
-        const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as Repository<City>;
+        const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
         const city = cityRepo.getOneBy('id',data.cityID);
         const target = city.buildings.find(b=> b.id === data.id) || null;

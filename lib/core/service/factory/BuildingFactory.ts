@@ -1,12 +1,12 @@
-import Repository from "../../model/repository/Repository";
+import IRepository from "../../model/repository/IRepository";
 import Building from "../../model/schema/building/Building";
 import TemplateBuilding from "../../model/schema/building/TemplateBuilding";
-import UIDService from "../UIDService";
+import IUIDService from "../IUIDService";
 import IFactory from "./IFactory";
 
 export default class BuildingFactory implements IFactory{
 
-    constructor(private _repo:Repository<TemplateBuilding>, private _uidService:UIDService){
+    constructor(private _repo:IRepository<TemplateBuilding>, private _uidService:IUIDService){
         this.fromData = this.fromData.bind(this);
     }
 

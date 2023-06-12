@@ -5,8 +5,9 @@ import QuantityList from "../model/schema/resources/QuantityList";
 import BuildingLevel from "../model/schema/building/BuildingLevel";
 import TemplateBuilding from "../model/schema/building/TemplateBuilding";
 import Building from "../model/schema/building/Building";
+import ISerializerService from "./ISerializerService";
 
-export default class SerializerService{
+export default class SerializerService implements ISerializerService{
 
     serialize(
         cities:City[], 

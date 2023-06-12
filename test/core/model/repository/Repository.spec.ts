@@ -1,22 +1,38 @@
-import Repository from "../../../../lib/core/model/repository/Repository";
+import { Container, Facade } from "@thetinyspark/coffe-maker";
+import IRepository from "../../../../lib/core/model/repository/IRepository";
 import Resource from "../../../../lib/core/model/schema/resources/Resource";
+import { setup } from "../../../setup.spec";
+import AppConst from "../../../../lib/core/ioc/app.const";
 
-describe('Building test suite', 
+describe('IRepository test suite', 
 ()=>{
+
+    
+    var repository:IRepository<Resource>;
+
+    beforeAll( 
+        ()=>{
+            const container = new Container();
+            const facade:Facade = setup(container);
+            repository = container.resolve(AppConst.RESOURCE_REPOSITORY) as IRepository<Resource>;
+        }
+    ); 
+
+    beforeEach( 
+        ()=>{
+            repository.reset();
+        }
+    )
+    
+
     it('should be able to create a repository for a specific type', 
     ()=>{
-        // given 
-        const repository = new Repository<Resource>(); 
-
         // when then
         expect(repository).toBeTruthy();
     }); 
 
     it('should be able to add elements on a repository and retrieve them all', 
     ()=>{
-        // given 
-        const repository = new Repository<Resource>(); 
-
         // when 
         repository.add(new Resource(1,"gold"));
         repository.add(new Resource(2,"wood"));
@@ -32,9 +48,6 @@ describe('Building test suite',
 
     it('should be able to add elements on a repository and remove one', 
     ()=>{
-        // given 
-        const repository = new Repository<Resource>(); 
-
         // when 
         repository.add(new Resource(1,"gold"));
         repository.add(new Resource(2,"wood"));
@@ -50,9 +63,6 @@ describe('Building test suite',
 
     it('should be able to add elements on a repository and retrieve those with specific criteria', 
     ()=>{
-        // given 
-        const repository = new Repository<Resource>(); 
-
         // when 
         repository.add(new Resource(1,"gold1"));
         repository.add(new Resource(1,"gold2")); // duplicate
@@ -70,9 +80,6 @@ describe('Building test suite',
 
     it('should be able to add elements on a repository and retrieve one with specific criteria', 
     ()=>{
-        // given 
-        const repository = new Repository<Resource>(); 
-
         // when 
         repository.add(new Resource(1,"gold"));
         repository.add(new Resource(2,"wood"));

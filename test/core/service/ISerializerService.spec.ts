@@ -1,16 +1,16 @@
-import SerializerService from "../../../lib/core/service/SerializerService";
+import ISerializerService from "../../../lib/core/service/ISerializerService";
 import { setup } from "../../setup.spec";
 import { Container, Facade, IStoreModel } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import * as mock from "../../../lib/mock";
 import IFactory from "../../../lib/core/service/factory/IFactory";
 
-describe("SerializerService test suite", () => {
+describe("ISerializerService test suite", () => {
   it("should be able to create a building from data according to its template", () => {
     // given
     const container = new Container();
     const facade = setup(container) as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const storage = container.resolve(AppConst.GAME_STORE_MODEL) as IStoreModel;
     
     // when
@@ -30,7 +30,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a resource to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.RESOURCE_FACTORY) as IFactory;
     // when
 
@@ -48,7 +48,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a quantity to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.QUANTITY_FACTORY) as IFactory;
     // when
 
@@ -66,7 +66,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a quantityList to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.QUANTITY_LIST_FACTORY) as IFactory;
     // when
 
@@ -81,7 +81,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a buildingLevel to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.BUILDING_LEVEL_FACTORY) as IFactory;
     // when
 
@@ -96,7 +96,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a template building to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.TEMPLATE_BUILDING_FACTORY) as IFactory;
     // when
 
@@ -111,7 +111,7 @@ describe("SerializerService test suite", () => {
   it("should be able to convert a city to an object", () => {
     // given
     const facade = setup() as Facade;
-    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as SerializerService;
+    const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.CITY_FACTORY) as IFactory;
     // when
 

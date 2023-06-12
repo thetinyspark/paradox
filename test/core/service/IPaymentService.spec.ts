@@ -1,14 +1,14 @@
-import PaymentService from "../../../lib/core/service/PaymentService";
+import IPaymentService from "../../../lib/core/service/IPaymentService";
 import { setup } from "../../setup.spec";
 import { Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import IFactory from "../../../lib/core/service/factory/IFactory";
 
-describe("PaymentService test suite", () => {
+describe("IPaymentService test suite", () => {
   it("should be able to create a building from data according to its template", () => {
     // given
     const facade = setup() as Facade;
-    const payment = facade.getService(AppConst.PAYMENT_SERVICE) as PaymentService;
+    const payment = facade.getService(AppConst.PAYMENT_SERVICE) as IPaymentService;
     const factory = facade.getService(AppConst.QUANTITY_LIST_FACTORY) as IFactory;
     const data = [
       {
