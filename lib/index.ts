@@ -1,13 +1,10 @@
 import { Container } from "@thetinyspark/coffe-maker";
-import { configIOC } from "./core/ioc/config";
 import Engine from "./core/Engine";
-import AppConst from "./core/ioc/app.const";
 
-const defaultContainer = configIOC(new Container());
+const defaultContainer = new Container();
 const engine = new Engine();
 
 export = {
     engine, 
-    defaultContainer,
-    appConstants:AppConst
+    defaultContainer
 };

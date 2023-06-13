@@ -30,6 +30,8 @@ class Engine extends tiny_observer_1.Emitter {
      * @param configuration game data to restore
      */
     init(container, configuration = {}) {
+        container.reset();
+        (0, config_1.configIOC)(container);
         (0, config_1.configFacade)(container);
         this._facade = container.resolve(app_const_1.default.APP_FACADE);
         this._container = container;

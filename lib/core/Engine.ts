@@ -1,7 +1,7 @@
 import { Container, Facade} from "@thetinyspark/coffe-maker";
 import { Emitter } from "@thetinyspark/tiny-observer";
 import AppConst from "./ioc/app.const";
-import { configFacade } from "./ioc/config";
+import { configFacade, configIOC } from "./ioc/config";
 import { version } from "../version";
 import City from "./model/schema/city/City";
 import { GameSaveDescType } from "./model/types/GameSaveDescType";
@@ -48,6 +48,8 @@ export default class Engine extends Emitter{
      * @param configuration game data to restore
      */
     init(container:Container, configuration:GameSaveDescType = {}){
+        container.reset();
+        configIOC(container);
         configFacade(container);
         this._facade = container.resolve(AppConst.APP_FACADE) as Facade;
         this._container = container;
