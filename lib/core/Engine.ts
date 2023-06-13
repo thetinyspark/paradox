@@ -52,6 +52,9 @@ export default class Engine extends Emitter{
         this._facade = container.resolve(AppConst.APP_FACADE) as Facade;
         this._container = container;
 
+        // reset
+        this.reset();
+
         // init resources and buildings
         this._facade.sendNotification(AppConst.RESTORE_SAVED_DATA, configuration);
     }

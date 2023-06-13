@@ -23,7 +23,24 @@ describe('IRepository test suite',
             repository.reset();
         }
     )
-    
+
+    it('should be able to reset a repository for a specific type', 
+    ()=>{
+        // when 
+        repository.add(new Resource(1,"gold"));
+        repository.add(new Resource(2,"wood"));
+        repository.add(new Resource(3,"mill"));
+        repository.reset();
+        
+        repository.add(new Resource(1,"gold"));
+        repository.add(new Resource(2,"wood"));
+        repository.add(new Resource(3,"mill"));
+        repository.reset();
+        const results = repository.getAll();
+
+        // when then
+        expect(results).toEqual([]);
+    });
 
     it('should be able to create a repository for a specific type', 
     ()=>{

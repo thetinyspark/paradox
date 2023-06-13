@@ -44,17 +44,31 @@ describe("Engine test suite", () => {
     it("should be able to reset the engine's data", 
         async () => {
             // given
-            engine.restoreGameData(SAVED_DATA);
             engine.reset();
+            engine.restoreGameData(SAVED_DATA);
+            
             // when 
-            const cities = await engine.getCities();
-            const templates = await engine.getTemplateBuildings();
-            const resources = await engine.getResources();
+            const cities1       = await engine.getCities();
+            const templates1    = await engine.getTemplateBuildings();
+            const resources1    = await engine.getResources();
+            
+            engine.reset();
+            engine.restoreGameData(SAVED_DATA);
+
+            engine.reset();
+            const cities2       = await engine.getCities();
+            const templates2    = await engine.getTemplateBuildings();
+            const resources2    = await engine.getResources();
 
             // then
-            expect(cities.length).toEqual(0);
-            expect(templates.length).toEqual(0);
-            expect(resources.length).toEqual(0);
+            expect(cities1).not.toEqual([]);
+            expect(cities2).toEqual([]);
+
+            expect(templates1).not.toEqual([]);
+            expect(templates2).toEqual([]);
+
+            expect(resources1).not.toEqual([]);
+            expect(resources2).toEqual([]);
         }   
     );
 

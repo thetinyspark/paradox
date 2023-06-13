@@ -33,6 +33,8 @@ class Engine extends tiny_observer_1.Emitter {
         (0, config_1.configFacade)(container);
         this._facade = container.resolve(app_const_1.default.APP_FACADE);
         this._container = container;
+        // reset
+        this.reset();
         // init resources and buildings
         this._facade.sendNotification(app_const_1.default.RESTORE_SAVED_DATA, configuration);
     }
