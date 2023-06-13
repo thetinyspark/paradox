@@ -281,6 +281,8 @@ Paradox.engine.createBuildingTemplates(templates);
      * ```
      */
     restoreGameData(data) {
+        // reset
+        this.reset();
         return this.getFacade().sendNotification(app_const_1.default.RESTORE_SAVED_DATA, data);
     }
     /**
