@@ -14,13 +14,11 @@ class CityFactory {
         /* istanbul ignore else */
         if (Array.isArray(obj.buildings)) {
             buildings = obj.buildings.map((b, id) => {
-                const data = { ...b };
-                const uid = this._uidService.createUID("cities", b.id);
-                data.id = uid;
-                return this._buildingFactory.fromData(data);
+                return this._buildingFactory.fromData({ ...b });
             });
         }
-        return new City_1.default(obj.id, obj.name, buildings, wallet);
+        const uid = this._uidService.createUID("cities", obj.id);
+        return new City_1.default(uid, obj.name, buildings, wallet);
     }
 }
 exports.default = CityFactory;

@@ -11,7 +11,7 @@ describe('CreateCitiesCommand test suite',
         // given 
         const facade:Facade = setup() as Facade;
         const proxy = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
-        const cities:any[] = [SHANGRILA(), ATLANTIS(), YS()];
+        const cities:any[] = [YS(),ATLANTIS(),SHANGRILA()];
         
         // when 
         facade.sendNotification(AppConst.CREATE_CITIES, cities);

@@ -24,7 +24,7 @@ export function ATLANTIS():CityDescType{
 
 export function SHANGRILA():CityDescType{
     return{
-        id: 2, 
+        id: 3, 
         name: "Atlantis", 
         buildings:[{tplID:1, level:2, id:1, frozen:false}],
         wallet: [{resourceID: 1, amount: 1000},{resourceID: 2, amount: 1000}]

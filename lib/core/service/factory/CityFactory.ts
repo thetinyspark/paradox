@@ -18,13 +18,12 @@ export default class CityFactory implements IFactory{
         if( Array.isArray(obj.buildings)){
             buildings = obj.buildings.map( 
                 (b,id)=>{
-                    const data = {...b};
-                    const uid = this._uidService.createUID("cities", b.id);
-                    data.id = uid;
-                    return this._buildingFactory.fromData(data);
+                    return this._buildingFactory.fromData({...b});
                 }
             );
         }
-        return new City(obj.id, obj.name, buildings, wallet);
+
+        const uid = this._uidService.createUID("cities", obj.id);
+        return new City(uid, obj.name, buildings, wallet);
     }
 }

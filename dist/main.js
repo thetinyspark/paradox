@@ -386,7 +386,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
   \**************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst City_1 = __webpack_require__(/*! ../../model/schema/city/City */ \"./dist/core/model/schema/city/City.js\");\r\nclass CityFactory {\r\n    constructor(_buildingFactory, _quantityListFactory, _uidService) {\r\n        this._buildingFactory = _buildingFactory;\r\n        this._quantityListFactory = _quantityListFactory;\r\n        this._uidService = _uidService;\r\n        this.fromData = this.fromData.bind(this);\r\n    }\r\n    fromData(obj) {\r\n        let buildings = [];\r\n        const wallet = this._quantityListFactory.fromData(obj.wallet);\r\n        /* istanbul ignore else */\r\n        if (Array.isArray(obj.buildings)) {\r\n            buildings = obj.buildings.map((b, id) => {\r\n                const data = { ...b };\r\n                const uid = this._uidService.createUID(\"cities\", b.id);\r\n                data.id = uid;\r\n                return this._buildingFactory.fromData(data);\r\n            });\r\n        }\r\n        return new City_1.default(obj.id, obj.name, buildings, wallet);\r\n    }\r\n}\r\nexports[\"default\"] = CityFactory;\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/core/service/factory/CityFactory.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst City_1 = __webpack_require__(/*! ../../model/schema/city/City */ \"./dist/core/model/schema/city/City.js\");\r\nclass CityFactory {\r\n    constructor(_buildingFactory, _quantityListFactory, _uidService) {\r\n        this._buildingFactory = _buildingFactory;\r\n        this._quantityListFactory = _quantityListFactory;\r\n        this._uidService = _uidService;\r\n        this.fromData = this.fromData.bind(this);\r\n    }\r\n    fromData(obj) {\r\n        let buildings = [];\r\n        const wallet = this._quantityListFactory.fromData(obj.wallet);\r\n        /* istanbul ignore else */\r\n        if (Array.isArray(obj.buildings)) {\r\n            buildings = obj.buildings.map((b, id) => {\r\n                return this._buildingFactory.fromData({ ...b });\r\n            });\r\n        }\r\n        const uid = this._uidService.createUID(\"cities\", obj.id);\r\n        return new City_1.default(uid, obj.name, buildings, wallet);\r\n    }\r\n}\r\nexports[\"default\"] = CityFactory;\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/core/service/factory/CityFactory.js?");
 
 /***/ }),
 
@@ -446,7 +446,7 @@ eval("\r\nconst coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-make
   \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.6.3\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.6.4\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
 
 /***/ }),
 
