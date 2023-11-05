@@ -3,6 +3,7 @@ import IRepository from "../../../lib/core/model/repository/IRepository";
 import AppConst from "../../../lib/core/ioc/app.const";
 import { ATLANTIS, YS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
+import City from "../../../lib/core/model/schema/city/City";
 
 describe('AddCityCommand test suite', 
 ()=>{
@@ -23,5 +24,17 @@ describe('AddCityCommand test suite',
 
         expect(results[1].id).toEqual(ATLANTIS().id);
         expect(results[1].name).toEqual(ATLANTIS().name);
+    });
+
+    it('should be able to return the last added city', 
+    async ()=>{
+        // given 
+        const facade:Facade   = setup() as Facade;
+        
+        // when 
+        const addedCity:City = await facade.query(AppConst.ADD_CITY, YS());
+
+        // then 
+        expect(addedCity.id).toEqual(YS().id);
     });
 })

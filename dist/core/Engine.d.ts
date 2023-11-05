@@ -181,7 +181,7 @@ Paradox.engine.createBuildingTemplates(templates);
     * Paradox.engine.addCity(cityData);
     * ```
     */
-    addCity(city: CityDescType): void;
+    addCity(city: CityDescType): Promise<any>;
     /**
      * Removes city
      *

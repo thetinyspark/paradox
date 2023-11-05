@@ -1,5 +1,6 @@
 import { ICommand } from "@thetinyspark/coffe-maker";
 import { INotification } from "@thetinyspark/tiny-observer";
+import City from "../model/schema/city/City";
 /**
  * Adds city
  *
@@ -15,5 +16,5 @@ import { INotification } from "@thetinyspark/tiny-observer";
  * ```
  */
 export default class AddCityCommand implements ICommand {
-    execute(notification: INotification): void;
+    execute(notification: INotification): City;
 }

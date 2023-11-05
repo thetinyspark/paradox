@@ -248,7 +248,7 @@ Paradox.engine.createBuildingTemplates(templates);
     * ```
     */
     addCity(city:CityDescType){
-        return this.getFacade().sendNotification(AppConst.ADD_CITY, city);
+        return this.getFacade().query(AppConst.ADD_CITY, city);
     }
     /**
      * Removes city

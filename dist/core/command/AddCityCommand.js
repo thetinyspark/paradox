@@ -21,7 +21,9 @@ class AddCityCommand {
         const data = notification.getPayload();
         const proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const factory = facade.getService(app_const_1.default.CITY_FACTORY);
-        proxy.add(factory.fromData(data));
+        const city = factory.fromData(data);
+        proxy.add(city);
+        return city;
     }
 }
 exports.default = AddCityCommand;

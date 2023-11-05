@@ -77,12 +77,14 @@ describe("Engine test suite", () => {
     it("should be able to add a city", 
         async () => {
             // given
-            engine.addCity(ATLANTIS());
+            const addedCity = await engine.addCity(ATLANTIS());
             // when 
             const cities = await engine.getCities();
 
             // then
             expect(cities.length).toEqual(1);
+            expect(addedCity).toBeTruthy();
+            expect(addedCity.id).toEqual(ATLANTIS().id);
         }   
     );
 

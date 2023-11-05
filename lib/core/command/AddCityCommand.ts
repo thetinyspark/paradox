@@ -21,11 +21,13 @@ import IFactory from "../service/factory/IFactory";
  */
 export default class AddCityCommand implements ICommand{
 
-    execute(notification: INotification): void {
+    execute(notification: INotification): City {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         const proxy = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
         const factory:IFactory = facade.getService(AppConst.CITY_FACTORY) as IFactory;
-        proxy.add( factory.fromData(data));
+        const city:City = factory.fromData(data) as City;
+        proxy.add(city);
+        return city;
     }
 }
