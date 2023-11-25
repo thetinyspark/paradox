@@ -7,7 +7,7 @@ import { setup } from "../../setup.spec";
 describe('BuyBuildingCommand test suite', 
 ()=>{
     it('should be able to add a building to an existing city', 
-    ()=>{
+    async ()=>{
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
@@ -17,16 +17,21 @@ describe('BuyBuildingCommand test suite',
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ysData);
         facade.sendNotification(AppConst.ADD_CITY, atData);
-        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 1});
-        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 2});
-        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 4});
-        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: ysData.id, tplID: 3});
-        facade.sendNotification(AppConst.BUY_BUILDING, {cityID: ysData.id, tplID: 4});
+        const results1 = await facade.query(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 1});
+        const results2 = await facade.query(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 2});
+        const results3 = await facade.query(AppConst.BUY_BUILDING, {cityID: atData.id, tplID: 4});
+        const results4 = await facade.query(AppConst.BUY_BUILDING, {cityID: ysData.id, tplID: 3});
+        const results5 = await facade.query(AppConst.BUY_BUILDING, {cityID: ysData.id, tplID: 4});
 
         const atlantis = cityRepo.getOneBy('id', atData.id);
         const ys = cityRepo.getOneBy('id', ysData.id);
 
         // then 
+        expect(results1).toBeTrue();
+        expect(results2).toBeTrue();
+        expect(results3).toBeTrue();
+        expect(results4).toBeFalse();
+        expect(results5).toBeTrue();
         expect(atlantis.buildings.length).toEqual(3);
         expect(ys.buildings.length).toEqual(1);
     });

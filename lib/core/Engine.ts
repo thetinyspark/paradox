@@ -98,7 +98,7 @@ export default class Engine extends Emitter{
      * ```
      */
     addBuilding(data:CreateCityBuildingType){
-        return this.getFacade().sendNotification(AppConst.ADD_BUILDING_TO_CITY, data);
+        return this.getFacade().query(AppConst.ADD_BUILDING_TO_CITY, data);
     }
     /**
      * Set frozen status for a city building
@@ -121,7 +121,7 @@ export default class Engine extends Emitter{
      * ```
      */
     buyBuilding(data:CreateCityBuildingType){
-        return this.getFacade().sendNotification(AppConst.BUY_BUILDING, data);
+        return this.getFacade().query(AppConst.BUY_BUILDING, data);
     }
     /**
      * Upgrades a building with a specific id (it if exists)
@@ -132,7 +132,7 @@ export default class Engine extends Emitter{
      * ```
      */
     upgradeBuilding(data:CityBuildingPointerType){
-        return this.getFacade().sendNotification(AppConst.UPGRADE_BUILDING, data);
+        return this.getFacade().query(AppConst.UPGRADE_BUILDING, data);
     }
     /**
      * Removes a building with a specific id from a city (it if exists)
@@ -143,7 +143,7 @@ export default class Engine extends Emitter{
      * ```
      */
     removeBuilding(data:CityBuildingPointerType){
-        return this.getFacade().sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, data);
+        return this.getFacade().query(AppConst.REMOVE_BUILDING_FROM_CITY, data);
     }
     /**
      * Sells a building with a specific id and remove it from a city (it if exists)
@@ -154,7 +154,7 @@ export default class Engine extends Emitter{
      * ```
      */
     sellBuilding(data:CityBuildingPointerType){
-        return this.getFacade().sendNotification(AppConst.SELL_BUILDING, data);
+        return this.getFacade().query(AppConst.SELL_BUILDING, data);
     }
 
     /**

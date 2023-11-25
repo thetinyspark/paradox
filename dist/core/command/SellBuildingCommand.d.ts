@@ -10,5 +10,5 @@ import { INotification } from "@thetinyspark/tiny-observer";
  * ```
  */
 export default class SellBuildingCommand implements ICommand {
-    execute(notification: INotification): void;
+    execute(notification: INotification): Promise<boolean>;
 }

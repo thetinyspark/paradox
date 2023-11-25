@@ -174,10 +174,11 @@ describe("Engine test suite", () => {
             engine.createResources(RESOURCES_MOCK);
             engine.createBuildingTemplates(TEMPLATE_BUILDINGS_MOCK);
             engine.addCity(data);
-            engine.addBuilding({cityID: data.id, tplID: 1})
+            const ok1 = await engine.addBuilding({cityID: data.id, tplID: 1})
             const cities = await engine.getCities();
 
             // then
+            expect(ok1).toBeTrue();
             expect(cities[0].buildings.length).toEqual(1);
         }   
     );
@@ -211,10 +212,11 @@ describe("Engine test suite", () => {
             // when 
             const data = ATLANTIS();
             engine.addCity(data);
-            engine.buyBuilding({cityID: data.id, tplID: 1});
+            const ok = await engine.buyBuilding({cityID: data.id, tplID: 1});
             const cities = await engine.getCities();
 
             // then
+            expect(ok).toBeTrue();
             expect(cities[0].buildings.length).toEqual(1);
         }   
     );
@@ -230,10 +232,11 @@ describe("Engine test suite", () => {
             const data = ATLANTIS();
             engine.addCity(data);
             engine.addBuilding({cityID: data.id, tplID: 1});
-            engine.upgradeBuilding({cityID: data.id, id: 1});
+            const ok = await engine.upgradeBuilding({cityID: data.id, id: 1});
             const cities = await engine.getCities();
 
             // then
+            expect(ok).toBeTrue();
             expect(cities[0].buildings[0].level.level).toEqual(2);
         }   
     );
@@ -249,10 +252,11 @@ describe("Engine test suite", () => {
             const data = ATLANTIS();
             engine.addCity(data);
             engine.addBuilding({tplID:1, cityID:data.id});
-            engine.removeBuilding({id:1, cityID:data.id});
+            const ok = await engine.removeBuilding({id:1, cityID:data.id});
             const cities = await engine.getCities();
 
             // then
+            expect(ok).toBeTrue();
             expect(cities[0].buildings.length).toEqual(0);
         }   
     );
@@ -268,10 +272,11 @@ describe("Engine test suite", () => {
             const data = ATLANTIS();
             engine.addCity(data);
             engine.addBuilding({tplID:1, cityID:data.id});
-            engine.sellBuilding({id:1, cityID:data.id});
+            const ok = await engine.sellBuilding({id:1, cityID:data.id});
             const cities = await engine.getCities();
 
             // then
+            expect(ok).toBeTrue();
             expect(cities[0].buildings.length).toEqual(0);
         }   
     );

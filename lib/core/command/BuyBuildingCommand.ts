@@ -17,7 +17,7 @@ import IPaymentService from "../service/IPaymentService";
  */
 export default class BuyBuildingCommand implements ICommand{
 
-    execute(notification: INotification): void {
+    execute(notification: INotification): boolean {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
@@ -27,14 +27,14 @@ export default class BuyBuildingCommand implements ICommand{
         const city = cityRepo.getOneBy('id',data.cityID);
 
         if( tpl === null || city === null )
-            return;
+            return false;
 
         const factory:IFactory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
         
         // building is free
         if( tpl.levels.length === 0 || data.freely ){
             city.buildings.push( factory.fromData({tplID: tpl.id}));
-            return;
+            return true;
         }
         
         const cost = tpl.levels[0].cost;
@@ -43,6 +43,10 @@ export default class BuyBuildingCommand implements ICommand{
 
         if( paymentService.pay(wallet, cost) ){
             city.buildings.push( factory.fromData({tplID: tpl.id}));
+            return true;
         }
+        
+        return false;
+
     }
 }

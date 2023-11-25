@@ -12,16 +12,16 @@ const Quantity_1 = require("../model/schema/resources/Quantity");
  * ```
  */
 class SellBuildingCommand {
-    execute(notification) {
+    async execute(notification) {
         const facade = notification.getEmitter();
         const data = notification.getPayload();
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const city = cityRepo.getOneBy('id', data.cityID);
         if (city === null)
-            return;
+            return false;
         const target = city.buildings.find(b => b.id === data.id) || null;
         if (target === null)
-            return;
+            return false;
         target.level.sold.get().forEach((quantity) => {
             const wallet = city.wallet.get();
             const eq = wallet.find(q => q.resourceID === quantity.resourceID) || new Quantity_1.default(quantity.resourceID, 0);
@@ -30,7 +30,8 @@ class SellBuildingCommand {
             wallet.push(eq);
             city.wallet.set(wallet);
         });
-        facade.sendNotification(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
+        await facade.query(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
+        return true;
     }
 }
 exports.default = SellBuildingCommand;

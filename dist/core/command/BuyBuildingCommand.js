@@ -19,19 +19,21 @@ class BuyBuildingCommand {
         const tpl = tplRepo.getOneBy('id', data.tplID);
         const city = cityRepo.getOneBy('id', data.cityID);
         if (tpl === null || city === null)
-            return;
+            return false;
         const factory = facade.getService(app_const_1.default.BUILDING_FACTORY);
         // building is free
         if (tpl.levels.length === 0 || data.freely) {
             city.buildings.push(factory.fromData({ tplID: tpl.id }));
-            return;
+            return true;
         }
         const cost = tpl.levels[0].cost;
         const wallet = city.wallet;
         const paymentService = facade.getService(app_const_1.default.PAYMENT_SERVICE);
         if (paymentService.pay(wallet, cost)) {
             city.buildings.push(factory.fromData({ tplID: tpl.id }));
+            return true;
         }
+        return false;
     }
 }
 exports.default = BuyBuildingCommand;

@@ -15,20 +15,19 @@ import Quantity from "../model/schema/resources/Quantity";
  */
 export default class SellBuildingCommand implements ICommand{
 
-    execute(notification: INotification): void {
+    async execute(notification: INotification): Promise<boolean> {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
-
         const city = cityRepo.getOneBy('id',data.cityID);
         if( city === null )
-            return; 
+            return false; 
             
         const target = city.buildings.find(b=> b.id === data.id) || null;
     
         if( target === null )
-            return;
-            
+            return false;
+
         target.level.sold.get().forEach(
             (quantity)=>{
                 const wallet = city.wallet.get();
@@ -39,7 +38,7 @@ export default class SellBuildingCommand implements ICommand{
                 city.wallet.set(wallet);
             }
         );
-        
-        facade.sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, data);
+        await facade.query(AppConst.REMOVE_BUILDING_FROM_CITY, data);
+        return true;
     }
 }

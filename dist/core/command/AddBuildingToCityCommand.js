@@ -19,9 +19,10 @@ class AddBuildingToCityCommand {
         const tpl = tplRepo.getOneBy('id', data.tplID);
         const city = cityRepo.getOneBy('id', data.cityID);
         if (tpl === null || city === null)
-            return;
+            return false;
         const factory = facade.getService(app_const_1.default.BUILDING_FACTORY);
         city.buildings.push(factory.fromData({ tplID: tpl.id }));
+        return true;
     }
 }
 exports.default = AddBuildingToCityCommand;

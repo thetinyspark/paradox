@@ -7,7 +7,7 @@ import { setup } from "../../setup.spec";
 describe('RemoveBuildingCommand test suite', 
 ()=>{
     it('should be able to remove a building to an existing city', 
-    ()=>{
+    async ()=>{
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
@@ -18,11 +18,12 @@ describe('RemoveBuildingCommand test suite',
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 3});
-        facade.sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id, id:1});
+        const ok1 = await facade.query(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id, id:1});
 
         const atlantis = cityRepo.getOneBy('id', atData.id);
 
         // then 
+        expect(ok1).toBeTrue();
         expect(atlantis).toBeTruthy();
         expect(atlantis.buildings.length).toEqual(2);
         expect(atlantis.buildings[0].id).toEqual(2);
@@ -31,7 +32,7 @@ describe('RemoveBuildingCommand test suite',
     });
 
     it('should not be able to remove a building to a non existing city', 
-    ()=>{
+    async ()=>{
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
@@ -42,18 +43,19 @@ describe('RemoveBuildingCommand test suite',
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 3});
-        facade.sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id+30, id:1});
+        const ok1 = await facade.query(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id+30, id:1});
 
         const atlantis = cityRepo.getOneBy('id', atData.id);
 
         // then 
+        expect(ok1).toBeFalse();
         expect(atlantis).toBeTruthy();
         expect(atlantis.buildings.length).toEqual(3);
     
     });
 
     it('should not be able to remove a non existing building froml a city', 
-    ()=>{
+    async ()=>{
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
@@ -64,11 +66,12 @@ describe('RemoveBuildingCommand test suite',
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
         facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 3});
-        facade.sendNotification(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id, id:100});
+        const ok1 = await facade.query(AppConst.REMOVE_BUILDING_FROM_CITY, {cityID: atData.id, id:100});
 
         const atlantis = cityRepo.getOneBy('id', atData.id);
 
         // then 
+        expect(ok1).toBeFalse();
         expect(atlantis).toBeTruthy();
         expect(atlantis.buildings.length).toEqual(3);
     

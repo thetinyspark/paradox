@@ -16,7 +16,7 @@ import IPaymentService from "../service/IPaymentService";
  */
 export default class UpgradeBuildingCommand implements ICommand{
 
-    execute(notification: INotification): void {
+    execute(notification: INotification): boolean {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         const tplRepo = facade.getProxy(AppConst.TEMPLATE_BUILDING_REPOSITORY) as IRepository<TemplateBuilding>;
@@ -24,23 +24,23 @@ export default class UpgradeBuildingCommand implements ICommand{
 
         const city = cityRepo.getOneBy('id',data.cityID) || null;
         if( city === null )
-            return; 
+            return false; 
 
         const target = city.buildings.find(b=> b.id === data.id) || null; 
         const tplID = target === null ? -1 : target.tplBuildingID;
         const tpl = tplRepo.getOneBy('id',tplID);
 
         if( tpl === null || target === null)
-            return;
+            return false;
 
         const nextLevel = tpl.levels.find( l=>l.level === target.level.level+1) || null;
         
         if( nextLevel === null )
-            return 
+            return false;
 
         if( data.freely === true ){
             target.level = nextLevel.clone();
-            return;
+            return true;
         }
 
         const cost = nextLevel.cost;
@@ -48,6 +48,9 @@ export default class UpgradeBuildingCommand implements ICommand{
         const IPaymentService = facade.getService(AppConst.PAYMENT_SERVICE) as IPaymentService; 
         if( IPaymentService.pay(wallet, cost) ){
             target.level = nextLevel.clone();
+            return true;
         }
+        
+        return false;
     }
 }

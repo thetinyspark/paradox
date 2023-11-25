@@ -3,12 +3,11 @@ import AppConst from "../../../lib/core/ioc/app.const";
 import IRepository from "../../../lib/core/model/repository/IRepository";
 import { ATLANTIS, TEMPLATE_BUILDINGS_MOCK, YS } from "../../mock.spec";
 import { setup } from "../../setup.spec";
-import City from "../../../lib/core/model/schema/city/City";
 
 describe('AddBuildingToCityCommand test suite', 
 ()=>{
     it('should be able to add a building to an existing city', 
-    ()=>{
+    async ()=>{
         // given 
         const facade            = setup() as Facade;
         const cityRepo          = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
@@ -19,14 +18,14 @@ describe('AddBuildingToCityCommand test suite',
         // when 
         facade.sendNotification(AppConst.ADD_CITY, ysData);
         facade.sendNotification(AppConst.ADD_CITY, atData);
-        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
-        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
-        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: ysData.id, tplID: 3});
+        const ok1 = await facade.query(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 1});
+        const ok2 = await facade.query(AppConst.ADD_BUILDING_TO_CITY, {cityID: atData.id, tplID: 2});
+        const ok3 = await facade.query(AppConst.ADD_BUILDING_TO_CITY, {cityID: ysData.id, tplID: 3});
 
         const atlantis = cityRepo.getAllBy('id', atData.id)[0];
         const ys = cityRepo.getAllBy('id', ysData.id)[0];
         // then 
-
+        expect(ok1 && ok2 && ok3).toBeTrue();
         expect(atlantis).toBeTruthy();
         expect(ys).toBeTruthy();
         expect(atlantis.buildings.length).toEqual(2);

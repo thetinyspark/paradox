@@ -75,7 +75,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     addBuilding(data) {
-        return this.getFacade().sendNotification(app_const_1.default.ADD_BUILDING_TO_CITY, data);
+        return this.getFacade().query(app_const_1.default.ADD_BUILDING_TO_CITY, data);
     }
     /**
      * Set frozen status for a city building
@@ -98,7 +98,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     buyBuilding(data) {
-        return this.getFacade().sendNotification(app_const_1.default.BUY_BUILDING, data);
+        return this.getFacade().query(app_const_1.default.BUY_BUILDING, data);
     }
     /**
      * Upgrades a building with a specific id (it if exists)
@@ -109,7 +109,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     upgradeBuilding(data) {
-        return this.getFacade().sendNotification(app_const_1.default.UPGRADE_BUILDING, data);
+        return this.getFacade().query(app_const_1.default.UPGRADE_BUILDING, data);
     }
     /**
      * Removes a building with a specific id from a city (it if exists)
@@ -120,7 +120,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     removeBuilding(data) {
-        return this.getFacade().sendNotification(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
+        return this.getFacade().query(app_const_1.default.REMOVE_BUILDING_FROM_CITY, data);
     }
     /**
      * Sells a building with a specific id and remove it from a city (it if exists)
@@ -131,7 +131,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     sellBuilding(data) {
-        return this.getFacade().sendNotification(app_const_1.default.SELL_BUILDING, data);
+        return this.getFacade().query(app_const_1.default.SELL_BUILDING, data);
     }
     /**
      * Create building's templates

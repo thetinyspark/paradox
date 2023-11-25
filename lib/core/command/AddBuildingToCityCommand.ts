@@ -16,7 +16,7 @@ import IFactory from "../service/factory/IFactory";
  * ```
  */
 export default class AddBuildingToCityCommand implements ICommand{
-    execute(notification: INotification): void {
+    execute(notification: INotification): boolean {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         
@@ -26,9 +26,10 @@ export default class AddBuildingToCityCommand implements ICommand{
         const city = cityRepo.getOneBy('id',data.cityID);
 
         if( tpl === null || city === null )
-            return;
+            return false;
 
         const factory:IFactory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
         city.buildings.push( factory.fromData({tplID: tpl.id}));
+        return true;
     }
 }

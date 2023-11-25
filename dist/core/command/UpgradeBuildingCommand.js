@@ -18,25 +18,27 @@ class UpgradeBuildingCommand {
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const city = cityRepo.getOneBy('id', data.cityID) || null;
         if (city === null)
-            return;
+            return false;
         const target = city.buildings.find(b => b.id === data.id) || null;
         const tplID = target === null ? -1 : target.tplBuildingID;
         const tpl = tplRepo.getOneBy('id', tplID);
         if (tpl === null || target === null)
-            return;
+            return false;
         const nextLevel = tpl.levels.find(l => l.level === target.level.level + 1) || null;
         if (nextLevel === null)
-            return;
+            return false;
         if (data.freely === true) {
             target.level = nextLevel.clone();
-            return;
+            return true;
         }
         const cost = nextLevel.cost;
         const wallet = city.wallet;
         const IPaymentService = facade.getService(app_const_1.default.PAYMENT_SERVICE);
         if (IPaymentService.pay(wallet, cost)) {
             target.level = nextLevel.clone();
+            return true;
         }
+        return false;
     }
 }
 exports.default = UpgradeBuildingCommand;

@@ -17,12 +17,13 @@ class RemoveBuildingCommand {
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const city = cityRepo.getOneBy('id', data.cityID);
         if (city === null)
-            return;
+            return false;
         const target = city.buildings.find(b => b.id === data.id) || null;
         if (!city.buildings.includes(target))
-            return;
+            return false;
         const pos = city.buildings.indexOf(target);
         city.buildings.splice(pos, 1);
+        return pos > -1;
     }
 }
 exports.default = RemoveBuildingCommand;
