@@ -97,7 +97,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.addBuilding({cityID: 1, tplID: 1, frozen:true})
      * ```
      */
-    addBuilding(data:CreateCityBuildingType){
+    addBuilding(data:CreateCityBuildingType):Promise<boolean>{
         return this.getFacade().query(AppConst.ADD_BUILDING_TO_CITY, data);
     }
     /**
@@ -120,7 +120,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.buyBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    buyBuilding(data:CreateCityBuildingType){
+    buyBuilding(data:CreateCityBuildingType):Promise<boolean>{
         return this.getFacade().query(AppConst.BUY_BUILDING, data);
     }
     /**
@@ -131,7 +131,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.upgradeBuilding({cityID: 1, id:1});
      * ```
      */
-    upgradeBuilding(data:CityBuildingPointerType){
+    upgradeBuilding(data:CityBuildingPointerType):Promise<boolean>{
         return this.getFacade().query(AppConst.UPGRADE_BUILDING, data);
     }
     /**
@@ -142,7 +142,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.removeBuilding({cityID: 1, id:1});
      * ```
      */
-    removeBuilding(data:CityBuildingPointerType){
+    removeBuilding(data:CityBuildingPointerType):Promise<boolean>{
         return this.getFacade().query(AppConst.REMOVE_BUILDING_FROM_CITY, data);
     }
     /**
@@ -153,7 +153,7 @@ export default class Engine extends Emitter{
      * Paradox.engine.sellBuilding({cityID:1, id:1});
      * ```
      */
-    sellBuilding(data:CityBuildingPointerType){
+    sellBuilding(data:CityBuildingPointerType):Promise<boolean>{
         return this.getFacade().query(AppConst.SELL_BUILDING, data);
     }
 

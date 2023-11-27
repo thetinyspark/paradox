@@ -56,7 +56,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.addBuilding({cityID: 1, tplID: 1, frozen:true})
      * ```
      */
-    addBuilding(data: CreateCityBuildingType): Promise<any>;
+    addBuilding(data: CreateCityBuildingType): Promise<boolean>;
     /**
      * Set frozen status for a city building
      * A frozen building does not produce nor consume anything on cycle
@@ -75,7 +75,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.buyBuilding({cityID: 1, tplID: 1})
      * ```
      */
-    buyBuilding(data: CreateCityBuildingType): Promise<any>;
+    buyBuilding(data: CreateCityBuildingType): Promise<boolean>;
     /**
      * Upgrades a building with a specific id (it if exists)
      *
@@ -84,7 +84,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.upgradeBuilding({cityID: 1, id:1});
      * ```
      */
-    upgradeBuilding(data: CityBuildingPointerType): Promise<any>;
+    upgradeBuilding(data: CityBuildingPointerType): Promise<boolean>;
     /**
      * Removes a building with a specific id from a city (it if exists)
      *
@@ -93,7 +93,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.removeBuilding({cityID: 1, id:1});
      * ```
      */
-    removeBuilding(data: CityBuildingPointerType): Promise<any>;
+    removeBuilding(data: CityBuildingPointerType): Promise<boolean>;
     /**
      * Sells a building with a specific id and remove it from a city (it if exists)
      *
@@ -102,7 +102,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.sellBuilding({cityID:1, id:1});
      * ```
      */
-    sellBuilding(data: CityBuildingPointerType): Promise<any>;
+    sellBuilding(data: CityBuildingPointerType): Promise<boolean>;
     /**
      * Create building's templates
      *
