@@ -64,12 +64,11 @@ export default class SerializerService implements ISerializerService{
     }
 
     buildingToObject( building:Building ):any{
-        return {
-            tplID: building?.tplBuildingID || -1,
-            level: building.level?.level || 1,
-            id: building?.id || -1,  
-            frozen: building?.frozen || false
-        }
+        const tplID = building.tplBuildingID ? building.tplBuildingID : -1;
+        const level = building.level ? building.level.level  : -1;
+        const id = building.id ? building.id  : -1;
+        const frozen = building.frozen === true;
+        return {tplID, level, id, frozen};
     }
 
     cityToObject( city:City ):any{
