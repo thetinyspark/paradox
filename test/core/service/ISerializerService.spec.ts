@@ -4,6 +4,7 @@ import { Container, Facade, IStoreModel } from "@thetinyspark/coffe-maker";
 import AppConst from "../../../lib/core/ioc/app.const";
 import * as mock from "../../mock.spec";
 import IFactory from "../../../lib/core/service/factory/IFactory";
+import Building from "../../../lib/core/model/schema/building/Building";
 
 describe("ISerializerService test suite", () => {
   it("should be able serialize this into a json or object", () => {
@@ -73,15 +74,20 @@ describe("ISerializerService test suite", () => {
     const facade = setup() as Facade;
     const serializer = facade.getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     const factory = facade.getService(AppConst.BUILDING_FACTORY) as IFactory;
+
+    const build = new Building("");
     // when
     
     const expected1 = mock.SHANGRILA().buildings[0];
     const expected2 = {...expected1, id:10, frozen:true};
+
     const results1 = serializer.buildingToObject( factory.fromData(expected1));
     const results2 = serializer.buildingToObject( factory.fromData(expected2));
+    const results3 = serializer.buildingToObject( build );
     // then
     expect(results1).toEqual(expected1); 
     expect(results2).toEqual(expected2);
+    expect(results3).not.toBeNull();
   });
 
   it("should be able to convert a quantity to an object", () => {
@@ -157,6 +163,7 @@ describe("ISerializerService test suite", () => {
 
     const expected = mock.SHANGRILA(); 
     const city = factory.fromData(expected);
+    console.log(city);
     const results = serializer.cityToObject(city);
     // then
     expect(results).toEqual(expected);

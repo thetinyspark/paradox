@@ -65,10 +65,10 @@ export default class SerializerService implements ISerializerService{
 
     buildingToObject( building:Building ):any{
         return {
-            tplID: building.tplBuildingID,
-            level: building.level.level,
-            id: building.id, 
-            frozen: building.frozen
+            tplID: building?.tplBuildingID || -1,
+            level: building.level?.level || 1,
+            id: building?.id || -1,  
+            frozen: building?.frozen || false
         }
     }
 
