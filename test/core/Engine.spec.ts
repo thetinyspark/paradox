@@ -12,6 +12,12 @@ describe("Engine test suite", () => {
         }
     );
 
+    // get serializer service
+    it('should be able to return the serializer service', 
+    ()=>{
+        expect(engine.getSerializer()).not.toBeNull();
+    })
+
     // game data
     it("should restore game data", 
         async () => {

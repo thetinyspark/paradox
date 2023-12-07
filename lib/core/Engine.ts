@@ -16,6 +16,7 @@ import { CityPointerType } from "./model/types/CityPointerType";
 import IUIDService from "./service/IUIDService";
 import IRepository from "./model/repository/IRepository";
 import { SetBuildingFrozenStatusType } from "./model/types/SetBuildingFrozenStatusType";
+import ISerializerService from "./service/ISerializerService";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -327,5 +328,9 @@ Paradox.engine.createBuildingTemplates(templates);
      */
     saveGameData():Promise<GameSaveDescType>{
         return this.getFacade().query(AppConst.SAVE_GAME_DATA_QUERY);
+    }
+
+    getSerializer():ISerializerService{
+        return this.getFacade().getService(AppConst.SERIALIZER_SERVICE) as ISerializerService;
     }
 }

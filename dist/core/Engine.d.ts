@@ -11,6 +11,7 @@ import { CityBuildingPointerType } from "./model/types/CityBuildingPointerType";
 import { CreateCityBuildingType } from "./model/types/CreateCityBuildingType";
 import { CityPointerType } from "./model/types/CityPointerType";
 import { SetBuildingFrozenStatusType } from "./model/types/SetBuildingFrozenStatusType";
+import ISerializerService from "./service/ISerializerService";
 /**
  * The Engine object represents the main gateway between you and the paradox engine's core.
  */
@@ -244,4 +245,5 @@ Paradox.engine.createBuildingTemplates(templates);
      * ```
      */
     saveGameData(): Promise<GameSaveDescType>;
+    getSerializer(): ISerializerService;
 }

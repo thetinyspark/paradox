@@ -298,5 +298,8 @@ Paradox.engine.createBuildingTemplates(templates);
     saveGameData() {
         return this.getFacade().query(app_const_1.default.SAVE_GAME_DATA_QUERY);
     }
+    getSerializer() {
+        return this.getFacade().getService(app_const_1.default.SERIALIZER_SERVICE);
+    }
 }
 exports.default = Engine;
