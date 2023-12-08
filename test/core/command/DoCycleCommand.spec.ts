@@ -6,6 +6,7 @@ import { setup } from "../../setup.spec";
 import QuantityList from "../../../lib/core/model/schema/resources/QuantityList";
 import Quantity from "../../../lib/core/model/schema/resources/Quantity";
 import City from "../../../lib/core/model/schema/city/City";
+import Resource from "../../../lib/core/model/schema/resources/Resource";
 
 describe('DoCycleCommand test suite', 
 ()=>{
@@ -201,5 +202,34 @@ describe('DoCycleCommand test suite',
                 expect(quantity.amount).toEqual(200);
             }
         )
+    });
+
+    it('should not consume anything if all resources in production are already full', 
+    ()=>{
+        // given 
+        const facade        = setup() as Facade;
+        const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const data          = YS();
+        const template      = TEMPLATE_BUILDINGS_MOCK[8];
+        // set consumed resource to their maximum
+        data.wallet = [
+            {resourceID: 1, amount: 2000 }, 
+            {resourceID: 2, amount: 1500}
+        ];
+
+
+        // when 
+
+        facade.sendNotification(AppConst.ADD_CITY, data);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template.id});
+
+        const city:City = cityRepo.getOneBy('id', data.id);
+        facade.sendNotification(AppConst.DO_CYCLE);
+
+        // then 
+        const resource1 = city.wallet.get().find( q=>q.resourceID == 1);
+        const resource2 = city.wallet.get().find( q=>q.resourceID == 2);
+        expect(resource1?.amount).toEqual(2000);
+        expect(resource2?.amount).toEqual(1500);
     });
 })

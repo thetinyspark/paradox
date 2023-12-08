@@ -16,13 +16,28 @@ class DoCycleCommand {
         const facade = notification.getEmitter();
         const proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         proxy.getAll().forEach((city) => {
-            // production
+            // every building
             city.buildings.forEach((building) => {
                 if (building.level === null || building.frozen)
                     return;
                 building.level.cycleCounter++;
                 if (building.level.cycleCounter % building.level.prodFrequency !== 0)
                     return;
+                // are productions resources maxed ? 
+                const notEmpty = building.level.prod.get().length > 0;
+                const fulled = building.level.prod.get().map((q) => {
+                    const walletQ = city.wallet.get().find(b => b.resourceID == q.resourceID) || null;
+                    if (walletQ == null) {
+                        return false;
+                    }
+                    else {
+                        return walletQ.isFull();
+                    }
+                }).reduce((previous, current) => { return previous && current; }, notEmpty);
+                // if production is fulled, then skip this building production/consumption mechanism
+                if (fulled) {
+                    return;
+                }
                 const virtualWallet = city.wallet.clone();
                 // production
                 building.level.prod.get().forEach((prod) => {

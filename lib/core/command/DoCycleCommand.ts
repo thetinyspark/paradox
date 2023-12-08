@@ -25,7 +25,7 @@ export default class DoCycleCommand implements ICommand{
             (city:City)=>{
 
                 
-                // production
+                // every building
                 city.buildings.forEach( 
                     (building:Building)=>{
                         if( building.level === null || building.frozen)
@@ -35,8 +35,27 @@ export default class DoCycleCommand implements ICommand{
                         if( building.level.cycleCounter % building.level.prodFrequency !== 0)
                             return;
 
-                        const virtualWallet = city.wallet.clone();
+                        // are productions resources maxed ? 
+                        const notEmpty = building.level.prod.get().length > 0;
+                        const fulled = building.level.prod.get().map( 
+                            (q)=>{
+                                const walletQ = city.wallet.get().find( b=>b.resourceID == q.resourceID) || null;
+                                if( walletQ == null){
+                                    return false;
+                                }
+                                else{
+                                    return walletQ.isFull();
+                                }
 
+                            }
+                        ).reduce( (previous, current)=>{return previous && current;}, notEmpty);
+                        
+                        // if production is fulled, then skip this building production/consumption mechanism
+                        if(fulled){
+                            return;
+                        }
+                        
+                        const virtualWallet = city.wallet.clone();
                         // production
                         building.level.prod.get().forEach( 
                             (prod:Quantity)=>{

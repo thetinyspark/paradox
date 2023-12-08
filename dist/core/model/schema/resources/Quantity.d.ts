@@ -7,4 +7,5 @@ export default class Quantity {
     clone(): Quantity;
     get amount(): number;
     set amount(value: number);
+    isFull(): boolean;
 }

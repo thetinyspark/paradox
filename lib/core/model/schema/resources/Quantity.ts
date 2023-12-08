@@ -17,4 +17,8 @@ export default class Quantity{
     public set amount(value:number){
         this._amount = value < this._min ? this._min : value > this._max ? this._max : value;
     }
+
+    public isFull():boolean{
+        return this._amount >= this._max;
+    }
 }

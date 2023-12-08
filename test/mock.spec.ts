@@ -114,6 +114,20 @@ export const TEMPLATE_BUILDINGS_MOCK:TemplateBuildingDescType[] = [
             },
         ]
     },
+    {
+        id: 9, 
+        name: "test4", 
+        levels: [
+            {
+                level: 1, 
+                cost: [], 
+                prod: [{resourceID: 1, amount: 100}], 
+                cons: [{resourceID: 2, amount: 100}], 
+                sold:[], 
+                prodFrequency: 1
+            },
+        ]
+    },
 ];
 
 export const SAVED_DATA:GameSaveDescType = {

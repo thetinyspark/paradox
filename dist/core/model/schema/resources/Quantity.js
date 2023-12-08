@@ -16,5 +16,8 @@ class Quantity {
     set amount(value) {
         this._amount = value < this._min ? this._min : value > this._max ? this._max : value;
     }
+    isFull() {
+        return this._amount >= this._max;
+    }
 }
 exports.default = Quantity;
