@@ -306,7 +306,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
   \******************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nclass Quantity {\r\n    constructor(resourceID = -1, _amount = 0, _min = 0, _max = Infinity) {\r\n        this.resourceID = resourceID;\r\n        this._amount = _amount;\r\n        this._min = _min;\r\n        this._max = _max;\r\n    }\r\n    clone() {\r\n        return new Quantity(this.resourceID, this.amount);\r\n    }\r\n    get amount() {\r\n        return this._amount;\r\n    }\r\n    set amount(value) {\r\n        this._amount = value < this._min ? this._min : value > this._max ? this._max : value;\r\n    }\r\n}\r\nexports[\"default\"] = Quantity;\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/core/model/schema/resources/Quantity.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nclass Quantity {\r\n    constructor(resourceID = -1, _amount = 0, _min = 0, _max = Infinity) {\r\n        this.resourceID = resourceID;\r\n        this._amount = _amount;\r\n        this._min = _min;\r\n        this._max = _max;\r\n    }\r\n    clone() {\r\n        return new Quantity(this.resourceID, this.amount, this._min, this._max);\r\n    }\r\n    get amount() {\r\n        return this._amount;\r\n    }\r\n    set amount(value) {\r\n        this._amount = value < this._min ? this._min : value > this._max ? this._max : value;\r\n    }\r\n}\r\nexports[\"default\"] = Quantity;\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/core/model/schema/resources/Quantity.js?");
 
 /***/ }),
 
@@ -446,7 +446,7 @@ eval("\r\nconst coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-make
   \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.7.4\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.7.5\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
 
 /***/ }),
 

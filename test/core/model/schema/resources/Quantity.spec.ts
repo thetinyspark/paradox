@@ -52,7 +52,7 @@ describe('Quantity test suite',
     ()=>{
         // given 
         const qty1 = new Quantity(1,0, -100, 100);
-        const qty2 = new Quantity(1,0, -100, 100);
+        const qty2 = qty1.clone();
         qty1.amount -= 1000; 
         qty2.amount += 1000; 
 

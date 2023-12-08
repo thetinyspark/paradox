@@ -8,7 +8,7 @@ class Quantity {
         this._max = _max;
     }
     clone() {
-        return new Quantity(this.resourceID, this.amount);
+        return new Quantity(this.resourceID, this.amount, this._min, this._max);
     }
     get amount() {
         return this._amount;

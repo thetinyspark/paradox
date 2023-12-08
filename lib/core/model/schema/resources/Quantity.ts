@@ -7,7 +7,7 @@ export default class Quantity{
     ){}
 
     public clone():Quantity{
-        return new Quantity( this.resourceID, this.amount );
+        return new Quantity( this.resourceID, this.amount, this._min, this._max );
     }
 
     public get amount():number{
