@@ -79,6 +79,20 @@ export const TEMPLATE_BUILDINGS_MOCK:TemplateBuildingDescType[] = [
             {level: 1, cost: [], prod: [], cons:[{resourceID: 2, amount: 1}], sold:[]},
         ]
     },
+    {
+        id: 6, 
+        name: "test1", 
+        levels: [
+            {level: 1, cost: [], prod: [{resourceID: 2, amount: 100}], cons:[{resourceID: 2, amount: 2}], sold:[]},
+        ]
+    },
+    {
+        id: 7, 
+        name: "test2", 
+        levels: [
+            {level: 1, cost: [], prod: [{resourceID: 1, amount: 1}], cons:[{resourceID: 1, amount: 2}], sold:[]},
+        ]
+    },
 ];
 
 export const SAVED_DATA:GameSaveDescType = {

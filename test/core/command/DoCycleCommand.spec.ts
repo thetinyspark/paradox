@@ -116,27 +116,35 @@ describe('DoCycleCommand test suite',
         )
     });
 
-    it('should not add resources is city could not afford maintenance', 
+    it('should not add resources is to the city if a building could not afford maintenance', 
     ()=>{
         // given 
         const facade        = setup() as Facade;
         const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
         const data          = YS();
-        const template      = TEMPLATE_BUILDINGS_MOCK[0];
+        const template1     = {...TEMPLATE_BUILDINGS_MOCK[5]};
+        const template2     = {...TEMPLATE_BUILDINGS_MOCK[6]};
+
+        // prod: [{resourceID: 2, amount: 100}], cons:[{resourceID: 2, amount: 2}]
+
+
+
+        // add resources on wallet
+        data.wallet = [{resourceID: 2, amount: 2}, /*{resourceID: 1, amount: 2}*/];
 
         // when 
         facade.sendNotification(AppConst.ADD_CITY, data);
-        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template.id});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template1.id});
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template2.id});
 
         const city:City = cityRepo.getOneBy('id', data.id);
-        city.buildings[0].frozen = true;
-
         facade.sendNotification(AppConst.DO_CYCLE);
 
         // then 
         city.wallet.get().forEach( 
             (quantity:Quantity)=>{
-                expect(quantity.amount).toEqual(0);
+                const expectedValue = quantity.resourceID == 1 ? 0 : 100;
+                expect(quantity.amount).toEqual(expectedValue);
             }
         )
     });

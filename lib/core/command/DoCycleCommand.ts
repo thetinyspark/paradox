@@ -24,14 +24,16 @@ export default class DoCycleCommand implements ICommand{
         proxy.getAll().forEach( 
             (city:City)=>{
 
-                const virtualWallet = city.wallet.clone();
-
+                
                 // production
                 city.buildings.forEach( 
                     (building:Building)=>{
                         if( building.level === null || building.frozen )
                             return; 
-                            
+                    
+                        const virtualWallet = city.wallet.clone();
+
+                        // production
                         building.level.prod.get().forEach( 
                             (prod:Quantity)=>{
 
@@ -47,38 +49,33 @@ export default class DoCycleCommand implements ICommand{
                                 cityQuantity.amount += prod.amount;
                             }
                         );
+
+                        // maintenance
+                        building.level.cons.get().forEach( 
+                            (cons:Quantity)=>{
+                                const wallet = virtualWallet.get();
+                                let pos = wallet.findIndex(q=>q.resourceID === cons.resourceID );
+    
+                                if( pos < 0 ){
+                                    wallet.push( new Quantity(cons.resourceID, 0));
+                                    pos = wallet.length -1;
+                                }
+                                    
+                                const cityQuantity = wallet[pos];
+                                cityQuantity.amount -= cons.amount;
+                            }
+                        );
+
+                        // if wallet is not in debt then clone it to city wallet; 
+                        const isInDebt:boolean = virtualWallet.get().filter((q)=>q.amount < 0).length > 0;
+
+                        if( !isInDebt ){
+                            city.wallet = virtualWallet.clone();
+                        }
                     }
                 );
 
-                // maintenance
-                city.buildings.forEach( 
-                (building:Building)=>{
-                    if( building.level === null || building.frozen )
-                        return; 
- 
-                    building.level.cons.get().forEach( 
-                        (cons:Quantity)=>{
-                            const wallet = virtualWallet.get();
-                            let pos = wallet.findIndex(q=>q.resourceID === cons.resourceID );
-
-                            if( pos < 0 ){
-                                wallet.push( new Quantity(cons.resourceID, 0));
-                                pos = wallet.length -1;
-                            }
-                                
-                            const cityQuantity = wallet[pos];
-                            cityQuantity.amount -= cons.amount;
-                        }
-                    );
-                }
-                );
-
-                // if wallet is not in debt then clone it to city wallet; 
-                const isInDebt:boolean = virtualWallet.get().filter((q)=>q.amount < 0).length > 0;
-
-                if( !isInDebt ){
-                    city.wallet = virtualWallet.clone();
-                }
+              
             }
         )
     }
