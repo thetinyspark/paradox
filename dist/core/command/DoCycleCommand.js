@@ -18,7 +18,9 @@ class DoCycleCommand {
         proxy.getAll().forEach((city) => {
             // production
             city.buildings.forEach((building) => {
-                if (building.level === null || building.frozen)
+                if (building.level === null ||
+                    building.frozen ||
+                    building.level.cycleCounter + 1 % building.level.prodFrequency !== 0)
                     return;
                 const virtualWallet = city.wallet.clone();
                 // production

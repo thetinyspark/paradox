@@ -13,6 +13,7 @@ export default class BuildingLevelFactory implements IFactory{
             this._quantityListFactory.fromData( obj.prod || [] ),
             this._quantityListFactory.fromData( obj.cons || [] ),
             this._quantityListFactory.fromData( obj.sold || [] ),
+            obj.prodFrequency
         );
     }
 }

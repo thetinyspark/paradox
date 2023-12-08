@@ -148,4 +148,58 @@ describe('DoCycleCommand test suite',
             }
         )
     });
+
+    it('should not produce anything if number of cycles is lower than building prodFrequency', 
+    ()=>{
+        // given 
+        const facade        = setup() as Facade;
+        const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const data          = YS();
+        const template      = TEMPLATE_BUILDINGS_MOCK[7];
+        const max           = template.levels[0].prodFrequency || 1;
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, data);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template.id});
+
+        const city:City = cityRepo.getOneBy('id', data.id);
+
+        for( let i = 0; i < (max-1); i++){
+            facade.sendNotification(AppConst.DO_CYCLE);
+        }
+
+        // then 
+        city.wallet.get().forEach( 
+            (quantity:Quantity)=>{
+                expect(quantity.amount).toEqual(0);
+            }
+        )
+    });
+
+    it('should produce something if number of cycles is greater or equal than building prodFrequency', 
+    ()=>{
+        // given 
+        const facade        = setup() as Facade;
+        const cityRepo      = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<any>;
+        const data          = YS();
+        const template      = TEMPLATE_BUILDINGS_MOCK[7];
+        const max           = ( template.levels[0].prodFrequency || 1 ) * 2;
+
+        // when 
+        facade.sendNotification(AppConst.ADD_CITY, data);
+        facade.sendNotification(AppConst.ADD_BUILDING_TO_CITY, {cityID: data.id, tplID:template.id});
+
+        const city:City = cityRepo.getOneBy('id', data.id);
+
+        for( let i = 0; i < max; i++){
+            facade.sendNotification(AppConst.DO_CYCLE);
+        }
+
+        // then 
+        city.wallet.get().forEach( 
+            (quantity:Quantity)=>{
+                expect(quantity.amount).toEqual(200);
+            }
+        )
+    });
 })

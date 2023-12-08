@@ -7,6 +7,8 @@ export default class BuildingLevel{
         public prod:QuantityList = new QuantityList([]), 
         public cons:QuantityList = new QuantityList([]), 
         public sold:QuantityList = new QuantityList([]), 
+        public prodFrequency:number = 1,
+        public cycleCounter:number = 0
     ){}
 
     public clone():BuildingLevel{
@@ -15,7 +17,8 @@ export default class BuildingLevel{
             this.cost.clone(), 
             this.prod.clone(), 
             this.cons.clone(), 
-            this.sold.clone()
+            this.sold.clone(),
+            this.prodFrequency
         );
     }
 }

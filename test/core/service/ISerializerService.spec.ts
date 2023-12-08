@@ -163,7 +163,6 @@ describe("ISerializerService test suite", () => {
 
     const expected = mock.SHANGRILA(); 
     const city = factory.fromData(expected);
-    console.log(city);
     const results = serializer.cityToObject(city);
     // then
     expect(results).toEqual(expected);

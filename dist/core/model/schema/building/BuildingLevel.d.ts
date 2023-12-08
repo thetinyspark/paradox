@@ -5,6 +5,8 @@ export default class BuildingLevel {
     prod: QuantityList;
     cons: QuantityList;
     sold: QuantityList;
-    constructor(level?: number, cost?: QuantityList, prod?: QuantityList, cons?: QuantityList, sold?: QuantityList);
+    prodFrequency: number;
+    cycleCounter: number;
+    constructor(level?: number, cost?: QuantityList, prod?: QuantityList, cons?: QuantityList, sold?: QuantityList, prodFrequency?: number, cycleCounter?: number);
     clone(): BuildingLevel;
 }

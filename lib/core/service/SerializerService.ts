@@ -52,6 +52,7 @@ export default class SerializerService implements ISerializerService{
             prod: this.quantityListToObject(buildingLevel.prod),
             cons: this.quantityListToObject(buildingLevel.cons),
             sold: this.quantityListToObject(buildingLevel.sold),
+            prodFrequency: buildingLevel.prodFrequency
         };
     }
 

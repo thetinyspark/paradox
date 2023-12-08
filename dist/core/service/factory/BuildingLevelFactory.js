@@ -7,7 +7,7 @@ class BuildingLevelFactory {
         this.fromData = this.fromData.bind(this);
     }
     fromData(obj) {
-        return new BuildingLevel_1.default(obj.level, this._quantityListFactory.fromData(obj.cost || []), this._quantityListFactory.fromData(obj.prod || []), this._quantityListFactory.fromData(obj.cons || []), this._quantityListFactory.fromData(obj.sold || []));
+        return new BuildingLevel_1.default(obj.level, this._quantityListFactory.fromData(obj.cost || []), this._quantityListFactory.fromData(obj.prod || []), this._quantityListFactory.fromData(obj.cons || []), this._quantityListFactory.fromData(obj.sold || []), obj.prodFrequency);
     }
 }
 exports.default = BuildingLevelFactory;
