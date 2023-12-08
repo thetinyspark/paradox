@@ -28,12 +28,13 @@ export default class DoCycleCommand implements ICommand{
                 // production
                 city.buildings.forEach( 
                     (building:Building)=>{
-                        if( building.level === null || 
-                            building.frozen         || 
-                            building.level.cycleCounter + 1 % building.level.prodFrequency !== 0
-                        )
+                        if( building.level === null || building.frozen)
                             return; 
-                    
+
+                        building.level.cycleCounter++;
+                        if( building.level.cycleCounter % building.level.prodFrequency !== 0)
+                            return;
+
                         const virtualWallet = city.wallet.clone();
 
                         // production
