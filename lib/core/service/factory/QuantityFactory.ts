@@ -14,6 +14,8 @@ export default class QuantityFactory implements IFactory{
         if( resource === null )
             return null;
             
-        return new Quantity(obj.resourceID, obj.amount);
+        const q = new Quantity(obj.resourceID, 0, resource.min, resource.max);
+        q.amount = obj.amount; 
+        return q;
     }
 }

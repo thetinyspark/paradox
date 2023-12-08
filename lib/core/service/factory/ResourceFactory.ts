@@ -8,6 +8,6 @@ export default class ResourceFactory implements IFactory{
     }
 
     fromData(obj:any):Resource{
-        return new Resource(this._uidService.createUID("resources",obj.id), obj.name);
+        return new Resource(this._uidService.createUID("resources",obj.id), obj.name, obj.min, obj.max);
     }
 }

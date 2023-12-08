@@ -34,7 +34,7 @@ export default class SerializerService implements ISerializerService{
     }
 
     resourceToObject(resource:Resource):any{
-        return {id:resource.id, name:resource.name};
+        return {id:resource.id, name:resource.name, min:resource.min, max:resource.max};
     }
 
     quantityToObject(quantity:Quantity):any{

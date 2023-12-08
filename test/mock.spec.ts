@@ -32,9 +32,9 @@ export function SHANGRILA():CityDescType{
 };
 
 export const RESOURCES_MOCK:ResourceDescType[] = [
-    {id:1, name: "gold"},
-    {id:2, name: "wood"},
-    {id:3, name: "food"},
+    {id:1, name: "gold", min: 0, max:2000},
+    {id:2, name: "wood", min: 0, max:2000},
+    {id:3, name: "food", min: 0, max:2000},
 ];
 
 export const QUANTITIES_MOCK:QuantityDescType[] = [

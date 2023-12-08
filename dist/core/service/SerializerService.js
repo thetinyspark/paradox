@@ -15,7 +15,7 @@ class SerializerService {
         };
     }
     resourceToObject(resource) {
-        return { id: resource.id, name: resource.name };
+        return { id: resource.id, name: resource.name, min: resource.min, max: resource.max };
     }
     quantityToObject(quantity) {
         return { resourceID: quantity.resourceID, amount: quantity.amount };

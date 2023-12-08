@@ -47,4 +47,19 @@ describe('Quantity test suite',
         expect(qty1.resourceID).toEqual(1);
         expect(qty2.resourceID).toEqual(2);
     }); 
+
+    it('should contains its amount in boundaries is specified', 
+    ()=>{
+        // given 
+        const qty1 = new Quantity(1,0, -100, 100);
+        const qty2 = new Quantity(1,0, -100, 100);
+        qty1.amount -= 1000; 
+        qty2.amount += 1000; 
+
+        // when 
+
+        // then
+        expect(qty1.amount).toEqual(-100);
+        expect(qty2.amount).toEqual(100);
+    }); 
 })

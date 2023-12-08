@@ -34,6 +34,7 @@ export default class SellBuildingCommand implements ICommand{
                 const eq = wallet.find( q=>q.resourceID === quantity.resourceID ) || new Quantity(quantity.resourceID, 0);
                 wallet.splice( wallet.findIndex(q=>q.resourceID === quantity.resourceID, 1))
                 eq.amount += quantity.amount;
+                // eq.add(quantity.amount);
                 wallet.push(eq);
                 city.wallet.set(wallet);
             }
