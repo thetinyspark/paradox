@@ -16,12 +16,13 @@ class DoCycleCommand {
         const facade = notification.getEmitter();
         const proxy = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         proxy.getAll().forEach((city) => {
+            const virtualWallet = city.wallet.clone();
             // production
             city.buildings.forEach((building) => {
                 if (building.level === null || building.frozen)
                     return;
                 building.level.prod.get().forEach((prod) => {
-                    const wallet = city.wallet.get();
+                    const wallet = virtualWallet.get();
                     let pos = wallet.findIndex(q => q.resourceID === prod.resourceID);
                     if (pos < 0) {
                         wallet.push(new Quantity_1.default(prod.resourceID, 0));
@@ -36,7 +37,7 @@ class DoCycleCommand {
                 if (building.level === null || building.frozen)
                     return;
                 building.level.cons.get().forEach((cons) => {
-                    const wallet = city.wallet.get();
+                    const wallet = virtualWallet.get();
                     let pos = wallet.findIndex(q => q.resourceID === cons.resourceID);
                     if (pos < 0) {
                         wallet.push(new Quantity_1.default(cons.resourceID, 0));
@@ -46,6 +47,11 @@ class DoCycleCommand {
                     cityQuantity.amount -= cons.amount;
                 });
             });
+            // if wallet is not in debt then clone it to city wallet; 
+            const isInDebt = virtualWallet.get().filter((q) => q.amount < 0).length > 0;
+            if (!isInDebt) {
+                city.wallet = virtualWallet.clone();
+            }
         });
     }
 }
