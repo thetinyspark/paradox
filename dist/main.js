@@ -436,7 +436,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
   \***********************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("\r\nconst coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-maker */ \"./node_modules/@thetinyspark/coffe-maker/dist/index.js\");\r\nconst Engine_1 = __webpack_require__(/*! ./core/Engine */ \"./dist/core/Engine.js\");\r\nconst defaultContainer = new coffe_maker_1.Container();\r\nconst engine = new Engine_1.default();\r\nmodule.exports = {\r\n    engine,\r\n    defaultContainer\r\n};\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/index.js?");
+eval("\r\nconst coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-maker */ \"./node_modules/@thetinyspark/coffe-maker/dist/index.js\");\r\nconst Engine_1 = __webpack_require__(/*! ./core/Engine */ \"./dist/core/Engine.js\");\r\nconst app_const_1 = __webpack_require__(/*! ./core/ioc/app.const */ \"./dist/core/ioc/app.const.js\");\r\nconst defaultContainer = new coffe_maker_1.Container();\r\nconst engine = new Engine_1.default();\r\nconst paradoxConstants = app_const_1.default;\r\nmodule.exports = {\r\n    engine,\r\n    defaultContainer,\r\n    paradoxConstants\r\n};\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/index.js?");
 
 /***/ }),
 
@@ -446,7 +446,7 @@ eval("\r\nconst coffe_maker_1 = __webpack_require__(/*! @thetinyspark/coffe-make
   \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.7.6\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.version = void 0;\r\nexports.version = \"1.7.7\";\r\n\n\n//# sourceURL=webpack://@thetinyspark/paradox/./dist/version.js?");
 
 /***/ }),
 
