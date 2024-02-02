@@ -66,7 +66,7 @@ export default class Engine extends Emitter {
      * Paradox.engine.setBuildingFrozenStatus({cityID: 1, id: 1, frozen:true})
      * ```
      */
-    setBuildingFrozenStatus(data: SetBuildingFrozenStatusType): void;
+    setBuildingFrozenStatus(data: SetBuildingFrozenStatusType): Promise<any>;
     /**
      * Buys and adds a building to a city if city has enough resources
      *

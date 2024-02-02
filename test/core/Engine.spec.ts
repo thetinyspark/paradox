@@ -200,11 +200,12 @@ describe("Engine test suite", () => {
             engine.createBuildingTemplates(TEMPLATE_BUILDINGS_MOCK);
             engine.addCity(data);
             engine.addBuilding({cityID: data.id, tplID: 1})
-            engine.setBuildingFrozenStatus({cityID: data.id, id: 1, frozen: true})
+            const ok = await engine.setBuildingFrozenStatus({cityID: data.id, id: 1, frozen: true})
             const cities = await engine.getCities();
 
             // then
             expect(cities[0].buildings[0].frozen).toBeTrue();
+            expect(ok).toBeTrue();
         }   
     );
 

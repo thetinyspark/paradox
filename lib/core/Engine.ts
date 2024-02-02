@@ -110,7 +110,7 @@ export default class Engine extends Emitter{
      * ```
      */
     setBuildingFrozenStatus(data:SetBuildingFrozenStatusType){
-        return this.getFacade().sendNotification(AppConst.SET_BUILDING_FROZEN_STATUS, data);
+        return this.getFacade().query(AppConst.SET_BUILDING_FROZEN_STATUS, data);
     }
     /**
      * Buys and adds a building to a city if city has enough resources

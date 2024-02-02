@@ -17,11 +17,12 @@ class SetBuildingFrozenStatusCommand {
         const cityRepo = facade.getProxy(app_const_1.default.CITY_REPOSITORY);
         const city = cityRepo.getOneBy('id', data.cityID) || null;
         if (city === null)
-            return;
+            return false;
         const target = city.buildings.find(b => b.id === data.id) || null;
         if (target === null)
-            return;
+            return false;
         target.frozen = data.frozen === true;
+        return true;
     }
 }
 exports.default = SetBuildingFrozenStatusCommand;

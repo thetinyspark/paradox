@@ -14,20 +14,21 @@ import IRepository from "../model/repository/IRepository";
  */
 export default class SetBuildingFrozenStatusCommand implements ICommand{
 
-    execute(notification: INotification): void {
+    execute(notification: INotification): boolean {
         const facade:Facade = notification.getEmitter() as Facade;
         const data:any = notification.getPayload() as any; 
         const cityRepo = facade.getProxy(AppConst.CITY_REPOSITORY) as IRepository<City>;
 
         const city = cityRepo.getOneBy('id',data.cityID) || null;
         if( city === null )
-            return; 
+            return false; 
 
         const target = city.buildings.find(b=> b.id === data.id) || null; 
 
         if( target === null)
-            return;
+            return false;
 
         target.frozen = data.frozen === true;
+        return true;
     }
 }

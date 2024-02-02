@@ -86,7 +86,7 @@ class Engine extends tiny_observer_1.Emitter {
      * ```
      */
     setBuildingFrozenStatus(data) {
-        return this.getFacade().sendNotification(app_const_1.default.SET_BUILDING_FROZEN_STATUS, data);
+        return this.getFacade().query(app_const_1.default.SET_BUILDING_FROZEN_STATUS, data);
     }
     /**
      * Buys and adds a building to a city if city has enough resources
