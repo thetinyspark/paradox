@@ -248,6 +248,50 @@ describe("Engine test suite", () => {
         }   
     );
 
+    it("should be able to downgrade a building", 
+        async () => {
+            // given
+            engine.reset();
+            engine.createResources(RESOURCES_MOCK);
+            engine.createBuildingTemplates(TEMPLATE_BUILDINGS_MOCK);
+            
+            // when 
+            const data = ATLANTIS();
+            engine.addCity(data);
+            engine.addBuilding({cityID: data.id, tplID: 1});
+            const ok1 = await engine.upgradeBuilding({cityID: data.id, id: 1});
+            const ok2 = await engine.downgradeBuilding({cityID: data.id, id: 1}, 1);
+            const cities = await engine.getCities();
+
+            // then
+            expect(ok1).toBeTrue();
+            expect(ok2).toBeTrue();
+            expect(cities[0].buildings[0].level.level).toEqual(1);
+        }   
+    );
+
+    it("should be able to remove a building if downgrade is too strong", 
+        async () => {
+            // given
+            engine.reset();
+            engine.createResources(RESOURCES_MOCK);
+            engine.createBuildingTemplates(TEMPLATE_BUILDINGS_MOCK);
+            
+            // when 
+            const data = ATLANTIS();
+            engine.addCity(data);
+            engine.addBuilding({cityID: data.id, tplID: 1});
+            const ok1 = await engine.upgradeBuilding({cityID: data.id, id: 1});
+            const ok2 = await engine.downgradeBuilding({cityID: data.id, id: 1}, 2);
+            const cities = await engine.getCities();
+
+            // then
+            expect(ok1).toBeTrue();
+            expect(ok2).toBeTrue();
+            expect(cities[0].buildings.length).toEqual(0);
+        }   
+    );
+
     it("should be able to remove a building from a city", 
         async () => {
             // given

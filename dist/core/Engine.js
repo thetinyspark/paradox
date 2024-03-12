@@ -112,6 +112,19 @@ class Engine extends tiny_observer_1.Emitter {
         return this.getFacade().query(app_const_1.default.UPGRADE_BUILDING, data);
     }
     /**
+     * Downgrades a building with a specific id (it if exists) by a certain minus
+     * Removes building if minus is too strong
+     *
+     * example.ts
+     * ```typescript
+     * const data = {cityID: 1, id:1, minus: 1};
+     * Paradox.engine.getFacade().sendNotification(Paradox.appConstants.DOWNGRADE_BUILDING, data);
+     * ```
+     */
+    downgradeBuilding(data, minus = 1) {
+        return this.getFacade().query(app_const_1.default.DOWNGRADE_BUILDING, { ...data, minus });
+    }
+    /**
      * Removes a building with a specific id from a city (it if exists)
      *
      * example.ts

@@ -34,10 +34,12 @@ const SellBuildingCommand_1 = require("../command/SellBuildingCommand");
 const UIDService_1 = require("../service/UIDService");
 const RemoveCityCommand_1 = require("../command/RemoveCityCommand");
 const SetBuildingFrozenStatusCommand_1 = require("../command/SetBuildingFrozenStatusCommand");
+const DowngradeBuildingCommand_1 = require("../command/DowngradeBuildingCommand");
 function configIOC(container) {
     container.reset();
     container.register(app_const_1.default.GAME_STORE_MODEL, () => new coffe_maker_1.StoreModel(), true);
     container.register(app_const_1.default.APP_FACADE, () => new coffe_maker_1.Facade(), true);
+    container.register(app_const_1.default.DOWNGRADE_BUILDING, () => new DowngradeBuildingCommand_1.default());
     container.register(app_const_1.default.BUY_BUILDING, () => new BuyBuildingCommand_1.default());
     container.register(app_const_1.default.SET_BUILDING_FROZEN_STATUS, () => new SetBuildingFrozenStatusCommand_1.default());
     container.register(app_const_1.default.ADD_BUILDING_TO_CITY, () => new AddBuildingToCityCommand_1.default());
@@ -87,6 +89,7 @@ function configFacade(container) {
     facade.registerCommand(app_const_1.default.SET_BUILDING_FROZEN_STATUS, container.get(app_const_1.default.SET_BUILDING_FROZEN_STATUS));
     facade.registerCommand(app_const_1.default.SELL_BUILDING, container.get(app_const_1.default.SELL_BUILDING));
     facade.registerCommand(app_const_1.default.REMOVE_BUILDING_FROM_CITY, container.get(app_const_1.default.REMOVE_BUILDING_FROM_CITY));
+    facade.registerCommand(app_const_1.default.DOWNGRADE_BUILDING, container.get(app_const_1.default.DOWNGRADE_BUILDING));
     facade.registerCommand(app_const_1.default.UPGRADE_BUILDING, container.get(app_const_1.default.UPGRADE_BUILDING));
     facade.registerCommand(app_const_1.default.ADD_BUILDING_TO_CITY, container.get(app_const_1.default.ADD_BUILDING_TO_CITY));
     facade.registerCommand(app_const_1.default.BUY_BUILDING, container.get(app_const_1.default.BUY_BUILDING));

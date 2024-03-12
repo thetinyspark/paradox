@@ -50,6 +50,7 @@ export const TEMPLATE_BUILDINGS_MOCK:TemplateBuildingDescType[] = [
         levels: [
             {prodFrequency: 1, level: 1, cost: [{resourceID: 1, amount: 100}], prod: [{resourceID: 2, amount: 100}], cons:[{resourceID: 2, amount: 2}], sold:[{resourceID: 1, amount: 50}]},
             {prodFrequency: 1, level: 2, cost: [{resourceID: 1, amount: 200}], prod: [{resourceID: 2, amount: 200}], cons:[], sold:[]},
+            {prodFrequency: 1, level: 3, cost: [{resourceID: 1, amount: 200}], prod: [{resourceID: 2, amount: 200}], cons:[], sold:[]},
         ]
     },
     {

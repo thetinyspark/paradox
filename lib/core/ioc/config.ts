@@ -32,12 +32,14 @@ import SellBuildingCommand from "../command/SellBuildingCommand";
 import UIDService from "../service/UIDService";
 import RemoveCityCommand from "../command/RemoveCityCommand";
 import SetBuildingFrozenStatusCommand from "../command/SetBuildingFrozenStatusCommand";
+import DowngradeBuildingCommand from "../command/DowngradeBuildingCommand";
 
 
 export function configIOC(container:Container){
     container.reset();
     container.register(AppConst.GAME_STORE_MODEL                , ()=>  new StoreModel()                        , true  )
     container.register(AppConst.APP_FACADE                      , ()=>  new Facade()                            , true  );
+    container.register(AppConst.DOWNGRADE_BUILDING              , ()=>  new DowngradeBuildingCommand()          );
     container.register(AppConst.BUY_BUILDING                    , ()=>  new BuyBuildingCommand()                );
     container.register(AppConst.SET_BUILDING_FROZEN_STATUS      , ()=>  new SetBuildingFrozenStatusCommand()    );
     container.register(AppConst.ADD_BUILDING_TO_CITY            , ()=>  new AddBuildingToCityCommand()          );
@@ -118,6 +120,7 @@ export function configFacade(container:Container){
     facade.registerCommand( AppConst.SET_BUILDING_FROZEN_STATUS     , container.get(AppConst.SET_BUILDING_FROZEN_STATUS));
     facade.registerCommand( AppConst.SELL_BUILDING                  , container.get(AppConst.SELL_BUILDING));
     facade.registerCommand( AppConst.REMOVE_BUILDING_FROM_CITY      , container.get(AppConst.REMOVE_BUILDING_FROM_CITY));
+    facade.registerCommand( AppConst.DOWNGRADE_BUILDING             , container.get(AppConst.DOWNGRADE_BUILDING));
     facade.registerCommand( AppConst.UPGRADE_BUILDING               , container.get(AppConst.UPGRADE_BUILDING));
     facade.registerCommand( AppConst.ADD_BUILDING_TO_CITY           , container.get(AppConst.ADD_BUILDING_TO_CITY));
     facade.registerCommand( AppConst.BUY_BUILDING                   , container.get(AppConst.BUY_BUILDING));

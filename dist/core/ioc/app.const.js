@@ -13,6 +13,7 @@ AppConst.SELL_BUILDING = "SellBuildingCommand";
 AppConst.REMOVE_BUILDING_FROM_CITY = "RemoveBuildingFromCityCommand";
 AppConst.ADD_BUILDING_TO_CITY = "AddBuildingToCityCommand";
 AppConst.UPGRADE_BUILDING = "UpgradeBuildingCommand";
+AppConst.DOWNGRADE_BUILDING = "DowngradeBuildingCommand";
 AppConst.ADD_CITY = "AddCityCommand";
 AppConst.REMOVE_CITY = "RemoveCityCommand";
 AppConst.BUY_BUILDING = "BuyBuildingCommand";
